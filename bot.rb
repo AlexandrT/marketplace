@@ -1,9 +1,3 @@
-# module Zakupki
-#   autoload :ListLoader, "list_loader"
-#   autoload :ListParser, "list_parser"
-#   autoload :OrderLoader, "order_loader"
-#   autoload :OrderParser, "order_parser"
-# end
 require_relative "list_parser"
 require_relative "list_loader"
 require_relative "order_loader"

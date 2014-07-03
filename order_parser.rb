@@ -22,23 +22,26 @@ class OrderParser
       temp_json = Hash.new
       # puts block_title.text()
       # puts blocks[index].name()
-      if blocks[index].name() == 'div'
+      if blocks[index].name() == 'div' or blocks[index].at_xpath("//table[not(@*)]")
         key = blocks[index].css(".fontBoldTextTd/text()").to_s
         val = blocks[index].css(".fontBoldTextTd ~ *").to_s
         temp_json[key] = val
-      elsif blocks[index].name() == 'table'
-        # puts blocks[index]
+      elsif blocks[index].at_css("table.contractSpecificationsDescriptTbl")
+        
+        puts blocks[index]
+        puts "-------------------------------------------------------------"
         # parse table to hash of arrays
+      # elsif blocks[index].at_xpath("//table[not(@*)]")
+        
       end
       @json[block_title] = temp_json
-      # puts "-------------------------------------------------------------"
       # @json[key.text()] = ....
     end
 
-    @json.each do |key, value|
-      puts "#{key} is #{value}"
-      puts "-------------------------------------------------------------"
-    end
+    # @json.each do |key, value|
+    #   puts "#{key} is #{value}"
+    #   puts "-------------------------------------------------------------"
+    # end
 
     # arr.each do |div|
     #   key = div.css(".noticeTabBoxWrapper ~ h2")
