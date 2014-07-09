@@ -9,34 +9,76 @@ class OrderParser
     main_block = page.css("div.noticeTabBox")
     
     blocks_title = main_block[0].css("h2").to_a
-    blocks = main_block[0].xpath("//h2/following-sibling::div | //h2/following-sibling::table").to_a
+    blocks = main_block[0].xpath("//h2/following-sibling::table[1]").to_a
     
     unless blocks_title.length == blocks.length
       puts "h2 is #{blocks_title.length}"
       puts "h2~div is #{blocks.length}"
-      return false
+      # return false
     end
+
+    file = File.new("parser.log", "w")
 
     blocks_title.each_with_index do |block_title, index|
       result = Array.new
       temp_json = Hash.new
-      # puts block_title.text()
-      # puts blocks[index].name()
-      if blocks[index].name() == 'div' or blocks[index].at_xpath("//table[not(@*)]")
-        key = blocks[index].css(".fontBoldTextTd/text()").to_s
-        val = blocks[index].css(".fontBoldTextTd ~ *").to_s
-        temp_json[key] = val
-      elsif blocks[index].at_css("table.contractSpecificationsDescriptTbl")
-        
-        puts blocks[index]
-        puts "-------------------------------------------------------------"
+      # if index == 6
+        # puts blocks[index]
+        # puts blocks[index].class
+      # end
+      file.write blocks[index]
+      file.write "\n-------------------------------------------------------------\n\n\n"
+      if blocks[index].name() == 'table'
+        # puts block_title.text()
+        # puts "if"
+        tr_tags = Array.new
+        tr_tags = blocks[index].css("tr")
+
+        tr_tags.each_with_index do |tr_tag, i|
+          key = tr_tag.css(".fontBoldTextTd/text()")[0]
+          val = tr_tag.css(".fontBoldTextTd ~ *").to_a
+          # puts key.to_s
+          # puts val[0]
+          # puts i.to_s
+          # puts val[0].class
+          # puts "-------------------------------------------------------------"
+          # org = val[0].xpath('//a[contains(@href, "/organization/")]').to_a
+          # if !org.empty?
+            # puts clean_trash(org[0]["href"].to_s)
+            # puts "------------------------------------"
+          # end
+          temp_json[key] = val
+          # puts key
+          # puts val
+        end
+      # elsif !blocks[index].at_xpath("//table[not(@*)]").nil? #or !blocks[index].at_xpath("/table[not(@*)]").empty?
+        # puts "empty table"
+        # puts index
+        # temp = blocks[index].to_s
+        # clean_trash(temp)
+        # file.write temp
+      # elsif !blocks[index].at_xpath("//table[@class='contractSpecificationsDescriptTbl']").nil? #or !blocks[index].at_xpath("//table[@class='contractSpecificationsDescriptTbl']").empty?
+        # puts "elsif"
+        # first_block_key = blocks[index].css(".noticeTdFirst.fontBoldTextTd")[0].text()
+        # first_block_value = blocks[index].css(".noticeTdFirst.fontBoldTextTd ~ td")[0].text()
+        # temp_json[first_block_key] = first_block_value
+
+        # puts blocks[index].name()
+        # puts blocks[index]
+        # temp = blocks[index].to_s
+        # clean_trash(temp)
+        # file.write temp
+        # puts "-------------------------------------------------------------"
         # parse table to hash of arrays
-      # elsif blocks[index].at_xpath("//table[not(@*)]")
-        
+      else
+        puts "else"
+        puts "-------------------------------------------------------------"
       end
       @json[block_title] = temp_json
       # @json[key.text()] = ....
     end
+
+    file.close
 
     # @json.each do |key, value|
     #   puts "#{key} is #{value}"
@@ -66,31 +108,70 @@ class OrderParser
   def get_docs(docs_page)
     page = Nokogiri::HTML(docs_page, nil, 'utf-8')
     main_block = page.css("div.noticeTabBox")
-    arr = main_block[0].css("table#notice-documents") # <table id="notice-documents">
 
-    result = Array.new
+    blocks_title = main_block[0].css("h2").to_a
+    blocks = main_block[0].xpath("//h2/following-sibling::table").to_a
 
-    arr.each do |elem|
-      elem.css("a").each{ |el| result << el if el["href"] =~ /filestor/}
+    unless blocks_title.length == blocks.length
+      puts "h2 is #{blocks_title.length}"
+      puts "h2~div is #{blocks.length}"
+      return false
     end
 
+    file = File.new("parser.log", "w")
 
-    result.each do |elem|
+    blocks_title.each_with_index do |block_title, index|
+      temp_json = Hash.new
+      arr = Array.new
 
-      # puts elem["href"]
-      puts "-------------------------------------------------------------"
-      
-      name = elem["href"].scan(/.+=(\w*)$/).first.first
-      # puts path_to_save
+      arr = blocks[index].css("a")
+      arr.each do |a|
+        if a["href"] =~ /filestor/
+          key = a.text().to_s
+          clean_trash(key)
+          val = a["href"].to_s
+          temp_json[key] = val
 
-
-      doc = DocLoader.new(name)
-      d = doc.load_file
-
-      File.open("F:\\www\\zakupki\\" + name + ".doc", "wb") do |f|
-        f.write d.parsed_response
+          puts "#{key} is #{val}"
+        end
       end
+      # key = blocks[index].css(".fontBoldTextTd/text()").to_s
+      #   val = blocks[index].css(".fontBoldTextTd ~ *").to_s
+      #   temp_json[key] = val
+
+      @json[block_title.to_s] = temp_json
+      puts "#{block_title.to_s} is #{temp_json}"
     end
+
+    file.write @json
+    # puts @json
+    file.close
+
+    # main_block = page.css("div.noticeTabBox")
+    # arr = main_block[0].css("table#notice-documents") # <table id="notice-documents">
+
+    # result = Array.new
+
+    # arr.each do |elem|
+    #   elem.css("a").each{ |el| puts el.text() if el["href"] =~ /filestor/} # result << el if el["href"] =~ /filestor/
+    # end
+
+
+    # result.each do |elem|
+
+    #   puts "-------------------------------------------------------------"
+    #   puts elem["href"]
+    #   puts elem["href"].text()
+      
+    #   puts "###########################################################"
+
+    #   # doc = DocLoader.new(name)
+    #   # d = doc.load_file
+
+    #   # File.open("F:\\www\\zakupki\\" + name + ".doc", "wb") do |f|
+    #     # f.write d.parsed_response
+    #   # end
+    # end
   end
 
   def get_event(event_page)

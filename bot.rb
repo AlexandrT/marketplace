@@ -2,6 +2,7 @@ require_relative "list_parser"
 require_relative "list_loader"
 require_relative "order_loader"
 require_relative "order_parser"
+require_relative "lib"
 
 # obj = ListParser.new
 # ids = Array.new
@@ -22,7 +23,7 @@ require_relative "order_parser"
 #   end
 # end
 
-obj = OrderLoader.new("0173100006514000048")
+obj = OrderLoader.new("0347100011914000035")
 # info_page = obj.info
 # puts info_page
 parser = OrderParser.new

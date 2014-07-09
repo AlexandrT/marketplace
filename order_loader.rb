@@ -13,9 +13,9 @@ class OrderLoader
   # http_proxy 'http://foo.com', 80, 'user', 'pass'
 
 	# usual
-	INFO = "/epz/order/notice/ok44/view/common-info.html" # ?regNumber=0102200001614001856
-	DOCS = "/epz/order/notice/ok44/view/documents.html" # ?regNumber=0102200001614001856
-	EVENT_LOG = "/epz/order/notice/ok44/view/event-log.html" # ?regNumber=0102200001614001856
+	INFO = "/epz/order/notice/ea44/view/common-info.html" # ?regNumber=0102200001614001856
+	DOCS = "/epz/order/notice/ea44/view/documents.html" # ?regNumber=0102200001614001856
+	EVENT_LOG = "/epz/order/notice/ea44/view/event-log.html" # ?regNumber=0102200001614001856
 	PRINT_FORM = "/epz/order/notice/printForm/view.html" # ?regNumber=0102200001614001856
 
 	# def initialize(hash, url)
