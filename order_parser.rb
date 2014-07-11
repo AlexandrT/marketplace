@@ -8,35 +8,42 @@ class OrderParser
     page = Nokogiri::HTML(info_page, nil, 'utf-8')
     main_block = page.css("div.noticeTabBox")
     
-    blocks_title = main_block[0].css("h2").to_a
-    blocks = main_block[0].xpath("//h2/following-sibling::table[1]").to_a
+    # //h2[following-sibling::table and parent::div[@class='noticeTabBoxWrapper']] - все h2 кроме последнего блока
+    # //table[preceding-sibling::h2 and parent::div[@class='noticeTabBoxWrapper']] - все таблицы после h2 кроме последнего блока
+    blocks_title = main_block[0].xpath("//h2[following-sibling::table and parent::div[@class='noticeTabBoxWrapper']]").to_a
+    blocks = main_block[0].xpath("//table[preceding-sibling::h2 and parent::div[@class='noticeTabBoxWrapper']]").to_a
     
-    unless blocks_title.length == blocks.length
+    # unless blocks_title.length == blocks.length
       puts "h2 is #{blocks_title.length}"
-      puts "h2~div is #{blocks.length}"
+      puts "h2~table is #{blocks.length}"
       # return false
-    end
+    # end
 
     file = File.new("parser.log", "w")
 
-    blocks_title.each_with_index do |block_title, index|
-      result = Array.new
-      temp_json = Hash.new
-      # if index == 6
-        # puts blocks[index]
-        # puts blocks[index].class
-      # end
+    temp_arr = Array.new
+    blocks.each_with_index do |block_title, index|
+      # temp_json = Hash.new
+      puts index
+      if block_title.next_element().name == "table"
+        tmp = block_title.to_s + block_title.next_element.to_s
+      else
+        tmp = block_title.to_s
+        index += 1
+        # skip next iteration
+      end
+      temp_arr << tmp
       file.write blocks[index]
       file.write "\n-------------------------------------------------------------\n\n\n"
-      if blocks[index].name() == 'table'
+      # if blocks[index].name() == 'table'
         # puts block_title.text()
         # puts "if"
-        tr_tags = Array.new
-        tr_tags = blocks[index].css("tr")
+        # tr_tags = Array.new
+        # tr_tags = blocks[index].css("tr")
 
-        tr_tags.each_with_index do |tr_tag, i|
-          key = tr_tag.css(".fontBoldTextTd/text()")[0]
-          val = tr_tag.css(".fontBoldTextTd ~ *").to_a
+        # tr_tags.each_with_index do |tr_tag, i|
+          # key = tr_tag.css(".fontBoldTextTd/text()")[0]
+          # val = tr_tag.css(".fontBoldTextTd ~ *").to_a
           # puts key.to_s
           # puts val[0]
           # puts i.to_s
@@ -47,10 +54,10 @@ class OrderParser
             # puts clean_trash(org[0]["href"].to_s)
             # puts "------------------------------------"
           # end
-          temp_json[key] = val
+          # temp_json[key] = val
           # puts key
           # puts val
-        end
+        # end
       # elsif !blocks[index].at_xpath("//table[not(@*)]").nil? #or !blocks[index].at_xpath("/table[not(@*)]").empty?
         # puts "empty table"
         # puts index
@@ -70,11 +77,11 @@ class OrderParser
         # file.write temp
         # puts "-------------------------------------------------------------"
         # parse table to hash of arrays
-      else
-        puts "else"
-        puts "-------------------------------------------------------------"
-      end
-      @json[block_title] = temp_json
+      # else
+        # puts "else"
+        # puts "-------------------------------------------------------------"
+      # end
+      # @json[block_title] = temp_json
       # @json[key.text()] = ....
     end
 

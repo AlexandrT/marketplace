@@ -23,7 +23,7 @@ require_relative "lib"
 #   end
 # end
 
-obj = OrderLoader.new("0347100011914000035")
+obj = OrderLoader.new("0347200001414001315")
 # info_page = obj.info
 # puts info_page
 parser = OrderParser.new
