@@ -13,77 +13,94 @@ class OrderParser
     blocks_title = main_block[0].xpath("//h2[following-sibling::table and parent::div[@class='noticeTabBoxWrapper']]").to_a
     blocks = main_block[0].xpath("//table[preceding-sibling::h2 and parent::div[@class='noticeTabBoxWrapper']]").to_a
     
-    # unless blocks_title.length == blocks.length
-      puts "h2 is #{blocks_title.length}"
-      puts "h2~table is #{blocks.length}"
-      # return false
-    # end
+    check_table = false
 
     file = File.new("parser.log", "w")
 
+    # Составляем новый массив из //table[preceding-sibling::h2]
+    # если за <table> следует еще один такой же тег, то слепляем их в один, дабы получить правильный хэш { h2: {table} }
     temp_arr = Array.new
-    blocks.each_with_index do |block_title, index|
-      # temp_json = Hash.new
-      puts index
-      if block_title.next_element().name == "table"
-        tmp = block_title.to_s + block_title.next_element.to_s
+    temp_json = Hash.new
+
+    blocks_title.each_with_index do |block_title, index|
+      unless check_table
+        if blocks[index].next_element().name == "table"
+          tmp = block_title.to_s + block_title.next_element.to_s
+          check_table = true
+        else
+          tr_tags = blocks[index].css("tr")
+          tr_tags.each_with_index do |tr_tag, i|
+            key = tr_tag.css(".fontBoldTextTd/text()")[0]
+            val = tr_tag.css(".fontBoldTextTd ~ *").to_a
+
+            org = Array.new
+            org = val[0].inner_html.include? "/organization/"
+            
+            if org
+              organization_url = val[0].xpath('//a[contains(@href, "/organization/")]').to_a
+              puts clean_trash(organization_url[0]["href"].to_s)
+              puts "------------------------------------"
+            end
+            temp_json[key] = val
+          end
+        end
+        temp_arr << tmp
       else
-        tmp = block_title.to_s
-        index += 1
-        # skip next iteration
+        check_table = false
       end
-      temp_arr << tmp
-      file.write blocks[index]
-      file.write "\n-------------------------------------------------------------\n\n\n"
-      # if blocks[index].name() == 'table'
-        # puts block_title.text()
-        # puts "if"
-        # tr_tags = Array.new
-        # tr_tags = blocks[index].css("tr")
-
-        # tr_tags.each_with_index do |tr_tag, i|
-          # key = tr_tag.css(".fontBoldTextTd/text()")[0]
-          # val = tr_tag.css(".fontBoldTextTd ~ *").to_a
-          # puts key.to_s
-          # puts val[0]
-          # puts i.to_s
-          # puts val[0].class
-          # puts "-------------------------------------------------------------"
-          # org = val[0].xpath('//a[contains(@href, "/organization/")]').to_a
-          # if !org.empty?
-            # puts clean_trash(org[0]["href"].to_s)
-            # puts "------------------------------------"
-          # end
-          # temp_json[key] = val
-          # puts key
-          # puts val
-        # end
-      # elsif !blocks[index].at_xpath("//table[not(@*)]").nil? #or !blocks[index].at_xpath("/table[not(@*)]").empty?
-        # puts "empty table"
-        # puts index
-        # temp = blocks[index].to_s
-        # clean_trash(temp)
-        # file.write temp
-      # elsif !blocks[index].at_xpath("//table[@class='contractSpecificationsDescriptTbl']").nil? #or !blocks[index].at_xpath("//table[@class='contractSpecificationsDescriptTbl']").empty?
-        # puts "elsif"
-        # first_block_key = blocks[index].css(".noticeTdFirst.fontBoldTextTd")[0].text()
-        # first_block_value = blocks[index].css(".noticeTdFirst.fontBoldTextTd ~ td")[0].text()
-        # temp_json[first_block_key] = first_block_value
-
-        # puts blocks[index].name()
-        # puts blocks[index]
-        # temp = blocks[index].to_s
-        # clean_trash(temp)
-        # file.write temp
-        # puts "-------------------------------------------------------------"
-        # parse table to hash of arrays
-      # else
-        # puts "else"
-        # puts "-------------------------------------------------------------"
-      # end
-      # @json[block_title] = temp_json
-      # @json[key.text()] = ....
     end
+
+        # if blocks[index].name() == 'table'
+          # puts block_title.text()
+          # puts "if"
+
+          # tr_tags.each_with_index do |tr_tag, i|
+            # key = tr_tag.css(".fontBoldTextTd/text()")[0]
+            # val = tr_tag.css(".fontBoldTextTd ~ *").to_a
+            # puts key.to_s
+            # puts val[0]
+            # puts i.to_s
+            # puts val[0].class
+            # puts "-------------------------------------------------------------"
+            # org = val[0].xpath('//a[contains(@href, "/organization/")]').to_a
+            # if !org.empty?
+              # puts clean_trash(org[0]["href"].to_s)
+              # puts "------------------------------------"
+            # end
+            # temp_json[key] = val
+            # puts key
+            # puts val
+          # end
+        # elsif !blocks[index].at_xpath("//table[not(@*)]").nil? #or !blocks[index].at_xpath("/table[not(@*)]").empty?
+          # puts "empty table"
+          # puts index
+          # temp = blocks[index].to_s
+          # clean_trash(temp)
+          # file.write temp
+        # elsif !blocks[index].at_xpath("//table[@class='contractSpecificationsDescriptTbl']").nil? #or !blocks[index].at_xpath("//table[@class='contractSpecificationsDescriptTbl']").empty?
+          # puts "elsif"
+          # first_block_key = blocks[index].css(".noticeTdFirst.fontBoldTextTd")[0].text()
+          # first_block_value = blocks[index].css(".noticeTdFirst.fontBoldTextTd ~ td")[0].text()
+          # temp_json[first_block_key] = first_block_value
+
+          # puts blocks[index].name()
+          # puts blocks[index]
+          # temp = blocks[index].to_s
+          # clean_trash(temp)
+          # file.write temp
+          # puts "-------------------------------------------------------------"
+          # parse table to hash of arrays
+        # else
+          # puts "else"
+          # puts "-------------------------------------------------------------"
+        # end
+        # @json[block_title] = temp_json
+        # @json[key.text()] = ....
+
+    # temp_arr.each do |arr_elem|
+      # puts arr_elem
+      # puts "-------------------------------------------------------------------"
+    # end
 
     file.close
 
