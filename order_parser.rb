@@ -38,8 +38,12 @@ class OrderParser
             
             if org
               organization_url = val[0].xpath('//a[contains(@href, "/organization/")]').to_a
-              puts clean_trash(organization_url[0]["href"].to_s)
-              puts "------------------------------------"
+              company_url = clean_trash(organization_url[0]["href"].to_s)
+              
+              company = CompanyLoader.new
+              company_page = company.get_page(company_url)
+              company_parser = CompanyParser.new
+              company_parser.get(company_page)
             end
             temp_json[key] = val
           end

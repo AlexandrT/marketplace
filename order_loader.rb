@@ -2,7 +2,6 @@
 
 require 'httparty'
 require 'nokogiri'
-require 'debugger'
 
 class OrderLoader
 	include HTTParty
