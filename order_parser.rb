@@ -4,6 +4,54 @@ class OrderParser
     @json = Hash.new
   end
 
+  def get_info2(info_page)
+    page = Nokogiri::HTML(info_page, nil, 'utf-8')
+    # main_block = page.css("div.noticeTabBox")
+    blocks = page.xpath('//div[@class="noticeTabBox"]/*')
+
+    key = String.new
+    common_key = String.new
+    temp_json = Hash.new
+    val = Array.new
+
+    flag = false
+
+    blocks.each do |block|
+      if block.name == "h2"
+        if flag
+          @json[common_key] = temp_json   # должно срабатывать, если не первая итерация
+          flag = false
+        end
+        common_key = block.inner_text()
+      elsif block.name == "table"
+        tr_tags = block.css("tr")
+        
+        tr_tags.each do |tr_tag|
+          key = tr_tag.css(".fontBoldTextTd/text()")[0]
+          val = tr_tag.css(".fontBoldTextTd ~ *").to_a
+
+          org = Array.new
+          org = val[0].inner_html.include? "/organization/"
+            
+          if org
+            organization_url = val[0].xpath('//a[contains(@href, "/organization/")]').to_a
+            company_url = clean_trash(organization_url[0]["href"].to_s)
+              
+            company = CompanyLoader.new
+            company_page = company.get_page(company_url)
+            company_parser = CompanyParser.new
+            company_parser.get(company_page)
+          end
+          temp_json[key] = val
+          flag = true
+        end
+      else
+        next
+      end
+          
+    end
+  end
+
   def get_info(info_page)
     page = Nokogiri::HTML(info_page, nil, 'utf-8')
     main_block = page.css("div.noticeTabBox")
