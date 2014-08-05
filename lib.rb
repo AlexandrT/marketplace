@@ -1,3 +1,4 @@
+# deprecated
 def split_array(arr)
   orders = []
   arr.each do |element|
@@ -16,10 +17,8 @@ end
 
 
 def clean_trash(html)
-  html.gsub!("\r", " ")
-  html.gsub!("\n", " ")
-  html.gsub!("\t", " ")
   html.gsub!("<br>", " ")
+  html.gsub!(/([\r\n\t]|)/, " ")
   html.strip!
   while html =~ /\s{2,}/
     html.gsub!("  ", " ")

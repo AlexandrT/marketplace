@@ -6,8 +6,10 @@ class OrderParser
 
   def get_info2(info_page)
     page = Nokogiri::HTML(info_page, nil, 'utf-8')
+
+    file = File.new("parser.log", "w")
     # main_block = page.css("div.noticeTabBox")
-    blocks = page.xpath('//div[@class="noticeTabBox"]/*')
+    blocks = page.xpath('//div[@class="noticeTabBoxWrapper"]/child::*')
 
     key = String.new
     common_key = String.new
@@ -18,38 +20,48 @@ class OrderParser
 
     blocks.each do |block|
       if block.name == "h2"
-        if flag
-          @json[common_key] = temp_json   # должно срабатывать, если не первая итерация
+        if flag # может чекать на наличие значения common_key ?
+          @json[common_key] = temp_json.dup
+          temp_json.clear
           flag = false
         end
-        common_key = block.inner_text()
+        common_key = block.inner_text().to_s
       elsif block.name == "table"
         tr_tags = block.css("tr")
         
         tr_tags.each do |tr_tag|
-          key = tr_tag.css(".fontBoldTextTd/text()")[0]
-          val = tr_tag.css(".fontBoldTextTd ~ *").to_a
+          key = tr_tag.css(".fontBoldTextTd/text()")[0].to_s
+          val = tr_tag.css(".fontBoldTextTd ~ *").to_s
+          val = clean_trash(val)
 
-          org = Array.new
-          org = val[0].inner_html.include? "/organization/"
+          # org = Array.new
+          # org = val[0].inner_html.include? "/organization/"
             
-          if org
-            organization_url = val[0].xpath('//a[contains(@href, "/organization/")]').to_a
-            company_url = clean_trash(organization_url[0]["href"].to_s)
+          # if org
+          #   organization_url = val[0].xpath('//a[contains(@href, "/organization/")]').to_a
+          #   company_url = clean_trash(organization_url[0]["href"].to_s)
               
-            company = CompanyLoader.new
-            company_page = company.get_page(company_url)
-            company_parser = CompanyParser.new
-            company_parser.get(company_page)
-          end
+          #   company = CompanyLoader.new
+          #   company_page = company.get_page(company_url)
+          #   company_parser = CompanyParser.new
+          #   company_parser.get(company_page)
+          # end
           temp_json[key] = val
           flag = true
         end
       else
         next
       end
-          
     end
+
+    @json.each do |elem|
+      file.write elem
+      puts elem
+      puts "---------------------------------------------------------------------------------"
+      file.write "---------------------------------------------------------------------------------"
+    end
+
+    file.close
   end
 
   def get_info(info_page)

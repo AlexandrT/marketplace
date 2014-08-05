@@ -25,19 +25,19 @@ require_relative "lib"
 #   end
 # end
 
-# obj = OrderLoader.new("0347200001414001315")
-# # info_page = obj.info
-# # puts info_page
-# parser = OrderParser.new
-# # parser.get_info(info_page)
-
-# # docs_page = obj.docs
-# # parser.get_docs(docs_page)
-
-# info_page = obj.info
+obj = OrderLoader.new("0347200001414001315")
+info_page = obj.info
+# puts info_page
+parser = OrderParser.new
 # parser.get_info(info_page)
 
-company = CompanyLoader.new
-company_page = company.get_page("http://zakupki.gov.ru/pgz/public/action/organization/view?source=epz&organizationCode=03472000014")
-company_parser = CompanyParser.new
-company_parser.get(company_page)
+# docs_page = obj.docs
+# parser.get_docs(docs_page)
+
+info_page = obj.info
+parser.get_info2(info_page)
+
+# company = CompanyLoader.new
+# company_page = company.get_page("http://zakupki.gov.ru/pgz/public/action/organization/view?source=epz&organizationCode=03472000014")
+# company_parser = CompanyParser.new
+# company_parser.get(company_page)
