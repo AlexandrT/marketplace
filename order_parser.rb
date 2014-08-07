@@ -5,7 +5,7 @@ class OrderParser
   end
 
   def get_info2(info_page)
-    page = Nokogiri::HTML(info_page, nil, 'utf-8')
+    page = Nokogiri::HTML(clean_trash(info_page), nil, 'utf-8')
 
     file = File.new("parser.log", "w")
     # main_block = page.css("div.noticeTabBox")
@@ -20,7 +20,7 @@ class OrderParser
 
     flag = false
 
-    blocks.each_with_index do |block, n|
+    blocks.each_with_index do |block, index|
       if block.name == "h2"
         if flag # может чекать на наличие значения common_key ?
           @json[common_key] = temp_json.dup
@@ -29,18 +29,20 @@ class OrderParser
         end
         common_key = block.inner_text().to_s
       elsif block.name == "table"
-        prev_sibling = block.previous_element.name
+        unless block.previous_element.nil?
+          prev_sibling = block.previous_element.name 
+        end
 
         if prev_sibling == "table"
-          byebug
           # parse second table
-          th_tags = block.xpath("//tr/th").to_a # брать только текст, не объекты
+          th_tags = block.xpath(".//tr/th").text
           temp_json2['headers'] = th_tags
 
-          tr_tags = block.xpath("//tr[not(child::th)]")
+          tr_tags = block.xpath(".//tr[not(child::th)]")
 
+#          byebug
           tr_tags.each do |tr_tag|
-            td_tags = tr_tag.xpath("//td").to_a
+            td_tags = tr_tag.xpath(".//td[not(@class)]").text
             inner_row << td_tags
           end
 
@@ -51,7 +53,8 @@ class OrderParser
 
           temp_json2[key] = val
 
-          temp_json[n] = temp_json2
+          temp_json[index] = temp_json2.dup
+          temp_json2.clear
         else
           tr_tags = block.css("tr")
           
@@ -80,7 +83,12 @@ class OrderParser
       else
         next
       end
+      # if index == blocks.size - 1
+      #   @json[common_key] = temp_json.dup
+      # end
     end
+
+    @json[common_key] = temp_json.dup
 
     @json.each do |elem|
       file.write elem
