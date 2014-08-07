@@ -83,12 +83,43 @@ class OrderParser
       else
         next
       end
-      # if index == blocks.size - 1
-      #   @json[common_key] = temp_json.dup
-      # end
     end
 
     @json[common_key] = temp_json.dup
+
+    # parse display:none div
+    td = page.xpath("//div[@class='expandRow']//td[*]")[0]
+    elements = td.children
+
+    json_hide = Hash.new
+    key_hide = String.new
+    elements.each do |element|
+      if element.name == "table"
+        tr_tags = block.css("tr")
+
+        tr_tags.each do |tr_tag|
+          key = tr_tag.css(".fontBoldTextTd/text()")[0].to_s
+          val = tr_tag.css(".fontBoldTextTd ~ *").to_s
+          
+          if val.nil?
+            val = ""
+          end
+
+          if key_hide == ""
+            @json[key] = val
+          else  
+           json_hide[key] = val
+          end
+        end
+
+        @json[key_hide] = json_hide.dup
+        json_hide.clear
+      elsif elemen.name == "h2"
+        key_hide = element.inner_text().to_s
+      end
+    end
+
+
 
     @json.each do |elem|
       file.write elem
