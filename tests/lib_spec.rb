@@ -15,4 +15,8 @@ describe "test functions" do
     expect(clean_trash("1   \n 1")).to eq("1 1")
     expect(clean_trash("1   \n ")).to eq("1")
   end
+
+  it "split_array" do
+    
+  end
 end

@@ -14,11 +14,13 @@ class OrderParser
     key = String.new
     common_key = String.new
     temp_json = Hash.new
+    temp_json2 = Hash.new
     val = Array.new
+    inner_row = Array.new
 
     flag = false
 
-    blocks.each do |block|
+    blocks.each_with_index do |block, n|
       if block.name == "h2"
         if flag # может чекать на наличие значения common_key ?
           @json[common_key] = temp_json.dup
@@ -27,27 +29,53 @@ class OrderParser
         end
         common_key = block.inner_text().to_s
       elsif block.name == "table"
-        tr_tags = block.css("tr")
-        
-        tr_tags.each do |tr_tag|
-          key = tr_tag.css(".fontBoldTextTd/text()")[0].to_s
-          val = tr_tag.css(".fontBoldTextTd ~ *").to_s
+        prev_sibling = block.previous_element.name
+
+        if prev_sibling == "table"
+          byebug
+          # parse second table
+          th_tags = block.xpath("//tr/th").to_a # брать только текст, не объекты
+          temp_json2['headers'] = th_tags
+
+          tr_tags = block.xpath("//tr[not(child::th)]")
+
+          tr_tags.each do |tr_tag|
+            td_tags = tr_tag.xpath("//td").to_a
+            inner_row << td_tags
+          end
+
+          temp_json2['rows'] = inner_row
+          key = block.css(".fontBoldTextTd/text()")[0].to_s
+          val = block.css(".fontBoldTextTd ~ *").to_s
           val = clean_trash(val)
 
-          # org = Array.new
-          # org = val[0].inner_html.include? "/organization/"
-            
-          # if org
-          #   organization_url = val[0].xpath('//a[contains(@href, "/organization/")]').to_a
-          #   company_url = clean_trash(organization_url[0]["href"].to_s)
+          temp_json2[key] = val
+
+          temp_json[n] = temp_json2
+        else
+          tr_tags = block.css("tr")
+          
+          tr_tags.each do |tr_tag|
+            key = tr_tag.css(".fontBoldTextTd/text()")[0].to_s
+            val = tr_tag.css(".fontBoldTextTd ~ *").to_s
+            val = clean_trash(val)
+            temp_json[key] = val
+
+            # org = Array.new
+            # org = val[0].inner_html.include? "/organization/"
               
-          #   company = CompanyLoader.new
-          #   company_page = company.get_page(company_url)
-          #   company_parser = CompanyParser.new
-          #   company_parser.get(company_page)
-          # end
-          temp_json[key] = val
-          flag = true
+            # if org
+            #   organization_url = val[0].xpath('//a[contains(@href, "/organization/")]').to_a
+            #   company_url = clean_trash(organization_url[0]["href"].to_s)
+                
+            #   company = CompanyLoader.new
+            #   company_page = company.get_page(company_url)
+            #   company_parser = CompanyParser.new
+            #   company_parser.get(company_page)
+            # end
+            temp_json[key] = val
+            flag = true
+          end
         end
       else
         next
