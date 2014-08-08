@@ -17,7 +17,7 @@ end
 
 
 def clean_trash(html)
-  # возможно надо удалять <td> </td> и тримить
+  # возможно надо удалять <td> </td> и тримить после этого
   html.gsub!("<br>", " ")
   html.gsub!(/([\r\n\t]|)/, " ")
   html.strip!

@@ -10,6 +10,7 @@ class CompanyLoader
   base_uri 'zakupki.gov.ru'
   # http_proxy 'http://foo.com', 80, 'user', 'pass'
 
+  # url - полный адрес на страницу компании
   def get_page(url)
     self.class.get(url)
   end
