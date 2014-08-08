@@ -1,4 +1,4 @@
-# deprecated
+# not used
 def split_array(arr)
   orders = []
   arr.each do |element|
@@ -17,6 +17,7 @@ end
 
 
 def clean_trash(html)
+  # возможно надо удалять <td> </td> и тримить
   html.gsub!("<br>", " ")
   html.gsub!(/([\r\n\t]|)/, " ")
   html.strip!

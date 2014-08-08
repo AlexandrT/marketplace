@@ -40,7 +40,6 @@ class OrderParser
 
           tr_tags = block.xpath(".//tr[not(child::th)]")
 
-#          byebug
           tr_tags.each do |tr_tag|
             td_tags = tr_tag.xpath(".//td[not(@class)]").text
             inner_row << td_tags
@@ -93,9 +92,12 @@ class OrderParser
 
     json_hide = Hash.new
     key_hide = String.new
+    common_hide_key = String.new
+    json_sup = Hash.new
+
     elements.each do |element|
       if element.name == "table"
-        tr_tags = block.css("tr")
+        tr_tags = element.css("tr")
 
         tr_tags.each do |tr_tag|
           key = tr_tag.css(".fontBoldTextTd/text()")[0].to_s
@@ -106,20 +108,22 @@ class OrderParser
           end
 
           if key_hide == ""
-            @json[key] = val
+            json_sup[key] = val
           else  
            json_hide[key] = val
           end
         end
 
-        @json[key_hide] = json_hide.dup
+        json_sup[key_hide] = json_hide.dup
         json_hide.clear
-      elsif elemen.name == "h2"
+      elsif element.name == "h2"
         key_hide = element.inner_text().to_s
       end
     end
 
-
+    common_hide_key = page.xpath("//div[@class='expandRow']")[0].previous_element.text
+    @json[common_hide_key] = json_sup.dup
+    json_sup.clear
 
     @json.each do |elem|
       file.write elem
