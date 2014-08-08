@@ -7,132 +7,162 @@ class OrderParser
   def get_info2(info_page)
     page = Nokogiri::HTML(clean_trash(info_page), nil, 'utf-8')
 
-    file = File.new("parser.log", "w")
-    # main_block = page.css("div.noticeTabBox")
+    # получаем содержимое дива div class="noticeTabBoxWrapper"
     blocks = page.xpath('//div[@class="noticeTabBoxWrapper"]/child::*')
 
-    key = String.new
+    # ключ в хэше @json 
     common_key = String.new
-    temp_json = Hash.new
-    temp_json2 = Hash.new
+    
+    # ключ во вложенном хэше
+    key = String.new
+    
+    # значение во вложенном хэше
     val = Array.new
-    inner_row = Array.new
 
-    flag = false
+    # вложенный хэш
+    embedded_json = Hash.new
 
-    blocks.each_with_index do |block, index|
+    # хэш для вложенной таблицы
+    nested_table = Hash.new
+
+    # массив строк значений из вложенной таблицы
+    inner_rows = Array.new
+
+    # обходим все блоки, выбирая table и h2 для парсинга
+    blocks.each do |block|
+      # если блок h2
       if block.name == "h2"
-        if flag # может чекать на наличие значения common_key ?
-          @json[common_key] = temp_json.dup
-          temp_json.clear
-          flag = false
+        # и это не первая итерация (он не равен пустой строке), значит и embedded_json уже наполнен - складываем в @json.
+        unless common_key == ""
+          @json[common_key] = embedded_json.dup
+          embedded_json.clear
         end
         common_key = block.inner_text().to_s
+      # если блок table, то парсим его  
       elsif block.name == "table"
+        # проверяем, есть ли предыдущий элемент
         unless block.previous_element.nil?
           prev_sibling = block.previous_element.name 
         end
 
+        # если предыдущий эдемент тоже table
         if prev_sibling == "table"
-          # parse second table
+          # то парсим текущий как вложенную таблицу
           th_tags = block.xpath(".//tr/th").text
-          temp_json2['headers'] = th_tags
+          # получаем хэдеры вложенной таблицы
+          nested_table['headers'] = th_tags
 
           tr_tags = block.xpath(".//tr[not(child::th)]")
 
+          # получаем значения строк вложенной таблицы
           tr_tags.each do |tr_tag|
             td_tags = tr_tag.xpath(".//td[not(@class)]").text
-            inner_row << td_tags
+            inner_rows << td_tags
           end
 
-          temp_json2['rows'] = inner_row
+          nested_table['rows'] = inner_rows
+
+          # парсим последнюю строку, содержащую "Итого:"
           key = block.css(".fontBoldTextTd/text()")[0].to_s
           val = block.css(".fontBoldTextTd ~ *").to_s
           val = clean_trash(val)
+          nested_table[key] = val
 
-          temp_json2[key] = val
-
-          temp_json[index] = temp_json2.dup
-          temp_json2.clear
+          embedded_json["embedded_table"] = nested_table.dup
+          nested_table.clear
+        # парсим как одиночную таблицу
         else
           tr_tags = block.css("tr")
           
           tr_tags.each do |tr_tag|
             key = tr_tag.css(".fontBoldTextTd/text()")[0].to_s
-            val = tr_tag.css(".fontBoldTextTd ~ *").to_s
-            val = clean_trash(val)
-            temp_json[key] = val
+            val = tr_tag.css(".fontBoldTextTd ~ *")
+            # val = clean_trash(val)
+            embedded_json[key] = val
 
-            # org = Array.new
-            # org = val[0].inner_html.include? "/organization/"
+            # запускаем парсинг компании, если ссылка на ее страницу
+            company_exists = false
+            company_exists = val.inner_html.include? "/organization/"
               
-            # if org
-            #   organization_url = val[0].xpath('//a[contains(@href, "/organization/")]').to_a
-            #   company_url = clean_trash(organization_url[0]["href"].to_s)
+            if company_exists
+              organization_url = val[0].xpath('//a[contains(@href, "/organization/")]').to_a
+              company_url = clean_trash(organization_url[0]["href"].to_s)
                 
-            #   company = CompanyLoader.new
-            #   company_page = company.get_page(company_url)
-            #   company_parser = CompanyParser.new
-            #   company_parser.get(company_page)
-            # end
-            temp_json[key] = val
-            flag = true
+              company = CompanyLoader.new
+              company_page = company.get_page(company_url)
+              company_parser = CompanyParser.new
+              company_parser.get(company_page)
+            end
+            embedded_json[key] = val
           end
         end
-      else
-        next
       end
     end
 
-    @json[common_key] = temp_json.dup
+    # добавляем в хэш результат последней итерации
+    @json[common_key] = embedded_json.dup
 
-    # parse display:none div
-    td = page.xpath("//div[@class='expandRow']//td[*]")[0]
-    elements = td.children
+    # парсим div display:none
+    main_td = page.xpath("//div[@class='expandRow']//td[*]")[0]
 
-    json_hide = Hash.new
+    # table и h2 из div display:none
+    elements = main_td.children
+
+    # вложенный хэш для подразделов
+    json_hide_embedded = Hash.new
+
+    # ключ для подразделов div display:none
     key_hide = String.new
+
+    # ключ в @json для div display:none
     common_hide_key = String.new
-    json_sup = Hash.new
+
+    # вложенный хэш для div display:none
+    json_hide = Hash.new
 
     elements.each do |element|
       if element.name == "table"
         tr_tags = element.css("tr")
 
+        # парсим строки из таблички
         tr_tags.each do |tr_tag|
           key = tr_tag.css(".fontBoldTextTd/text()")[0].to_s
           val = tr_tag.css(".fontBoldTextTd ~ *").to_s
           
+          # если <td> со значением нет
           if val.nil?
             val = ""
           end
 
+          # если у таблички нет предшествующего h2, то складываем все сразу во вложенный хэш
           if key_hide == ""
-            json_sup[key] = val
+            json_hide[key] = val
+          # иначе во вложенный хэш json_hide_embedded
           else  
-           json_hide[key] = val
+           json_hide_embedded[key] = val
           end
         end
 
-        json_sup[key_hide] = json_hide.dup
-        json_hide.clear
+        # складываем результат парсинга во вложенный хэш
+        json_hide[key_hide] = json_hide_embedded.dup
+        json_hide_embedded.clear
       elsif element.name == "h2"
+        # парсим ключ для @json
         key_hide = element.inner_text().to_s
       end
     end
 
+    # ключ в @json div display:none
     common_hide_key = page.xpath("//div[@class='expandRow']")[0].previous_element.text
-    @json[common_hide_key] = json_sup.dup
-    json_sup.clear
+    # помещаем в @json результат парсинга div display:none
+    @json[common_hide_key] = json_hide.dup
+    json_hide.clear
 
     @json.each do |elem|
-      file.write elem
       puts elem
       puts "---------------------------------------------------------------------------------"
-      file.write "---------------------------------------------------------------------------------"
     end
 
-    file.close
   end
 
   def get_info(info_page)
