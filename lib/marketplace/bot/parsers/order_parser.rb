@@ -173,23 +173,40 @@ class OrderParser
     # ключ типа документов
     common_key = String.new
 
+    # массив имен документов из раздела
+    names = Array.new
+
+    # массив ссылок на документы из раздела
+    links = Array.new
+
+    # { names : [name_doc1, name_doc2], links : [link_doc1, link_doc2] }
+    embedded_json = Hash.new
+
     blocks.each do |block|
       if block.name == "h2"
         common_key = block.inner_text().to_s
       elsif block.name == "table"
-        links = block.css("a")
+        a_tags = block.css("a")
 
-        links.each do |link|
-          if link["href"] =~ /filestor/
-            key = link.text().to_s
-            clean_trash(key)
-            val = link["href"].to_s
-            temp_json[key] = val
+        a_tags.each do |a_tag|
+          if a_tag["href"] =~ /filestor/
+            name = a_tag.text().to_s
+            clean_trash(name)
+            link = a_tag["href"].to_s
+            names << name
+            links << link
           end
         end
       end
 
-      @json[common_key] = temp_json
+      embedded_json["names"] = names.dup
+      embedded_json["links"] = links.dup
+
+      @json[common_key] = embedded_json.dup
+
+      names.clean
+      links.clean
+      embedded_json.clean
     end
   end
 
