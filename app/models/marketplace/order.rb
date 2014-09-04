@@ -5,8 +5,8 @@ module Marketplace
     field :remote_id
     field :type
     field :name
-    field :currency
 
+    embeds_one :customer
     embeds_many :contacts
     embeds_many :organizations
     embeds_many :lots
