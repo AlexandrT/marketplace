@@ -12,10 +12,12 @@ class ListParser
 
       source = ListLoader.new()  # date?
       page = Nokogiri::HTML(source.list(start_date, end_date, page_num), nil, 'utf-8')
+      
       if i > 3
         return orders_id
       end
-      page.css(".descriptTenderTd dl dt a").each{|link| orders_id << link["href"]}
+
+      page.xpath("//a[child::span[@class='printBtn']]").each{|link| orders_id << link["href"]}
     end while page.at_css(".rightArrow")
     return orders_id
   end
