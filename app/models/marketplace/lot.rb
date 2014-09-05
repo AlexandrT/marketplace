@@ -3,15 +3,11 @@ module Marketplace
     include Mongoid::Document
 
     field :name
-    field :okdp
-    field :okved
-    field :measure
-    field :count
-    field :price
     field :currency
-    field :additional_info
+    field :price
 
     embedded_in :order
+    embeds_many :lot_items
     embeds_one :delivery_place
   end
 end
