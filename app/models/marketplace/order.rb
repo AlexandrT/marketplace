@@ -7,7 +7,7 @@ module Marketplace
     field :name
 
     embeds_one :customer
-    embeds_many :contacts
+    embeds_one :contacts
     embeds_many :organizations
     embeds_many :lots
   end
