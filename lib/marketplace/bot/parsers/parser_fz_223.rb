@@ -8,14 +8,14 @@ module Marketplace
 
       get_order_info(xml_doc)
 
-      customer_xml = xml.xpath('//ns2:customer/mainInfo')[0]
-      get_customer(customer_xml)
+      auth_org_xml = xml.xpath('//ns2:customer/mainInfo')[0]
+      get_auth_organization(auth_org_xml)
 
       lots_xml = xml.xpath('//ns2:lots/lot')[0]
       get_all_lots(lots_xml)
 
-      organization_xml = xml.xpath('//ns2:placer/mainInfo')[0]
-      get_organization(organization_xml)
+      customer_xml = xml.xpath('//ns2:placer/mainInfo')[0]
+      get_customer(customer_xml)
 
       contacts_xml = xml.xpath('//ns2:contact')[0]
       get_contacts(contacts_xml)
@@ -27,8 +27,8 @@ module Marketplace
       @order_json[:type] = xml_doc.xpath('.//ns2:purchaseCodeName')
     end
 
-    def get_customer(customer_xml)
-      @auth_organization = Hash.from_xml(customer_xml)
+    def get_auth_organization(auth_org_xml)
+      @auth_organization = Hash.from_xml(auth_org_xml)
       @order_json[:auth_organization] = @auth_organization
     end
 
@@ -72,17 +72,22 @@ module Marketplace
       @order_json[:lots] = lots
     end
 
-    def get_organization(organization_xml)
-      @organization_json = Hash.from_xml(organization_xml)
-      @order_json[:organization] = @organization_json
+    def get_customer(customer_xml)
+      customers = Array.new
+
+      @customer_json = Hash.from_xml(customer_xml)
+      customers << @customer_json
+
+      @order_json[:customer] = customers
     end
 
     def get_contacts(contacts_xml)
-      org.search('.//organization').each do |node|
-        node.remove
-      end
-      @contacts_json = Hash.from_xml(contacts_xml)
-      @order_json[:contacts] = @contacts_json
+      @contacts_json[:person] = contacts_xml.xpath('.//lastName') + " " + contacts_xml.xpath('.//firstName') + " " + contacts_xml.xpath('.//middleName')
+      @contacts_json[:phone] = contacts_xml.xpath('.//phone')
+      @contacts_json[:email] = contacts_xml.xpath('.//email')
+      @contacts_json[:fax] = contacts_xml.xpath('.//fax')
+
+      @auth_organization[:contacts] = @contacts_json
     end
 
     def get_delivery_place(delivery_xml)
