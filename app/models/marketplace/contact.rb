@@ -2,9 +2,7 @@ module Marketplace
   class Contact
     include Mongoid::Document
 
-    field :first_name
-    field :middle_name
-    field :last_name
+    field :person
     field :phone
     field :email
     field :fax

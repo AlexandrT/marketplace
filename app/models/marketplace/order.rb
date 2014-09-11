@@ -6,9 +6,8 @@ module Marketplace
     field :type
     field :name
 
-    embeds_one :customer
-    embeds_one :contacts
-    embeds_many :organizations
+    embeds_one :auth_organization
+    embeds_many :customers
     embeds_many :lots
   end
 end

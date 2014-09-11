@@ -28,8 +28,8 @@ module Marketplace
     end
 
     def get_customer(customer_xml)
-      @customer = Hash.from_xml(customer_xml)
-      @order_json[:customer] = @customer
+      @auth_organization = Hash.from_xml(customer_xml)
+      @order_json[:auth_organization] = @auth_organization
     end
 
     def get_all_lots(lots_set)
