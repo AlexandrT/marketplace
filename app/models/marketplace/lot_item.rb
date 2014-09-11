@@ -7,6 +7,7 @@ module Marketplace
     field :measure
     field :count
     field :additional_info
+    field :delivery_place
 
     embedded_in :lot
   end
