@@ -56,16 +56,21 @@ module Marketplace
       lots = Array.new
 
       lots_set.each do |lot|
-        lot_json[:name] = lot.xpath('.//lot/subject')
-        lot_json[:currency] = lot.xpath('.//lot/currency/code')
-        lot_json[:price] = lot.xpath('.//lot/maxPrice')
+        lot_json[:name] = lot.xpath('.//subject')
+        lot_json[:currency] = lot.xpath('.//currency/code')
+        lot_json[:price] = lot.xpath('.//maxPrice')
         
-        lot_items_xml = lot.xpath('.//lot/customerRequirements/customerRequirement')
+        customer_xml = lot.xpath('.//customerRequirements/customerRequirement/organization')
+        get_customer(customer_xml)
+
+        lot_json[:customer] = @customer
+
+        lot_items_xml = lot.xpath('.//customerRequirements/customerRequirement')
         lot_items_xml.each do |lot_item_xml|
-          # lot_item[:okdp] = lot_item_xml.xpath('.//okdp/code')
+          lot_item[:okdp] = lot_item_xml.xpath('.//products/product/code')
           # lot_item[:okved] = lot_item_xml.xpath('.//okved/code')
           # lot_item[:measure] = lot_item_xml.xpath('.//okei/name')
-          # lot_item[:count] = lot_item_xml.xpath('.//qty')
+          lot_item[:count] = lot_item_xml.xpath('.//quantity')
 
           lot_item[:delivery_place] = lot_item.xpath('.//deliveryPlace')
 
@@ -78,6 +83,22 @@ module Marketplace
       end
 
       @order_json[:lots] = lots
+    end
+
+    def get_customer(customer_xml)
+      @customer[:name] = customer_xml.xpath('.//fullName')
+      # @customer[:bik] = 
+      # @customer[:ls_number] = 
+      # @customer[:rs_number] = 
+      @customer[:real_address] = customer_xml.xpath('.//factualAddress/addressLine')
+      @customer[:post_address] = customer_xml.xpath('.//postalAddress')
+
+      @contacts[:person] = customer_xml.xpath('.//lastName') + " " + customer_xml.xpath('.//firstName') + " " + customer_xml.xpath('.//middleName')
+      @contacts[:phone] = customer_xml.xpath('.//phone')
+      @contacts[:email] = customer_xml.xpath('.//email')
+      @contacts[:fax] = customer_xml.xpath('.//fax')
+
+      @customer[:contacts] = @contacts
     end
   end
 end
