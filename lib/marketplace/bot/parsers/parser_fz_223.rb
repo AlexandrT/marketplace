@@ -14,8 +14,8 @@ module Marketplace
       lots_xml = xml.xpath('//ns2:lots/lot')[0]
       get_all_lots(lots_xml)
 
-      customer_xml = xml.xpath('//ns2:placer/mainInfo')[0]
-      get_customer(customer_xml)
+      # customer_xml = xml.xpath('//ns2:placer/mainInfo')[0]
+      # get_customer(customer_xml)
 
       contacts_xml = xml.xpath('//ns2:contact')[0]
       get_contacts(contacts_xml)
@@ -72,14 +72,14 @@ module Marketplace
       @order_json[:lots] = lots
     end
 
-    def get_customer(customer_xml)
-      customers = Array.new
+    # def get_customer(customer_xml)
+    #   customers = Array.new
 
-      @customer_json = Hash.from_xml(customer_xml)
-      customers << @customer_json
+    #   @customer_json = Hash.from_xml(customer_xml)
+    #   customers << @customer_json
 
-      @order_json[:customer] = customers
-    end
+    #   @order_json[:customer] = customers
+    # end
 
     def get_contacts(contacts_xml)
       @contacts_json[:person] = contacts_xml.xpath('.//lastName') + " " + contacts_xml.xpath('.//firstName') + " " + contacts_xml.xpath('.//middleName')

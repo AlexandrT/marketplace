@@ -7,7 +7,6 @@ module Marketplace
     field :name
 
     embeds_one :auth_organization
-    embeds_many :customers
     embeds_many :lots
   end
 end

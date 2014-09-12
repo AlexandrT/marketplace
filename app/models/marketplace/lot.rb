@@ -9,5 +9,6 @@ module Marketplace
     embedded_in :order
     embeds_many :lot_items
     embeds_one :delivery_place
+    embeds_one :customer
   end
 end

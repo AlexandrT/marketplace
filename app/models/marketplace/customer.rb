@@ -10,6 +10,6 @@ module Marketplace
     field :post_address
 
     embeds_one :contact
-    embedded_in :order
+    embedded_in :lot
   end
 end
