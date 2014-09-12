@@ -7,6 +7,7 @@ module Marketplace
     field :email
     field :fax
 
-    embedded_in :order
+    embedded_in :auth_organization
+    embedded_in :customer
   end
 end

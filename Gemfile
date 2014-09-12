@@ -12,3 +12,12 @@ gemspec
 
 # To use debugger
 # gem 'debugger'
+group :test, :development do
+  gem 'rspec-rails'
+  gem 'nyan-cat-formatter'
+  gem 'factory_girl_rails'
+end
+
+group :test do
+  gem 'mongoid-rspec'
+end

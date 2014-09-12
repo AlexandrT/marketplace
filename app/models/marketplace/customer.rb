@@ -5,7 +5,7 @@ module Marketplace
     field :name
     field :bik
     field :ls_number
-    field :rs_nimber
+    field :rs_number
     field :real_address
     field :post_address
 
