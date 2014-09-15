@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe AuthOrganization do
+describe Marketplace::AuthOrganization do
   it { should have_fields(:full_name, :short_name, :inn, :kpp, :ogrn, :address, :post_address, :okato) }
   it { should have_one(:contact) }
   it { should be_embedded_in(:order) }
