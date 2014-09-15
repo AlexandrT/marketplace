@@ -21,3 +21,5 @@ end
 group :test do
   gem 'mongoid-rspec'
 end
+
+gem 'tzinfo-data', platforms: [:x64_mingw,:mingw, :mswin]
