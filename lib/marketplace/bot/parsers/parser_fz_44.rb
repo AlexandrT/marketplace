@@ -1,5 +1,5 @@
 module Marketplace
-  class ParserFz44 < OrderParserXml
+  class Bot::Parsers::ParserFz44 < Bot::Parsers::OrderParserXml
     def fill_json(info_page)
       get_order_info(info_page)
       

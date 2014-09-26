@@ -1,5 +1,5 @@
 module Marketplace
-  class ParserFz223 < OrderParserXml
+  class Bot::Parsers::ParserFz223 < Bot::Parsers::OrderParserXml
 
     def fill_json(info_page)
       page = Nokogiri::HTML(clean_trash(info_page), nil, 'utf-8')

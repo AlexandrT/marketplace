@@ -1,5 +1,5 @@
 module Marketplace
-  class ParserFz94 < OrderParserXml
+  class Bot::Parsers::ParserFz94 < Bot::Parsers::OrderParserXml
     def fill_json(info_page)
       info_page = Nokogiri::XML(info_page)
 

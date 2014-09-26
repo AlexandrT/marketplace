@@ -1,5 +1,5 @@
 module Marketplace
-  class OrderParserXml
+  class Bot::Parsers::OrderParserXml
     def initialize
       @order_json = Hash.new
       @auth_organization_json = Hash.new
