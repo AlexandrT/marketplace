@@ -2,13 +2,21 @@ require "spec_helper"
 require "bot"
 
 describe Marketplace::Bot::Parsers::ListParser do
-  let( :list_parser ) { Bot::Parsers::ListParser.new }
+  let(:list_parser) { Marketplace::Bot::Parsers::ListParser.new }
 
-  let( :valid_date ) { "04.09.2012" }
-  let( :invalid_time ) { "51.04.2031" }
-  let( :wrong_format_time ) { "111.04.2031" }
+  let(:start_date) { "04.09.2012" }
+  let(:end_date) { "05.09.2012" }
 
-  it { expect{list_parser.check_date(valid_date)}.should_not be_false }
-  it { expect{list_parser.check_date(invalid_time)}.to raise_error ArgumentError }
-  it { expect{list_parser.check_date(wrong_format_time)}.should be_false }
+  context "check_date" do
+    it { expect(list_parser.send(:check_date, "04.09.2012")).to_not eq(false) }
+    it { expect(list_parser.send(:check_date, "51.04.2031")).to eq(false) }
+    it { expect(list_parser.check_date("111.04.2031")).to eq(false)}
+  end
+
+  context "get_ids" do
+  	before(:each) { Nokogiri.stub(:HTML).and_return() }
+  	it {
+  		klass.any_instance.stub(:get_ids) { asdfsadf sa }
+  	}
+  end
 end

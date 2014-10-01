@@ -14,8 +14,10 @@ module Marketplace
           page_num = i.to_s
 
           source = ListLoader.new()  # date?
-          page = Nokogiri::HTML(source.list(start_date, end_date, page_num), nil, 'utf-8')
+          page = page_source(source.list(start_date, end_date, page_num), nil, 'utf-8')
       
+          # только для ручного тестирования
+          # чтобы не парсились все страницы
           if i > 3
             return orders_id
           end
@@ -24,6 +26,10 @@ module Marketplace
         end while page.at_css(".rightArrow")
         return orders_id
       end
+    end
+
+    def page_source(source)
+       Nokogiri::HTML(source)
     end
 
     def check_date(input_date)

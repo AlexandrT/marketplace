@@ -19,7 +19,7 @@ group :test, :development do
 end
 
 group :test do
-  gem 'mongoid-rspec'
+  gem 'mongoid-rspec', github: 'mongoid-rspec/mongoid-rspec', :branch => 'mongoid-4-0'
 end
 
 gem 'tzinfo-data', platforms: [:x64_mingw,:mingw, :mswin]
