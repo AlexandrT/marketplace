@@ -1,0 +1,1305 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
+  <head>
+    <title>Заказы и закупки</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+  </head>
+  <body>
+    <div class="outerWrapper mainPage">
+	  <div class="wrapper">
+        <div class="header">
+          <a href="/epz/main/public/home.html" onclick="setContentFilter(null);return false;" class="logo"></a>
+          <p>Официальный сайт Российской Федерации в сети Интернет
+            <br/>
+            <span>для размещения информации о размещении заказов на поставки товаров, выполнение работ, оказание услуг</span>
+          </p>
+          <ul class="ulRight">
+            <li class="mapOfSite">
+              <a href="/epz/main/public/information.html" class="linkPopUp">О чем этот сайт?</a>
+            </li>
+            <li class="mapOfSite">
+              <a href="/epz/main/public/siteMap.html" class="linkPopUp">Карта сайта</a>
+            </li>
+            <li class="cabinet">
+              <span>
+                <strong>Личный кабинет</strong>
+                <div class="personalCabinetPopUp">
+                  <div class="imgArr"></div>
+                  <div class="topBox">
+                    <a href="http://zakupki.gov.ru/pgz/pcabinet.jsp" target="_blank">Личный кабинет 44-ФЗ (94-ФЗ)</a>
+                  </div>
+                  <div class="bottomBox">
+                    <a href="https://zakupki.gov.ru/223/clause/private" target="_blank">Личный кабинет 223-ФЗ</a>
+                  </div>
+                </div>
+              </span>
+            </li>
+          </ul>
+          <ul>
+            <li class="titlePortal">
+              <span>
+                <a href="javascript:void(0)" onclick="setContentFilter(null);return false;" style="text-decoration:none;">Портал закупок</a>
+              </span>
+            </li>
+            <li class="law">
+              <span>
+                <a href="javascript:void(0)" onclick="setContentFilter('fz44');return false;" style="">44-ФЗ</a>
+              </span>
+            </li>
+            <li class="law">
+              <span>
+                <a href="javascript:void(0)" onclick="setContentFilter('fz223');return false;" style="">223-ФЗ</a>
+              </span>
+            </li>
+            <li class="law">
+              <span>
+                <a href="javascript:void(0)" onclick="setContentFilter('fz94');return false;" style="">94-ФЗ</a>
+              </span>
+            </li>
+          </ul>
+          <div class="clear"></div>
+        </div>
+        <table class="contactTopBox" cellpadding="0" cellspacing="0">
+          <tr>
+            <td class="contactPhone">
+              <dl>
+                <dt>Круглосуточная служба поддержки:</dt>
+                <dd>
+                  <span class="rightBrd">8 800 100-94-94</span>
+                  <span class="leftBrd">8 495 539-29-99</span>
+                </dd>
+              </dl>
+            </td>
+            <td>
+              <ul>
+                <li class="topFeedback">
+                  <a href="/epz/main/public/user-feedback.html">Обратная связь и контакты</a>
+                </li>
+                <li class="topForum">
+                  <a href="http://zakupki.gov.ru/forum/forums/list.page" target="_blank">Перейти на форум</a>
+                </li>
+              </ul>
+            </td>
+            <td class="headerBannersBlock">
+              <ul>
+                <li class="bannerFaqBtn">
+                  <a href="http://zakupki.gov.ru/epz/main/public/qa/view.html?categories=FZ44">
+                    <p class="bannerFaq"></p>
+                  </a>
+                </li>
+                <li>
+                  <a href="http://zakupki.gov.ru/epz/main/public/document/view.html?sectionId=105&amp;pageNo=1&amp;categories=FZ44&amp;_categories=on&amp;categories=FZ94&amp;_categories=on&amp;categories=FZ223&amp;_categories=on&amp;categories=FZALL&amp;_categories=on">
+                    <p class="bannerNpa"></p>
+                  </a>
+                </li>
+              </ul>
+            </td>
+            <td class="clientSupplierBtn">
+              <ul>
+                <li class="clientBtn">
+                  <a href="/epz/main/public/forCustomers.html?tmstmp=1412351536025">Заказчикам</a>
+                </li>
+                <li class="supplierBtn">
+                  <a href="/epz/main/public/forSuppliers.html?tmstmp=1412351536025">Поставщикам</a>
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </table>
+        <div class="searchBlockAll">
+          <ul class="catalogTabs">
+            <li class="currentTab">
+              <span class="quickSearch">Быстрый поиск</span>
+            </li>
+            <li>
+              <a href="/epz/order/extendedsearch/extended_search.html" class="extendSearch">Расширенный поиск</a>
+            </li>
+          </ul>
+          <div class="tabsBox">
+            <div class="searchBox">
+              <form id="quickSearchForm_header" action="/epz/order/quicksearch/search.html" method="GET" >
+                <div class="searchField">
+                  <span class="btn">
+                    <input type="button" value="Найти" onclick="submitQuickSearchForm();return false;"/>
+                  </span>
+                  <div class="inputContainer">
+                    <input id="quickSearchForm_header_searchString" maxlength="250" type="text" class="hint quickSearchAutocompleteOrder" name="searchString" title="По наименованию заказа, лота, заказчика, по номеру извещения" style="float:left"/>
+                    <div class="clearButton"></div>
+                    <div class="clear"></div>
+                  </div>
+                </div>
+                <p class="accounting">
+                  <label><input type="checkbox" id="morphology" name="morphology"  onclick="morphologyClick();"/>С учетом всех форм слов</label>
+                  <label><input type="checkbox" id="strictEqual" name="strictEqual"  onclick="strictEqualClick();"/>Строгое соответствие</label>
+                </p>
+                <div class="clear"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="mainBox">
+          <div class="leftCol">
+            <div class="leftColBox expCol">
+              <h1 class="leftColBoxTitle expand">
+                <p>
+                  <span>Развернуть меню</span>
+                </p>
+              </h1>
+            </div>
+            <div class="expandMenu">
+              <div class="leftCol">
+                <div class="leftColBox">
+                  <h1 class="leftColBoxTitle">Заказы и закупки</h1>
+                  <div class="leftColBoxContent">
+                    <ul class="addingMenu">
+                      <li>
+                        <a class="_search" href="/epz/order/quicksearch/search.html">Все заказы и закупки</a>
+                      </li>
+                      <li>
+                        <a class="_planSearch" href="/epz/orderplan/orderPlanQuickSearch/search.html">Реестр планов-графиков размещения заказов и планов закупок</a>
+                      </li>
+                      <li>
+                        <a class="_obozSearch" href="/epz/oboz/public/bigOrderSearch/search.html">Общественное обсуждение крупных закупок</a>
+                      </li>
+                      <li>
+                        <a class="_purchasePlanFz44Search" href="/epz/purchaseplanfz44/quicksearch/search.html">Реестр планов закупок (44-ФЗ)</a>
+                      </li>
+                      <li>
+                        <a class="_orderClauseSearch" href="/epz/orderclause/orderClauseQuickSearch/search.html">Реестр положений о закупках (223-ФЗ)</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="leftColBox">
+                  <h1 class="leftColBoxTitle">Контракты</h1>
+                  <div class="leftColBoxContent">
+                    <ul class="addingMenu">
+                      <li>
+                        <a class="_contractQuickSearch _contract/extended/search" href="/epz/contract/contractQuickSearch/search.html">Единый реестр государственных и муниципальных контрактов</a>
+                      </li>
+                      <li>
+                        <a class="_contract/reporting" href="/epz/contractreporting/contract/reporting/form.html">Отчетность по договорам (223-ФЗ)</a>
+                      </li>
+                      <li>
+                        <a class="_btkSearch" href="http://zakupki.gov.ru/epz/btk/search/quick/result.html">Библиотека типовых контрактов, типовых условий контрактов (44-ФЗ)</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="leftColBox">
+                  <h1 class="leftColBoxTitle">Реестры</h1>
+                  <div class="leftColBoxContent">
+                    <ul class="addingMenu">
+                      <li>
+                        <a class="_organization/search" href="/epz/organization/organizationQuickSearch/search.html">Реестр организаций</a>
+                      </li>
+                      <li>
+                        <a class="_bankGuaranteeSearch" href="/epz/bankguarantee/quicksearch/search.html">Реестр банковских гарантий (44-ФЗ)</a>
+                      </li>
+                      <li>
+                        <a href="http://zakupki.gov.ru/223/revenue/public/revenue/search.html" target="_blank" >Реестр сведений об объеме выручки (223-ФЗ)</a>
+                      </li>
+                      <li>
+                        <a class="_dishonestSupplierSearch" href="/epz/dishonestsupplier/dishonestSuppliersQuickSearch/search.html">Реестр недобросовестных поставщиков</a>
+                      </li>
+                      <li>
+                        <a class="_dizkSearch" href="/epz/dizk/quicksearch/search.html">Дополнительная информация о закупках и контрактах</a>
+                      </li>
+                      <li>
+                        <a class="_customerReportsSearch" href="/epz/customerreports/search/quick/result.html">Отчёты заказчиков</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="leftColBox">
+                  <h1 class="leftColBoxTitle smallTitle">Реестр жалоб, плановых и внеплановых проверок, их результатов и выданных предписаний</h1>
+                  <div class="leftColBoxContent">
+                    <ul class="addingMenu">
+                      <li>
+                        <a class="_complaintSearch" href="/epz/complaint/complaintQuickSearch/search.html">Жалобы</a>
+                      </li>
+                      <li>
+                        <a class="_inspectionPlanSearch" href="/epz/inspectionplan/inspectionPlanQuickSearch/search.html">Плановые проверки 44-ФЗ (94-ФЗ)</a>
+                      </li>
+                      <li>
+                        <a class="_unscheduledInspectionSearch" href="/epz/unscheduledinspection/unscheduledInspectionQuickSearch/search.html">Внеплановые проверки 44-ФЗ (94-ФЗ)</a>
+                      </li>
+                      <li>
+                        <a class="_controlResultSearch" href="/epz/controlresult/controlResultQuickSearch/search.html">Результаты контроля 44-ФЗ (94-ФЗ)</a>
+                      </li>
+                      <li>
+                        <a target="_blank" href="http://zakupki.gov.ru/pgz/public/action/inspection/plans/registry">Плановые проверки и результаты контроля 94-ФЗ до 05.04.2013</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="leftColBox">
+                  <h1 class="leftColBoxTitle">Аналитика</h1>
+                  <div class="leftColBoxContent">
+                    <ul class="addingMenu">
+                      <li>
+                        <a class="_analytics/public-control" href="/epz/main/public/analytics/public-control.html">Общественный контроль</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="leftColBox">
+                  <h1 class="leftColBoxTitle">Дополнительно</h1>
+                  <div class="leftColBoxContent">
+                    <ul class="addingMenu">
+                      <li>
+                        <a href="/epz/main/public/news/news.html">Новости</a>
+                      </li>
+                      <li>
+                        <a href="/epz/main/public/document/view.html">Документы</a>
+                      </li>
+                      <li>
+                        <a href="/epz/main/public/qa/view.html">Вопросы и ответы</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <form id="quickSearchForm_left" data-block_error="li" class="formValidation" action="/epz/order/quicksearch/update.html" method="GET">
+              <div class="collapseMenu">
+                <div class="filterBox">
+                  <ul>
+                    <li class="titleLi">Размещение выполняется по:</li>
+                    <li>
+                      <ul class="lineUl">
+                        <li>
+                          <input id="search44" name="placeOfSearch" type="checkbox" value="FZ_44" checked="checked"/>
+                          <label for="search44">44-ФЗ</label>
+                          <input type="hidden" name="_placeOfSearch" value="on"/>
+                          <li>
+                            <input id="search223" name="placeOfSearch" type="checkbox" value="FZ_223"/>
+                            <label for="search223">223-ФЗ</label>
+                            <input type="hidden" name="_placeOfSearch" value="on"/>
+                            <li>
+                              <input id="search94" name="placeOfSearch" type="checkbox" value="FZ_94"/>
+                              <label for="search94">94-ФЗ</label>
+                              <input type="hidden" name="_placeOfSearch" value="on"/>
+                      </ul>
+                    </li>
+                    <li class="titleLi">Начальная (максимальная) цена:</li>
+                    <li>
+                      <label>от<input id="minPrice" name="priceFrom" class="hint numeric mask" type="text" value=""/></label>
+                    </li>
+                    <li>
+                      <label>до<input id="maxPrice" name="priceTo" class="hint numeric mask" type="text" value=""/></label>
+                    </li>
+                    <li>
+                    </li>
+                    <li>
+                      <p class="sliderValue">
+                        <input id="amountmin" class="mask" type="text" readonly="readonly"/>
+                        <input id="amountmax" class="mask" type="text" readonly="readonly"/>
+                      </p>
+                      <div id="slider"></div>
+                    </li>
+                    <li class="titleLi">Дата публикации</li>
+                    <li class="calendarFilter">
+                      <label>
+                        <input type="text" value="" name="publishDateFrom" id="publishDateFrom" class="datepicker_ru" data-validate='{"required": "false", "validDate": "true"}' data-validate_message='{"validDate": "Неправильная дата начала"}'/>
+                      </label> -
+                      <label>
+                        <input type="text" value="" name="publishDateTo" id="publishDateTo" class="datepicker_ru" data-validate='{"required": "false", "validDate": "true", "dpCompareDate": "notBefore #publishDateFrom"}' data-validate_message='{"validDate": "Неправильная дата окончания", "dpCompareDate": "Дата начала периода должна быть меньше даты окончания периода"}'/>
+                      </label>
+                      <br/>
+                    </li>
+                    <li class="titleLi">Дата обновления</li>
+                    <li class="calendarFilter">
+                      <label>
+                        <input type="text" value="" name="updateDateFrom" id="updateDateFrom" class="datepicker_ru" data-validate='{"required": "false", "validDate": "true"}' data-validate_message='{"validDate": "Неправильная дата начала"}'/>
+                      </label> -
+                      <label>
+                        <input type="text" value="" name="updateDateTo" id="updateDateTo" class="datepicker_ru" data-validate='{"required": "false", "validDate": "true", "dpCompareDate": "notBefore #updateDateFrom"}' data-validate_message='{"validDate": "Неправильная дата окончания", "dpCompareDate": "Дата начала периода должна быть меньше даты окончания периода"}'/>
+                      </label>
+                      <br/>
+                    </li>
+                  </ul>
+                </div>
+                <div class="leftColBox">
+                  <span class="btn loadBtn">
+                    <input type="button" value="Очистить уточняющие параметры" onclick="clearAll();">
+                  </span>
+                </div>
+                <div class="leftColBox filter">
+                  <h1 class="leftColBoxTitle longLine">Этап закупки (размещения заказа)</h1>
+                  <div class="leftColBoxContent">
+                    <ul>
+                      <li>
+                        <label>
+                          <input id="orderStages1" name="orderStages" type="checkbox" value="AF" checked="checked"/>
+                          <input type="hidden" name="_orderStages" value="on"/>Подача заявок
+                        </label>
+                      </li>
+                      <li>
+                        <label>
+                          <input id="orderStages2" name="orderStages" type="checkbox" value="CA" checked="checked"/>
+                          <input type="hidden" name="_orderStages" value="on"/>Работа комиссии
+                        </label>
+                      </li>
+                      <li>
+                        <label>
+                          <input id="orderStages3" name="orderStages" type="checkbox" value="PC"/>
+                          <input type="hidden" name="_orderStages" value="on"/>Закупка завершена
+                        </label>
+                      </li>
+                      <li>
+                        <label>
+                          <input id="orderStages4" name="orderStages" type="checkbox" value="PA"/>
+                          <input type="hidden" name="_orderStages" value="on"/>Закупка отменена
+                        </label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="leftColBox filter">
+                  <h1 class="leftColBoxTitle">Сортировать</h1>
+                  <div class="leftColBoxContent">
+                    <ul>
+                      <li>
+                        <select id="sortDirection" name="sortDirection">
+                          <option value="false" selected="selected">По убыванию</option>
+                          <option value="true">По возрастанию</option>
+                        </select>
+                      </li>
+                      <li>
+                        <label>
+                          <input id="sortBy1" name="sortBy" type="radio" value="UPDATE_DATE" checked="checked"/>
+                          <label for="sortBy1">по дате обновления</label>
+                        </label>
+                      </li>
+                      <li>
+                        <label>
+                          <input id="sortBy2" name="sortBy" type="radio" value="PUBLISH_DATE"/>
+                          <label for="sortBy2">по дате публикации</label>
+                        </label>
+                      </li>
+                      <li>
+                        <label>
+                          <input id="sortBy3" name="sortBy" type="radio" value="PRICE"/>
+                          <label for="sortBy3">по цене</label>
+                        </label>
+                      </li>
+                      <li>
+                        <label>
+                          <input id="sortBy4" name="sortBy" type="radio" value="RELEVANCE"/>
+                          <label for="sortBy4">по релевантности</label>
+                        </label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="leftColBox filter">
+                  <h1 class="leftColBoxTitle longLine">Количество записей на странице</h1>
+                  <div class="leftColBoxContent">
+                    <ul class="lineUl">
+                      <li>
+                        <input id="recordsPerPage1" name="recordsPerPage" type="radio" value="_10" checked="checked"/>
+                        <label for="recordsPerPage1">10</label>
+                      </li>
+                      <li>
+                        <input id="recordsPerPage2" name="recordsPerPage" type="radio" value="_20"/>
+                        <label for="recordsPerPage2">20</label>
+                      </li>
+                      <li>
+                        <input id="recordsPerPage3" name="recordsPerPage" type="radio" value="_50"/>
+                        <label for="recordsPerPage3">50</label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="leftColBox">
+                  <span class="btn loadBtn">
+                    <input type="button" value="Обновить результаты поиска" onclick="submitQuickSearchForm();return false;">
+                  </span>
+                </div>
+                <input id="orderQuickSearchCriteria.pageNo" name="pageNo" type="hidden" value="1"/>
+                <input id="quickSearchForm_left_searchString" name="searchString" type="hidden" value=""/>
+                <input id="form_strictEqual" name="strictEqual" type="hidden" value="false"/>
+                <input id="form_morphology" name="morphology" type="hidden" value="false"/>
+                <input id="showLotsInfoHidden" name="showLotsInfo" type="hidden" value="false"/>
+                <input type="hidden" id="quickSearchForm_left_isPaging" name="isPaging" value="false"/>
+                <input type="hidden" id="isHeaderClick" name="isHeaderClick"/>
+                <input type="hidden" name="checkIds" id="checkIds" value=""/>
+              </div>
+            </form>
+          </div>
+          <div class="mainBox">
+            <div class="rightCol">
+              <div class="content">
+                <a href="javascript:void(0)" class="rssTemp" title="Подписаться на RSS-ленту" onclick="checkURILength('/epz/order/quicksearch/rss?placeOfSearch=FZ_44&_placeOfSearch=on&_placeOfSearch=on&_placeOfSearch=on&priceFrom=0&priceTo=200+000+000+000&publishDateFrom=&publishDateTo=&updateDateFrom=&updateDateTo=&orderStages=AF&_orderStages=on&orderStages=CA&_orderStages=on&_orderStages=on&_orderStages=on&sortDirection=false&sortBy=UPDATE_DATE&recordsPerPage=_10&pageNo=1&searchString=&strictEqual=false&morphology=false&showLotsInfo=false&isPaging=false&isHeaderClick=&checkIds=',256)"></a>
+                <a class="download" href="#" onclick="downloadOrderCsv(707359, '/epz/order', '?placeOfSearch=FZ_44&_placeOfSearch=on&_placeOfSearch=on&_placeOfSearch=on&priceFrom=0&priceTo=200+000+000+000&publishDateFrom=&publishDateTo=&updateDateFrom=&updateDateTo=&orderStages=AF&_orderStages=on&orderStages=CA&_orderStages=on&_orderStages=on&_orderStages=on&sortDirection=false&sortBy=UPDATE_DATE&recordsPerPage=_10&pageNo=1&searchString=&strictEqual=false&morphology=false&showLotsInfo=false&isPaging=false&isHeaderClick=&checkIds=', 'true')" title="Выгрузить результаты поиска"></a>
+                <a class="loadSettings linkPopUp" href="#"></a>
+                <h1>Реестр закупок и заказов</h1>
+                <form id="userQueryForm" style="height: 50px;">
+                  <table cellpadding="0" cellspacing="0" class="lowSearch independenTable">
+                    <tr>
+                      <td style="width: 360px !important;"></td>
+                      <td class="manySelect independenSelect" style="width: 0px;">
+                        <div class="collapsed" style="width: 470px !important;">
+                          <span class="msExpandButton"></span>
+                          <span id="userQuerySpan" class="msPlaceholder"></span>
+                        </div>
+                        <span id="quickSearchStar" title="Возможно сохранение 10 настроек поиска">&nbsp;*</span>
+                        <div class="selectChose">
+                          <div class="expanded" style="width: 475px !important; position: absolute; max-height: 200px !important;">
+                            <ul class="feasibilityToRemove">
+                              <li class="modeInsert">
+                                <input id="nameQuerySearch" type="text" maxlength="200" class="colorValue" onfocus="$('#nameQuerySearch').val('');" data-initial="Введите краткое название новой настройки" value="Введите краткое название новой настройки" />
+                                <span onclick="addUserQuery();" class="addRuleBtn"></span>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </form>
+                <p class="allRecords">Всего записей: 707359</p>
+                <label class="lotInfoLabel">
+                  <input id="expandLotsInfo" type="checkbox" />Развернуть информацию о лотах
+                </label>
+                <div id="exceedSphinxPageSizeDiv">
+                  <div class="registerBox">
+                    <table cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td class="tenderTd">
+                          <dl>
+                            <dt>Электронный аукцион</dt>
+                            <dd>Работа комиссии</dd>
+                          </dl>
+                        </td>
+                        <td class="descriptTenderTd">
+                          <dl>
+                            <dt>
+                              <a target="_blank" href="/epz/order/notice/ea44/view/common-info.html?regNumber=0320100036714000024">№ 0320100036714000024</a>
+                            </dt>
+                            <dd class="nameOrganization">
+                              <a target="_blank" href="http://zakupki.gov.ru/pgz/public/action/organization/view?source=epz&organizationId=1397757" title="Филиал федерального государственного бюджетного учреждения &quot;Федеральная кадастровая палата Федеральной службы государственной регистрации, кадастра и картографии&quot; по Приморскому краю">Филиал федерального государственного бюджетного учреждения "Федеральная кадастровая палата Федеральной службы государственной регистрации, кадастра и картографии" по Приморскому краю</a>
+                            </dd>
+                            <dd>
+                              <a target="_blank" href="/epz/order/notice/ea44/view/common-info.html?regNumber=0320100036714000024" title="Поставка материалов в части гражданской обороны для нужд филиала ФГБУ &laquo;ФКП Росреестра&raquo; по Приморскому краю.">Поставка материалов в части гражданской обороны для нужд филиала ФГБУ «ФКП Росреестра» по Приморскому краю.</a>
+                            </dd>
+                          </dl>
+                        </td>
+                        <td class="amountTenderTd">
+                          <p>
+                            <span class="fz44"></span>
+                            <a href="/epz/order/notice/printForm/view.html?regNumber=0320100036714000024" target="_blank"><span class="printBtn"></span></a>
+                          </p>
+                          <dl>
+                            <dt>36 540,00</dt>
+                            <dd>Российский рубль</dd>
+                          </dl>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td colspan="2" class="publishingTd">
+                          <ul class="publishing">
+                            <li>Опубликовано:</li>
+                            <li class="publishingDate">15.08.2014</li>
+                            <li>Обновлено:</li>
+                            <li class="publishingDate">04.10.2014</li>
+                          </ul>
+                        </td>
+                      </tr>
+                    </table>
+                    <div class="reportBox">
+                      <ul>
+                        <li>
+                          <a href="/epz/order/notice/ea44/view/common-info.html?regNumber=0320100036714000024" target="_blank">Сведения</a>
+                        </li>
+                        <li>
+                          <a href="/epz/order/notice/ea44/view/documents.html?regNumber=0320100036714000024" target="_blank">Документы</a>
+                        </li>
+                        <li>
+                          <a onclick="openComplaintQuickSearch('0320100036714000024', false, false, true)" style="cursor: pointer;">Жалобы</a>
+                        </li>
+                        <li>
+                          <a onclick="bankGuaranteeUrl('0320100036714000024')" style="cursor: pointer;">Банковские гарантии</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="registerBox">
+                    <table cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td class="tenderTd">
+                          <dl>
+                            <dt>Электронный аукцион</dt>
+                            <dd>Работа комиссии</dd>
+                          </dl>
+                        </td>
+                        <td class="descriptTenderTd">
+                          <dl>
+                            <dt>
+                              <a target="_blank" href="/epz/order/notice/ea44/view/common-info.html?regNumber=0122100000314000068">№ 0122100000314000068</a>
+                            </dt>
+                            <dd class="nameOrganization">
+                              <a target="_blank" href="http://zakupki.gov.ru/pgz/public/action/organization/view?source=epz&organizationId=613054" title="Управление Федерального казначейства по Хабаровскому краю">Управление Федерального казначейства по Хабаровскому краю</a>
+                            </dd>
+                            <dd>
+                              <a target="_blank" href="/epz/order/notice/ea44/view/common-info.html?regNumber=0122100000314000068" title="Поставка носителей информации">Поставка носителей информации</a>
+                            </dd>
+                          </dl>
+                        </td>
+                        <td class="amountTenderTd">
+                          <p>
+                            <span class="fz44"></span>
+                            <a href="/epz/order/notice/printForm/view.html?regNumber=0122100000314000068" target="_blank"><span class="printBtn"></span></a>
+                          </p>
+                          <dl>
+                            <dt>369 959,00</dt>
+                            <dd>Российский рубль</dd>
+                          </dl>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td colspan="2" class="publishingTd">
+                          <ul class="publishing">
+                            <li>Опубликовано:</li>
+                            <li class="publishingDate">25.09.2014</li>
+                            <li>Обновлено:</li>
+                            <li class="publishingDate">04.10.2014</li>
+                          </ul>
+                        </td>
+                      </tr>
+                    </table>
+                    <div class="reportBox">
+                      <ul>
+                        <li>
+                          <a href="/epz/order/notice/ea44/view/common-info.html?regNumber=0122100000314000068" target="_blank">Сведения</a>
+                        </li>
+                        <li>
+                          <a href="/epz/order/notice/ea44/view/documents.html?regNumber=0122100000314000068" target="_blank">Документы</a>
+                        </li>
+                        <li>
+                          <a onclick="openComplaintQuickSearch('0122100000314000068', false, false, true)" style="cursor: pointer;">Жалобы</a>
+                        </li>
+                        <li>
+                          <a onclick="bankGuaranteeUrl('0122100000314000068')" style="cursor: pointer;">Банковские гарантии</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="registerBox">
+                    <table cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td class="tenderTd">
+                          <dl>
+                            <dt>Электронный аукцион</dt>
+                            <dd>Подача заявок</dd>
+                          </dl>
+                        </td>
+                        <td class="descriptTenderTd">
+                          <dl>
+                            <dt>
+                              <a target="_blank" href="/epz/order/notice/ea44/view/common-info.html?regNumber=0361200014514000011">№ 0361200014514000011</a>
+                            </dt>
+                            <dd class="nameOrganization">
+                              <a target="_blank" href="http://zakupki.gov.ru/pgz/public/action/organization/view?source=epz&organizationId=1115582" title="Государственное бюджетное учреждение здравоохранения &quot;Сахалинское областное патологоанатомическое бюро&quot;">Государственное бюджетное учреждение здравоохранения "Сахалинское областное патологоанатомическое бюро"</a>
+                            </dd>
+                            <dd>
+                              <a target="_blank" href="/epz/order/notice/ea44/view/common-info.html?regNumber=0361200014514000011" title="Оказание услуг по техническому обслуживанию медицинского оборудования ГБУЗ &laquo;Сахалинское областное патологоанатомическое бюро&raquo;">Оказание услуг по техническому обслуживанию медицинского оборудования ГБУЗ «Сахалинское областное патологоанатомическое бюро»</a>
+                            </dd>
+                          </dl>
+                        </td>
+                        <td class="amountTenderTd">
+                          <p>
+                            <span class="fz44"></span>
+                            <a href="/epz/order/notice/printForm/view.html?regNumber=0361200014514000011" target="_blank"><span class="printBtn"></span></a>
+                          </p>
+                          <dl>
+                            <dt>250 038,00</dt>
+                            <dd>Российский рубль</dd>
+                          </dl>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td colspan="2" class="publishingTd">
+                          <ul class="publishing">
+                            <li>Опубликовано:</li>
+                            <li class="publishingDate">30.09.2014</li>
+                            <li>Обновлено:</li>
+                            <li class="publishingDate">04.10.2014</li>
+                          </ul>
+                        </td>
+                      </tr>
+                    </table>
+                    <div class="reportBox">
+                      <ul>
+                        <li>
+                          <a href="/epz/order/notice/ea44/view/common-info.html?regNumber=0361200014514000011" target="_blank">Сведения</a>
+                        </li>
+                        <li>
+                          <a href="/epz/order/notice/ea44/view/documents.html?regNumber=0361200014514000011" target="_blank">Документы</a>
+                        </li>
+                        <li>
+                          <a onclick="openComplaintQuickSearch('0361200014514000011', false, false, true)" style="cursor: pointer;">Жалобы</a>
+                        </li>
+                        <li>
+                          <a onclick="bankGuaranteeUrl('0361200014514000011')" style="cursor: pointer;">Банковские гарантии</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="registerBox">
+                    <table cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td class="tenderTd">
+                          <dl>
+                            <dt>Электронный аукцион</dt>
+                            <dd>Работа комиссии</dd>
+                          </dl>
+                        </td>
+                        <td class="descriptTenderTd">
+                          <dl>
+                            <dt>
+                              <a target="_blank" href="/epz/order/notice/ea44/view/common-info.html?regNumber=0316100017314000063">№ 0316100017314000063</a>
+                            </dt>
+                            <dd class="nameOrganization">
+                              <a target="_blank" href="http://zakupki.gov.ru/pgz/public/action/organization/view?source=epz&organizationId=701930" title="Федеральное государственное бюджетное учреждение науки Институт мерзлотоведения им. П.И. Мельникова Сибирского отделения Российской академии наук">Федеральное государственное бюджетное учреждение науки Институт мерзлотоведения им. П.И. Мельникова Сибирского отделения Российской академии наук</a>
+                            </dd>
+                            <dd>
+                              <a target="_blank" href="/epz/order/notice/ea44/view/common-info.html?regNumber=0316100017314000063" title="Поставка  автозапчастей для нужд ИМЗ СО РАН.">Поставка  автозапчастей для нужд ИМЗ СО РАН.</a>
+                            </dd>
+                          </dl>
+                        </td>
+                        <td class="amountTenderTd">
+                          <p>
+                            <span class="fz44"></span>
+                            <a href="/epz/order/notice/printForm/view.html?regNumber=0316100017314000063" target="_blank"><span class="printBtn"></span></a>
+                          </p>
+                          <dl>
+                            <dt>971 641,00</dt>
+                            <dd>Российский рубль</dd>
+                          </dl>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td colspan="2" class="publishingTd">
+                          <ul class="publishing">
+                            <li>Опубликовано:</li>
+                            <li class="publishingDate">25.09.2014</li>
+                            <li>Обновлено:</li>
+                            <li class="publishingDate">04.10.2014</li>
+                          </ul>
+                        </td>
+                      </tr>
+                    </table>
+                    <div class="reportBox">
+                      <ul>
+                        <li>
+                          <a href="/epz/order/notice/ea44/view/common-info.html?regNumber=0316100017314000063" target="_blank">Сведения</a>
+                        </li>
+                        <li>
+                          <a href="/epz/order/notice/ea44/view/documents.html?regNumber=0316100017314000063" target="_blank">Документы</a>
+                        </li>
+                        <li>
+                          <a onclick="openComplaintQuickSearch('0316100017314000063', false, false, true)" style="cursor: pointer;">Жалобы</a>
+                        </li>
+                        <li>
+                          <a onclick="bankGuaranteeUrl('0316100017314000063')" style="cursor: pointer;">Банковские гарантии</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="registerBox">
+                    <table cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td class="tenderTd">
+                          <dl>
+                            <dt>Электронный аукцион</dt>
+                            <dd>Работа комиссии</dd>
+                          </dl>
+                        </td>
+                        <td class="descriptTenderTd">
+                          <dl>
+                            <dt>
+                              <a target="_blank" href="/epz/order/notice/ea44/view/common-info.html?regNumber=0391100015114000089">№ 0391100015114000089</a>
+                            </dt>
+                            <dd class="nameOrganization">
+                              <a target="_blank" href="http://zakupki.gov.ru/pgz/public/action/organization/view?source=epz&organizationId=665659" title="федеральное государственное казенное учреждение &quot;321 Военный клинический госпиталь&quot; Министерства обороны Российской Федерации">федеральное государственное казенное учреждение "321 Военный клинический госпиталь" Министерства обороны Российской Федерации</a>
+                            </dd>
+                            <dd>
+                              <a target="_blank" href="/epz/order/notice/ea44/view/common-info.html?regNumber=0391100015114000089" title="Поставка дезинфицирующих средств для нужд  ФГКУ &quot;321 ВКГ&quot; МО РФ.">Поставка дезинфицирующих средств для нужд  ФГКУ "321 ВКГ" МО РФ.</a>
+                            </dd>
+                          </dl>
+                        </td>
+                        <td class="amountTenderTd">
+                          <p>
+                            <span class="fz44"></span>
+                            <a href="/epz/order/notice/printForm/view.html?regNumber=0391100015114000089" target="_blank"><span class="printBtn"></span></a>
+                          </p>
+                          <dl>
+                            <dt>4 394 687,00</dt>
+                            <dd>Российский рубль</dd>
+                          </dl>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td colspan="2" class="publishingTd">
+                          <ul class="publishing">
+                            <li>Опубликовано:</li>
+                            <li class="publishingDate">19.09.2014</li>
+                            <li>Обновлено:</li>
+                            <li class="publishingDate">04.10.2014</li>
+                          </ul>
+                        </td>
+                      </tr>
+                    </table>
+                    <div class="reportBox">
+                      <ul>
+                        <li>
+                          <a href="/epz/order/notice/ea44/view/common-info.html?regNumber=0391100015114000089" target="_blank">Сведения</a>
+                        </li>
+                        <li>
+                          <a href="/epz/order/notice/ea44/view/documents.html?regNumber=0391100015114000089" target="_blank">Документы</a>
+                        </li>
+                        <li>
+                          <a onclick="openComplaintQuickSearch('0391100015114000089', false, false, true)" style="cursor: pointer;">Жалобы</a>
+                        </li>
+                        <li>
+                          <a onclick="bankGuaranteeUrl('0391100015114000089')" style="cursor: pointer;">Банковские гарантии</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="registerBox">
+                    <table cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td class="tenderTd">
+                          <dl>
+                            <dt>Электронный аукцион</dt>
+                            <dd>Подача заявок</dd>
+                          </dl>
+                        </td>
+                        <td class="descriptTenderTd">
+                          <dl>
+                            <dt>
+                              <a target="_blank" href="/epz/order/notice/ea44/view/common-info.html?regNumber=0334100029514000027">№ 0334100029514000027</a>
+                            </dt>
+                            <dd class="nameOrganization">
+                              <a target="_blank" href="http://zakupki.gov.ru/pgz/public/action/organization/view?source=epz&organizationId=756859" title="войсковая часть 3695">войсковая часть 3695</a>
+                            </dd>
+                            <dd>
+                              <a target="_blank" href="/epz/order/notice/ea44/view/common-info.html?regNumber=0334100029514000027" title="Поставка одноразовой посуды для нужд войсковой части 3695">Поставка одноразовой посуды для нужд войсковой части 3695</a>
+                            </dd>
+                          </dl>
+                        </td>
+                        <td class="amountTenderTd">
+                          <p>
+                            <span class="fz44"></span>
+                            <a href="/epz/order/notice/printForm/view.html?regNumber=0334100029514000027" target="_blank"><span class="printBtn"></span></a>
+                          </p>
+                          <dl>
+                            <dt>99 955,60</dt>
+                            <dd>Российский рубль</dd>
+                          </dl>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td colspan="2" class="publishingTd">
+                          <ul class="publishing">
+                            <li>Опубликовано:</li>
+                            <li class="publishingDate">03.10.2014</li>
+                            <li>Обновлено:</li>
+                            <li class="publishingDate">03.10.2014</li>
+                          </ul>
+                        </td>
+                      </tr>
+                    </table>
+                    <div class="reportBox">
+                      <ul>
+                        <li>
+                          <a href="/epz/order/notice/ea44/view/common-info.html?regNumber=0334100029514000027" target="_blank">Сведения</a>
+                        </li>
+                        <li>
+                          <a href="/epz/order/notice/ea44/view/documents.html?regNumber=0334100029514000027" target="_blank">Документы</a>
+                        </li>
+                        <li>
+                          <a onclick="openComplaintQuickSearch('0334100029514000027', false, false, true)" style="cursor: pointer;">Жалобы</a>
+                        </li>
+                        <li>
+                          <a onclick="bankGuaranteeUrl('0334100029514000027')" style="cursor: pointer;">Банковские гарантии</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="registerBox">
+                    <table cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td class="tenderTd">
+                          <dl>
+                            <dt>Электронный аукцион</dt>
+                            <dd>Подача заявок</dd>
+                          </dl>
+                        </td>
+                        <td class="descriptTenderTd">
+                          <dl>
+                            <dt>
+                              <a target="_blank" href="/epz/order/notice/ea44/view/common-info.html?regNumber=0161200003114000061">№ 0161200003114000061</a>
+                            </dt>
+                            <dd class="nameOrganization">
+                              <a target="_blank" href="http://zakupki.gov.ru/pgz/public/action/organization/view?source=epz&organizationId=1289800" title="министерство инвестиций и внешних связей Сахалинской области">министерство инвестиций и внешних связей Сахалинской области</a>
+                            </dd>
+                            <dd>
+                              <a target="_blank" href="/epz/order/notice/ea44/view/common-info.html?regNumber=0161200003114000061" title="&laquo;Оказание услуг по организации мероприятия &laquo;Конференция &laquo;Биоразнообразие растительных и животных сообществ&raquo; ">«Оказание услуг по организации мероприятия «Конференция «Биоразнообразие растительных и животных сообществ»</a>
+                            </dd>
+                          </dl>
+                        </td>
+                        <td class="amountTenderTd">
+                          <p>
+                            <span class="fz44"></span>
+                            <a href="/epz/order/notice/printForm/view.html?regNumber=0161200003114000061" target="_blank"><span class="printBtn"></span></a>
+                          </p>
+                          <dl>
+                            <dt>200 000,00</dt>
+                            <dd>Российский рубль</dd>
+                          </dl>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td colspan="2" class="publishingTd">
+                          <ul class="publishing">
+                            <li>Опубликовано:</li>
+                            <li class="publishingDate">03.10.2014</li>
+                            <li>Обновлено:</li>
+                            <li class="publishingDate">03.10.2014</li>
+                          </ul>
+                        </td>
+                      </tr>
+                    </table>
+                    <div class="reportBox">
+                      <ul>
+                        <li>
+                          <a href="/epz/order/notice/ea44/view/common-info.html?regNumber=0161200003114000061" target="_blank">Сведения</a>
+                        </li>
+                        <li>
+                          <a href="/epz/order/notice/ea44/view/documents.html?regNumber=0161200003114000061" target="_blank">Документы</a>
+                        </li>
+                        <li>
+                          <a onclick="openComplaintQuickSearch('0161200003114000061', false, false, true)" style="cursor: pointer;">Жалобы</a>
+                        </li>
+                        <li>
+                          <a onclick="bankGuaranteeUrl('0161200003114000061')" style="cursor: pointer;">Банковские гарантии</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="registerBox">
+                    <table cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td class="tenderTd">
+                          <dl>
+                            <dt>Запрос котировок</dt>
+                            <dd>Подача заявок</dd>
+                          </dl>
+                        </td>
+                        <td class="descriptTenderTd">
+                          <dl>
+                            <dt>
+                              <a target="_blank" href="/epz/order/notice/zk44/view/common-info.html?regNumber=0339100001514000284">№ 0339100001514000284</a>
+                            </dt>
+                            <dd class="nameOrganization">
+                              <a target="_blank" href="http://zakupki.gov.ru/pgz/public/action/organization/view?source=epz&organizationId=612362" title="Федеральное государственное бюджетное учреждение &quot;Новокузнецкий научно-практический центр медико-социальной экспертизы и реабилитации инвалидов&quot; Министерства труда и социальной защиты Российской Федерации">Федеральное государственное бюджетное учреждение "Новокузнецкий научно-практический центр медико-социальной экспертизы и реабилитации инвалидов" Министерства труда и социальной защиты Российской  ...</a>
+                            </dd>
+                            <dd>
+                              <a target="_blank" href="/epz/order/notice/zk44/view/common-info.html?regNumber=0339100001514000284" title="поставка канцелярских товаров">поставка канцелярских товаров</a>
+                            </dd>
+                          </dl>
+                        </td>
+                        <td class="amountTenderTd">
+                          <p>
+                            <span class="fz44"></span>
+                            <a href="/epz/order/notice/printForm/view.html?regNumber=0339100001514000284" target="_blank"><span class="printBtn"></span></a>
+                          </p>
+                          <dl>
+                            <dt>278 176,59</dt>
+                            <dd>Российский рубль</dd>
+                          </dl>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td colspan="2" class="publishingTd">
+                          <ul class="publishing">
+                            <li>Опубликовано:</li>
+                            <li class="publishingDate">03.10.2014</li>
+                            <li>Обновлено:</li>
+                            <li class="publishingDate">03.10.2014</li>
+                          </ul>
+                        </td>
+                      </tr>
+                    </table>
+                    <div class="reportBox">
+                      <ul>
+                        <li>
+                          <a href="/epz/order/notice/zk44/view/common-info.html?regNumber=0339100001514000284" target="_blank">Сведения</a>
+                        </li>
+                        <li>
+                          <a href="/epz/order/notice/zk44/view/documents.html?regNumber=0339100001514000284" target="_blank">Документы</a>
+                        </li>
+                        <li>
+                          <a onclick="openComplaintQuickSearch('0339100001514000284', false, false, true)" style="cursor: pointer;">Жалобы</a>
+                        </li>
+                        <li>
+                          <a onclick="bankGuaranteeUrl('0339100001514000284')" style="cursor: pointer;">Банковские гарантии</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="registerBox">
+                    <table cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td class="tenderTd">
+                          <dl>
+                            <dt>Электронный аукцион</dt>
+                            <dd>Подача заявок</dd>
+                          </dl>
+                        </td>
+                        <td class="descriptTenderTd">
+                          <dl>
+                            <dt>
+                              <a target="_blank" href="/epz/order/notice/ea44/view/common-info.html?regNumber=0339100001514000283">№ 0339100001514000283</a>
+                            </dt>
+                            <dd class="nameOrganization">
+                              <a target="_blank" href="http://zakupki.gov.ru/pgz/public/action/organization/view?source=epz&organizationId=612362" title="Федеральное государственное бюджетное учреждение &quot;Новокузнецкий научно-практический центр медико-социальной экспертизы и реабилитации инвалидов&quot; Министерства труда и социальной защиты Российской Федерации">Федеральное государственное бюджетное учреждение "Новокузнецкий научно-практический центр медико-социальной экспертизы и реабилитации инвалидов" Министерства труда и социальной защиты Российской  ...</a>
+                            </dd>
+                            <dd>
+                              <a target="_blank" href="/epz/order/notice/ea44/view/common-info.html?regNumber=0339100001514000283" title="поставка угля">поставка угля</a>
+                            </dd>
+                          </dl>
+                        </td>
+                        <td class="amountTenderTd">
+                          <p>
+                            <span class="fz44"></span>
+                            <a href="/epz/order/notice/printForm/view.html?regNumber=0339100001514000283" target="_blank"><span class="printBtn"></span></a>
+                          </p>
+                          <dl>
+                            <dt>880 000,00</dt>
+                            <dd>Российский рубль</dd>
+                          </dl>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td colspan="2" class="publishingTd">
+                          <ul class="publishing">
+                            <li>Опубликовано:</li>
+                            <li class="publishingDate">03.10.2014</li>
+                            <li>Обновлено:</li>
+                            <li class="publishingDate">03.10.2014</li>
+                          </ul>
+                        </td>
+                      </tr>
+                    </table>
+                    <div class="reportBox">
+                      <ul>
+                        <li>
+                          <a href="/epz/order/notice/ea44/view/common-info.html?regNumber=0339100001514000283" target="_blank">Сведения</a>
+                        </li>
+                        <li>
+                          <a href="/epz/order/notice/ea44/view/documents.html?regNumber=0339100001514000283" target="_blank">Документы</a>
+                        </li>
+                        <li>
+                          <a onclick="openComplaintQuickSearch('0339100001514000283', false, false, true)" style="cursor: pointer;">Жалобы</a>
+                        </li>
+                        <li>
+                          <a onclick="bankGuaranteeUrl('0339100001514000283')" style="cursor: pointer;">Банковские гарантии</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="registerBox">
+                    <table cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td class="tenderTd">
+                          <dl>
+                            <dt>Электронный аукцион</dt>
+                            <dd>Подача заявок</dd>
+                          </dl>
+                        </td>
+                        <td class="descriptTenderTd">
+                          <dl>
+                            <dt>
+                              <a target="_blank" href="/epz/order/notice/ea44/view/common-info.html?regNumber=0339100001514000282">№ 0339100001514000282</a>
+                            </dt>
+                            <dd class="nameOrganization">
+                              <a target="_blank" href="http://zakupki.gov.ru/pgz/public/action/organization/view?source=epz&organizationId=612362" title="Федеральное государственное бюджетное учреждение &quot;Новокузнецкий научно-практический центр медико-социальной экспертизы и реабилитации инвалидов&quot; Министерства труда и социальной защиты Российской Федерации">Федеральное государственное бюджетное учреждение "Новокузнецкий научно-практический центр медико-социальной экспертизы и реабилитации инвалидов" Министерства труда и социальной защиты Российской  ... </a>
+                            </dd>
+                            <dd>
+                              <a target="_blank" href="/epz/order/notice/ea44/view/common-info.html?regNumber=0339100001514000282" title="Поставка моющих и чистящих средств">Поставка моющих и чистящих средств</a>
+                            </dd>
+                          </dl>
+                        </td>
+                        <td class="amountTenderTd">
+                          <p>
+                            <span class="fz44"></span>
+                            <a href="/epz/order/notice/printForm/view.html?regNumber=0339100001514000282" target="_blank"><span class="printBtn"></span></a>
+                          </p>
+                          <dl>
+                            <dt>677 982,33</dt>
+                            <dd>Российский рубль</dd>
+                          </dl>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td colspan="2" class="publishingTd">
+                          <ul class="publishing">
+                            <li>Опубликовано:</li>
+                            <li class="publishingDate">03.10.2014</li>
+                            <li>Обновлено:</li>
+                            <li class="publishingDate">03.10.2014</li>
+                          </ul>
+                        </td>
+                      </tr>
+                    </table>
+                    <div class="reportBox">
+                      <ul>
+                        <li>
+                          <a href="/epz/order/notice/ea44/view/common-info.html?regNumber=0339100001514000282" target="_blank">Сведения</a>
+                        </li>
+                        <li>
+                          <a href="/epz/order/notice/ea44/view/documents.html?regNumber=0339100001514000282" target="_blank">Документы</a>
+                        </li>
+                        <li>
+                          <a onclick="openComplaintQuickSearch('0339100001514000282', false, false, true)" style="cursor: pointer;">Жалобы</a>
+                        </li>
+                        <li>
+                          <a onclick="bankGuaranteeUrl('0339100001514000282')" style="cursor: pointer;">Банковские гарантии</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="paginator">
+                  <div class="allRecords">Всего записей: 707359</div>
+                  <ul class="paging">
+                    <li class="currentPage">1</li>
+                    <li>
+                      <a href="javascript:goToPage(2)">2</a>
+                    </li>
+                    <li>
+                      <a href="javascript:goToPage(3)">3</a>
+                    </li>
+                    <li>
+                      <a href="javascript:goToPage(4)">4</a>
+                    </li>
+                    <li>из</li>
+                    <li>
+                      <a href="javascript:goToPage(101)">101</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="clear"></div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="preFooter">
+          <div class="wrapperPreFooter">
+            <ul>
+              <li class="privateCabList">
+                <strong>Online доступ к заказам</strong>
+                <ul>
+                  <li>
+                    <a href="http://zakupki.gov.ru/pgz/pcabinet.jsp" target="_blank">Личный кабинет 44-ФЗ (94-ФЗ)</a>
+                  </li>
+                  <li>
+                    <a href="https://zakupki.gov.ru/223/clause/private" target="_blank">Личный кабинет 223-ФЗ</a>
+                  </li>
+                  <li class="btnLi">
+                    <span class="btnBtn" onclick="location='ftp://offline_ro:4eNa7iIzPa5Ca5lJMENB@ftp.zakupki.gov.ru/'">
+                      <span class="partLeftBtn"></span>
+                      Скачать Офлайн клиент
+                    </span>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <strong>Вопросы и ответы</strong>
+                <ul>
+                  <li>
+                    <a href="/epz/main/public/qa/view.html?categories=FZ44">Вопросы и ответы по 44-ФЗ</a>
+                  </li>
+                  <li>
+                    <a href="/epz/main/public/qa/view.html?categories=FZ94">Вопросы и ответы по 94-ФЗ</a>
+                  </li>
+                  <li>
+                    <a href="/epz/main/public/qa/view.html?categories=FZ223">Вопросы и ответы по 223-ФЗ</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <strong>Заказчикам и поставщикам</strong>
+                <ul>
+                  <li>
+                    <a href="/epz/main/public/forCustomersAndSuppliers.html" target="_blank">Информация по 44-ФЗ</a>
+                  </li>
+                  <li>
+                    <a href="http://zakupki.gov.ru/wps/portal/base/topinfo/information/!ut/p/c5" target="_blank">Информация по 94-ФЗ</a>
+                  </li>
+                  <li>
+                    <a href="http://zakupki.gov.ru/223/ppa/public/information/forCustomersAndSuppliers.html" target="_blank">Информация по 223-ФЗ</a>
+                  </li>
+                  <li class="bannerExpertUnit">
+                    <a href="http://ks.wikivote.ru/" target="_blank">
+                      <div>
+                        <p class="bannerExpert"></p>
+                        <span class="bannerExpertText">Экспертный Совет по<br/>контрактным отношениям</span>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <strong>Прочая информация</strong>
+                <ul>
+                  <li>
+                    <a href="/epz/oboz/public/bigOrderSearch/search.html" target="_blank">Обсуждение крупных закупок</a>
+                  </li>
+                  <li>
+                    <a href="/epz/main/public/siteMap.html"class="linkPopUp">Карта сайта</a>
+                  </li>
+                  <li>
+                    <a href="/epz/main/public/userFeedback/openFeedbackForm.html" class="linkPopUp">Ваши идеи по улучшению сайта</a>
+                  </li>
+                  <li>
+                    <a href="/epz/main/public/quiz/list.html" target="_blank">Опросы</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <div class="clear"></div>
+            <div class="footerBannersDelim"></div>
+            <div class="footerBannersBlock">
+              <table cellspacing="0" cellpadding="0">
+                <tr>
+                  <td class="firstBannerTd">
+                    <a href="http://www.sberbank-ast.ru/" target="_blank">
+                      <div class="bannerUnit">
+                        <p class="banner1"></p>
+                        <span class="line2">Система торгов Сбербанк-АСТ</span>
+                      </div>
+                    </a>
+                  </td>
+                  <td>
+                    <a href="http://etp.roseltorg.ru/" target="_blank">
+                      <div class="bannerUnit">
+                        <p class="banner2"></p>
+                        <span class="line3">Единая<br/>электронная<br/>торговая площадка</span>
+                      </div>
+                    </a>
+                  </td>
+                  <td>
+                    <a href="http://etp.zakazrf.ru/" target="_blank">
+                      <div class="bannerUnit">
+                        <p class="banner3"></p>
+                        <span class="line3">Общероссийская<br/>система электронной<br/>торговли</span>
+                      </div>
+                    </a>
+                  </td>
+                  <td>
+                    <a href="http://www.rts-tender.ru/" target="_blank">
+                      <div class="bannerUnit">
+                        <p class="banner4"></p>
+                        <span class="line2">Электронная<br/>площадка<br/>России</span>
+                      </div>
+                    </a>
+                  </td>
+                  <td class="lastBannerTd">
+                    <a href="http://www.etp-micex.ru/" target="_blank">
+                      <div class="bannerUnit">
+                        <p class="banner5"></p>
+                        <span class="line3">Электронная<br/>торговая площадка<br/>Госзакупки</span>
+                      </div>
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="preFooterShadow">
+          </div>
+          <div class="wrapperFooter">
+            <ul>
+              <li>© 2014, Федеральное казначейство<br/>Версия 4.4.6#6rev19573 от 27.08.2014      
+                <ul>
+                  <li>
+                    <a href="/epz/main/public/document/view.html?sectionId=1&pageNo=1&categories=FZ94&_categories=on&categories=FZ223&_categories=on&categories=FZ44&_categories=on&categories=FZALL&_categories=on">Журнал версий системы</a>
+                  </li>
+                  <li>
+                    <a href="/epz/main/public/user-feedback.html">Техническая поддержка</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="preFooterDelim">
+                <strong>
+                  <span></span>
+                  Ресурсы
+                </strong>
+                <ul>
+                  <li>
+                    <a href="http://www.kremlin.ru" target="_blank">Президент Российской Федерации</a>
+                  </li>
+                  <li>
+                    <a href="http://roskazna.ru" target="_blank">Федеральное казначейство</a>
+                  </li>
+                  <li>
+                    <a href="http://www.fas.gov.ru" target="_blank">Федеральная антимонопольная служба</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="footerDelim">&nbsp;
+                <ul>
+                  <li>
+                    <a href="http://www.government.ru" target="_blank">Правительство Российской Федерации</a>
+                  </li>
+                  <li>
+                    <a href="http://www.economy.gov.ru" target="_blank">Министерство экономического развития Российской Федерации</a>
+                  </li>
+                  <li>
+                    <a href="http://www.rosoboronpostavka.ru" target="_blank">Федеральное агентство по поставкам вооружения, военной, специальной техники и материальных средств</a>
+                  </li>
+                </ul>
+              </li>
+              <li>&nbsp;
+                <ul>
+                  <li>
+                    <a href="http://www.roszdravnadzor.ru" target="_blank">Росздравнадзор</a>
+                  </li>
+                  <li>
+                    <a href="http://www.minfin.ru" target="_blank">Министерство финансов Российской Федерации</a>
+                  </li>
+                  <li>
+                    <a href="http://www.fsoz.gov.ru" target="_blank">Федеральная служба по оборонному заказу (Рособоронзаказ)</a>
+                  </li>
+                  <li>
+                    <a href="http://rosfinnadzor.ru" target="_blank">Федеральная служба финансово-бюджетного надзора</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <div class="clear"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
