@@ -16,12 +16,6 @@ module Marketplace
           source = ListLoader.new()  # date?
           page = page_source(source.list(start_date, end_date, page_num), nil, 'utf-8')
       
-          # только для ручного тестирования
-          # чтобы не парсились все страницы
-          if i > 3
-            return orders_id
-          end
-
           page.xpath("//a[child::span[@class='printBtn']]").each{|link| orders_id << link["href"]}
         end while page.at_css(".rightArrow")
         return orders_id
@@ -37,11 +31,11 @@ module Marketplace
         begin
           Date.parse(input_date)
         rescue ArgumentError
-          puts "can't parse date"
+          # puts "can't parse date"
           return false
         end
       else
-        puts "wrong format"
+        # puts "wrong format"
         return false
       end
     end

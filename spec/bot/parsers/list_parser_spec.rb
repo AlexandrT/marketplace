@@ -14,9 +14,10 @@ describe Marketplace::Bot::Parsers::ListParser do
   end
 
   context "get_ids" do
-  	before(:each) { Nokogiri.stub(:HTML).and_return() }
-  	it {
-  		klass.any_instance.stub(:get_ids) { asdfsadf sa }
-  	}
+    # before(:each) do
+    # 	doc = Nokogiri::HTML(open(Rails.root + '../../spec/support/fz_44.html'))
+    #   # Nokogiri::HTML::Document.should_receive(:parse).and_return(doc)
+    #   Nokogiri::HTML.stub(:open).and_return(doc)
+    # end
   end
 end
