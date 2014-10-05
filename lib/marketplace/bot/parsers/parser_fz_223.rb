@@ -5,26 +5,28 @@ module Marketplace
       page = Nokogiri::HTML(clean_trash(info_page), nil, 'utf-8')
 
       xml = page.xpath('//div[@id="tabs-2"]')[0]
+      xml_doc = xml.xpath('//ns2:body/ns2:item/ns2:purchaseNoticeEPData')
 
       get_order_info(xml_doc)
 
-      auth_org_xml = xml.xpath('//ns2:customer/mainInfo')[0]
+      auth_org_xml = xml_doc.xpath('//ns2:customer/mainInfo')[0]
       get_auth_organization(auth_org_xml)
 
-      lots_xml = xml.xpath('//ns2:lots/lot')[0]
+      lots_xml = xml_doc.xpath('//ns2:lots/lot')[0]
       get_all_lots(lots_xml)
 
-      # customer_xml = xml.xpath('//ns2:placer/mainInfo')[0]
+      # customer_xml = xml_doc.xpath('//ns2:placer/mainInfo')[0]
       # get_customer(customer_xml)
 
-      contacts_xml = xml.xpath('//ns2:contact')[0]
+      contacts_xml = xml_doc.xpath('//ns2:contact')[0]
       get_contacts(contacts_xml)
     end
 
     def get_order_info(xml_doc)
+      byebug
       @order_json[:remote_id] = xml_doc.xpath('.//ns2:registrationNumber')
-      @order_json[:name] = xml_doc.xpath('.//ns2:name')
-      @order_json[:type] = xml_doc.xpath('.//ns2:purchaseCodeName')
+      @order_json[:name] = xml_doc.xpath('//ns2:name')
+      @order_json[:type] = xml_doc.xpath('//ns2:purchaseCodeName')
     end
 
     def get_auth_organization(auth_org_xml)

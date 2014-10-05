@@ -11,7 +11,7 @@ gemspec
 # your gem to rubygems.org.
 
 # To use debugger
-# gem 'debugger'
+gem 'byebug'
 group :test, :development do
   gem 'rspec-rails'
   gem 'nyan-cat-formatter'

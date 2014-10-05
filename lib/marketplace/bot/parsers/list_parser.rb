@@ -24,7 +24,7 @@ module Marketplace
     end
 
     def page_source(source)
-       Nokogiri::HTML(source, nil, 'utf-8')
+      Nokogiri::HTML(source, nil, 'utf-8')
     end
 
     def check_date(input_date)
