@@ -5,33 +5,44 @@ module Marketplace
       page = Nokogiri::HTML(clean_trash(info_page), nil, 'utf-8')
 
       xml = page.xpath('//div[@id="tabs-2"]')[0]
-      xml_doc = xml.xpath('//ns2:body/ns2:item/ns2:purchaseNoticeEPData')
+      doc = xml.xpath('.//ns2:purchaseNoticeEP/ns2:body/ns2:item/ns2:purchaseNoticeEPData')[0]
 
-      get_order_info(xml_doc)
+      get_order_info(doc)
 
-      auth_org_xml = xml_doc.xpath('//ns2:customer/mainInfo')[0]
+      auth_org_xml = doc.xpath('.//ns2:customer/mainInfo')[0]
       get_auth_organization(auth_org_xml)
 
-      lots_xml = xml_doc.xpath('//ns2:lots/lot')[0]
+      lots_xml = doc.xpath('.//lots/lot')[0]
       get_all_lots(lots_xml)
 
-      # customer_xml = xml_doc.xpath('//ns2:placer/mainInfo')[0]
+      # customer_xml = doc.xpath('//ns2:placer/mainInfo')[0]
       # get_customer(customer_xml)
 
-      contacts_xml = xml_doc.xpath('//ns2:contact')[0]
+      contacts_xml = doc.xpath('//contact')[0]
       get_contacts(contacts_xml)
     end
 
-    def get_order_info(xml_doc)
-      byebug
-      @order_json[:remote_id] = xml_doc.xpath('.//ns2:registrationNumber')
-      @order_json[:name] = xml_doc.xpath('//ns2:name')
-      @order_json[:type] = xml_doc.xpath('//ns2:purchaseCodeName')
+    def get_order_info(doc)
+      @order_json[:remote_id] = doc.xpath('.//ns2:registrationNumber').text
+      @order_json[:name] = doc.xpath('.//ns2:name').text
+      @order_json[:type] = doc.xpath('.//ns2:purchaseCodeName').text
     end
 
     def get_auth_organization(auth_org_xml)
-      @auth_organization = Hash.from_xml(auth_org_xml)
-      @order_json[:auth_organization] = @auth_organization
+      byebug
+      @auth_organization_json[:fullName] = auth_org_xml.xpath('.//fullName')
+      @auth_organization_json[:shortName] = auth_org_xml.xpath('.//shortName')
+      @auth_organization_json[:inn] = auth_org_xml.xpath('.//inn')
+      @auth_organization_json[:kpp] = auth_org_xml.xpath('.//kpp')
+      @auth_organization_json[:ogrn] = auth_org_xml.xpath('.//ogrn')
+      @auth_organization_json[:legalAddress] = auth_org_xml.xpath('.//legalAddress')
+      @auth_organization_json[:postalAddress] = auth_org_xml.xpath('.//postalAddress')
+      @auth_organization_json[:phone] = auth_org_xml.xpath('.//phone')
+      @auth_organization_json[:fax] = auth_org_xml.xpath('.//fax')
+      @auth_organization_json[:email] = auth_org_xml.xpath('.//email')
+      @auth_organization_json[:okato] = auth_org_xml.xpath('.//okato')
+
+      @order_json[:auth_organization] = @auth_organization_json
     end
 
     def get_all_lots(lots_set)
