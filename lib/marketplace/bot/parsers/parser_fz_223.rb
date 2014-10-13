@@ -18,7 +18,7 @@ module Marketplace
       # customer_xml = doc.xpath('//ns2:placer/mainInfo')[0]
       # get_customer(customer_xml)
 
-      contacts_xml = doc.xpath('//contact')[0]
+      contacts_xml = doc.xpath('.//ns2:contact')[0]
       get_contacts(contacts_xml)
     end
 
@@ -29,18 +29,18 @@ module Marketplace
     end
 
     def get_auth_organization(auth_org_xml)
-      byebug
-      @auth_organization_json[:fullName] = auth_org_xml.xpath('.//fullName')
-      @auth_organization_json[:shortName] = auth_org_xml.xpath('.//shortName')
-      @auth_organization_json[:inn] = auth_org_xml.xpath('.//inn')
-      @auth_organization_json[:kpp] = auth_org_xml.xpath('.//kpp')
-      @auth_organization_json[:ogrn] = auth_org_xml.xpath('.//ogrn')
-      @auth_organization_json[:legalAddress] = auth_org_xml.xpath('.//legalAddress')
-      @auth_organization_json[:postalAddress] = auth_org_xml.xpath('.//postalAddress')
-      @auth_organization_json[:phone] = auth_org_xml.xpath('.//phone')
-      @auth_organization_json[:fax] = auth_org_xml.xpath('.//fax')
-      @auth_organization_json[:email] = auth_org_xml.xpath('.//email')
-      @auth_organization_json[:okato] = auth_org_xml.xpath('.//okato')
+      # byebug
+      @auth_organization_json[:fullName] = auth_org_xml.xpath('.//ns2:fullName', 'ns2' => "http://zakupki.gov.ru/223fz/types/1").text
+      @auth_organization_json[:shortName] = auth_org_xml.xpath('.//ns2:shortName', 'ns2' => "http://zakupki.gov.ru/223fz/types/1").text
+      @auth_organization_json[:inn] = auth_org_xml.xpath('.//ns2:inn', 'ns2' => "http://zakupki.gov.ru/223fz/types/1").text
+      @auth_organization_json[:kpp] = auth_org_xml.xpath('.//ns2:kpp', 'ns2' => "http://zakupki.gov.ru/223fz/types/1").text
+      @auth_organization_json[:ogrn] = auth_org_xml.xpath('.//ns2:ogrn', 'ns2' => "http://zakupki.gov.ru/223fz/types/1").text
+      @auth_organization_json[:legalAddress] = auth_org_xml.xpath('.//ns2:legalAddress', 'ns2' => "http://zakupki.gov.ru/223fz/types/1").text
+      @auth_organization_json[:postalAddress] = auth_org_xml.xpath('.//ns2:postalAddress', 'ns2' => "http://zakupki.gov.ru/223fz/types/1").text
+      @auth_organization_json[:phone] = auth_org_xml.xpath('.//ns2:phone', 'ns2' => "http://zakupki.gov.ru/223fz/types/1").text
+      @auth_organization_json[:fax] = auth_org_xml.xpath('.//ns2:fax', 'ns2' => "http://zakupki.gov.ru/223fz/types/1").text
+      @auth_organization_json[:email] = auth_org_xml.xpath('.//ns2:email', 'ns2' => "http://zakupki.gov.ru/223fz/types/1").text
+      @auth_organization_json[:okato] = auth_org_xml.xpath('.//ns2:okato', 'ns2' => "http://zakupki.gov.ru/223fz/types/1").text
 
       @order_json[:auth_organization] = @auth_organization_json
     end
@@ -95,12 +95,12 @@ module Marketplace
     # end
 
     def get_contacts(contacts_xml)
-      @contacts_json[:person] = contacts_xml.xpath('.//lastName') + " " + contacts_xml.xpath('.//firstName') + " " + contacts_xml.xpath('.//middleName')
-      @contacts_json[:phone] = contacts_xml.xpath('.//phone')
-      @contacts_json[:email] = contacts_xml.xpath('.//email')
-      @contacts_json[:fax] = contacts_xml.xpath('.//fax')
+      @contacts_json[:person] = contacts_xml.xpath('.//ns2:lastName', 'ns2' => "http://zakupki.gov.ru/223fz/types/1")[0].text + " " + contacts_xml.xpath('.//ns2:firstName', 'ns2' => "http://zakupki.gov.ru/223fz/types/1")[0].text + " " + contacts_xml.xpath('.//ns2:middleName', 'ns2' => "http://zakupki.gov.ru/223fz/types/1")[0].text
+      @contacts_json[:phone] = contacts_xml.xpath('.//ns2:phone', 'ns2' => "http://zakupki.gov.ru/223fz/types/1")[0].text
+      @contacts_json[:email] = contacts_xml.xpath('.//ns2:email', 'ns2' => "http://zakupki.gov.ru/223fz/types/1")[0].text
+      @contacts_json[:fax] = contacts_xml.xpath('.//ns2:fax', 'ns2' => "http://zakupki.gov.ru/223fz/types/1")[0].text
 
-      @auth_organization[:contacts] = @contacts_json
+      @auth_organization_json[:contacts] = @contacts_json
     end
 
     def get_delivery_place(delivery_xml)
