@@ -22,4 +22,10 @@ group :test do
   gem 'mongoid-rspec'
 end
 
+group :development do
+  gem 'guard-bundler', require: false
+  gem 'guard-rspec', require: false
+  gem 'guard-spork'
+end
+
 gem 'tzinfo-data', platforms: [:x64_mingw,:mingw, :mswin]
