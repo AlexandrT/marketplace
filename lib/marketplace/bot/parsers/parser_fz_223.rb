@@ -12,7 +12,7 @@ module Marketplace
       auth_org_xml = doc.xpath('.//ns2:customer/mainInfo')[0]
       get_auth_organization(auth_org_xml)
 
-      lots_xml = doc.xpath('.//lots/lot')[0]
+      lots_xml = doc.xpath('.//ns2:lots')[0]
       get_all_lots(lots_xml)
 
       # customer_xml = doc.xpath('//ns2:placer/mainInfo')[0]
@@ -45,44 +45,38 @@ module Marketplace
       @order_json[:auth_organization] = @auth_organization_json
     end
 
-    def get_all_lots(lots_set)
+    def get_all_lots(lots_xml)
 
-      # жсон с отдельным лотом. после наполнения сливаем его в массив лотов
-      lot_json = Hash.new
-
-      # хэш с пунктами, входящими в лот  (<lotItem>)
-      lot_item = Hash.new
-
-      # массив со всеми пунктами лота, сливается в lots для каждого отдельного лота
-      lot_items = Array.new
-
-      # массив со всеми лотами, который сливаем в @order_json
-      lots = Array.new
+      lots_set = lots_xml.xpath('.//ns2:lot', 'ns2' => "http://zakupki.gov.ru/223fz/types/1")
 
       lots_set.each do |lot|
-        lot_json[:name] = lot.xpath('.//lotData/subject')
-        lot_json[:currency] = lot.xpath('.//lotData/currency/code')
-        lot_json[:price] = lot.xpath('.//lotData/initialSum')
+        get_common_lot_info(lot)
 
-        delivery_xml = lot.xpath('.//deliveryPlace')
-        lot_json[:delivery_place] = get_delivery_place(delivery_xml)
+        delivery_xml = lot.xpath('.//ns2:lotData/ns2:deliveryPlace', 'ns2' => "http://zakupki.gov.ru/223fz/types/1")
+        get_delivery_place(delivery_xml)
         
-        lot_items_xml = lot.xpath('.//lotItem')
+        lot_items_xml = lot.xpath('.//ns2:lotItem', 'ns2' => "http://zakupki.gov.ru/223fz/types/1")
         lot_items_xml.each do |lot_item_xml|
-          lot_item[:okdp] = lot_item_xml.xpath('.//okdp/code')
-          lot_item[:okved] = lot_item_xml.xpath('.//okved/code')
-          lot_item[:measure] = lot_item_xml.xpath('.//okei/name')
-          lot_item[:count] = lot_item_xml.xpath('.//qty')
-
-          lot_items << lot_item.dup
-          lot_item.clear
+          get_lot_item_info(lot_item_xml)
         end
-
-        lots << lot_json.dup
-        lot_json.clear
       end
+    end
 
-      @order_json[:lots] = lots
+    def get_common_lot_info(lot)
+      @lot_json[:name] = lot.xpath('.//ns2:lotData/ns2:subject', 'ns2' => "http://zakupki.gov.ru/223fz/types/1").text
+      @lot_json[:currency] = lot.xpath('.//ns2:lotData/ns2:currency/ns2:code', 'ns2' => "http://zakupki.gov.ru/223fz/types/1").text
+      @lot_json[:price] = lot.xpath('.//ns2:lotData/ns2:initialSum', 'ns2' => "http://zakupki.gov.ru/223fz/types/1").text
+    end
+
+    def get_lot_item_info(lot_item_xml)
+      # хэш с пунктами, входящими в лот  (<lotItem>)
+      lot_item = Hash.new
+      lot_item[:okdp] = lot_item_xml.xpath('.//ns2:okdp/ns2:code', 'ns2' => "http://zakupki.gov.ru/223fz/types/1").text
+      lot_item[:okved] = lot_item_xml.xpath('.//ns2:okved/ns2:code', 'ns2' => "http://zakupki.gov.ru/223fz/types/1").text
+      lot_item[:measure] = lot_item_xml.xpath('.//ns2:okei/ns2:name', 'ns2' => "http://zakupki.gov.ru/223fz/types/1").text
+      lot_item[:count] = lot_item_xml.xpath('.//ns2:qty', 'ns2' => "http://zakupki.gov.ru/223fz/types/1").text
+
+      @order_json[:lots] << lot_item
     end
 
     # def get_customer(customer_xml)
@@ -105,7 +99,11 @@ module Marketplace
 
     def get_delivery_place(delivery_xml)
       delivery_place = Hash.new
-      delivery_place = Hash.from_xml(delivery_xml)
+
+      delivery_place[:state] = delivery_xml.xpath('.//ns2:state', 'ns2' => "http://zakupki.gov.ru/223fz/types/1")[0].text
+      delivery_place[:region] = delivery_xml.xpath('.//ns2:region', 'ns2' => "http://zakupki.gov.ru/223fz/types/1")[0].text
+      delivery_place[:address] = delivery_xml.xpath('.//ns2:address', 'ns2' => "http://zakupki.gov.ru/223fz/types/1")[0].text
+      @lot_json[:delivery_place] = delivery_place
     end
 
   end

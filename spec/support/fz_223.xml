@@ -104,7 +104,10 @@
               </currency>
               <initialSum>11814000.00</initialSum>
               <deliveryPlace>
-                <address>г. Магадан, Магаданский морской торговый порт</address>
+                <state>Дальневосточный федеральный округ</state>
+                <region>Хабаровский край</region>
+                <regionOkato>08000000000</regionOkato>
+                <address>г. Хабаровск, ул. Воронежское шоссе, д.159.</address>
               </deliveryPlace>
               <lotItems>
                 <lotItem>
@@ -118,6 +121,11 @@
                     <code>65.22</code>
                     <name>Предоставление кредита</name>
                   </okved>
+                  <okei>
+                    <code>796</code>
+                    <name>Штука</name>
+                  </okei>
+                  <qty>1</qty>
                 </lotItem>
               </lotItems>
             </lotData>
