@@ -3,6 +3,8 @@ module Marketplace
     def fill_json(info_page)
       get_order_info(info_page)
       
+      lot_table = info_page.xpath('//table[@class="table"]').first
+      get_lots(lot_table)
     end
 
     def get_order_info(info_page)
@@ -27,7 +29,9 @@ module Marketplace
       @auth_organization_json[:contacts] = @contacts_json
     end
 
-    def get_lots(info_page)
+    def get_lots(lot_table)
+      name = lot_table.xpath('//td[not(@colspan) and contains(., "Наименование товара, работ, услуг")]').first
+      byebug
     end
   end
 end

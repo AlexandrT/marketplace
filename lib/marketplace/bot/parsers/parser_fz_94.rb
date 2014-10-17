@@ -4,12 +4,12 @@ module Marketplace
       info_page = Nokogiri::XML(info_page)
 
       get_order_info(info_page)
-      contacts_xml = info_page.xpath('//notification/contactInfo')
+      contacts_xml = info_page.xpath('//notification/contactInfo')[0]
       get_auth_organization(contacts_xml)
       get_contacts(contacts_xml)
 
-      lots_set = info_page.xpath('//notification/lots/lot')
-      get_lots(lots_set)
+      lots_xml = info_page.xpath('//notification/lots')[0]
+      get_all_lots(lots_xml)
     end
 
     def get_order_info(info_page)
@@ -41,7 +41,9 @@ module Marketplace
       # @auth_organization_json[:okato]
     end
 
-    def get_lots(lots_set)
+    def get_all_lots(lots_xml)
+      lots_set = lots_xml.xpath('.//lot')
+
       # жсон с отдельным лотом. после наполнения сливаем его в массив лотов
       lot_json = Hash.new
 
@@ -55,49 +57,52 @@ module Marketplace
       lots = Array.new
 
       lots_set.each do |lot|
-        lot_json[:name] = lot.xpath('.//subject').text
-        lot_json[:currency] = lot.xpath('.//currency/code').text
-        lot_json[:price] = lot.xpath('.//maxPrice').text
+        get_common_lot_info(lot)
         
+        ######### Refactoring ###########
         customer_xml = lot.xpath('.//customerRequirements/customerRequirement/organization')
         get_customer(customer_xml)
 
-        lot_json[:customer] = @customer
-
         lot_items_xml = lot.xpath('.//customerRequirements/customerRequirement').text
+        ##################################
+
         lot_items_xml.each do |lot_item_xml|
-          lot_item[:okdp] = lot_item_xml.xpath('.//products/product/code').text
-          # lot_item[:okved] = lot_item_xml.xpath('.//okved/code').text
-          # lot_item[:measure] = lot_item_xml.xpath('.//okei/name').text
-          lot_item[:count] = lot_item_xml.xpath('.//quantity').text
-
-          lot_item[:delivery_place] = lot_item.xpath('.//deliveryPlace').text
-
-          lot_items << lot_item.dup
-          lot_item.clear
+          get_lot_item_info(lot_item_xml)
         end
-
-        lots << lot_json.dup
-        lot_json.clear
       end
+    end
 
-      @order_json[:lots] = lots
+    def get_common_lot_info(lot)
+      @lot_json[:name] = lot.xpath('.//subject').first.text
+      @lot_json[:currency] = lot.xpath('.//currency/code').first.text
+      @lot_json[:price] = lot.xpath('.//maxPrice').first.text
+      @lot_json[:okdp] = lot.xpath('.//products/product/code').text
+    end
+
+    def get_lot_item_info(lot_item_xml)
+      lot_item = Hash.new
+
+      lot_item[:count] = lot_item_xml.xpath('.//quantity').text
+      lot_item[:delivery_place] = lot_item_xml.xpath('.//deliveryPlace').text
+
+      @order_json[:lots] << lot_item
     end
 
     def get_customer(customer_xml)
-      @customer[:name] = customer_xml.xpath('.//fullName').text
-      # @customer[:bik] = 
-      # @customer[:ls_number] = 
-      # @customer[:rs_number] = 
-      @customer[:real_address] = customer_xml.xpath('.//factualAddress/addressLine').text
-      @customer[:post_address] = customer_xml.xpath('.//postalAddress').text
+      contacts = Hash.new
 
-      @contacts[:person] = customer_xml.xpath('.//lastName').text + " " + customer_xml.xpath('.//firstName').text + " " + customer_xml.xpath('.//middleName').text
-      @contacts[:phone] = customer_xml.xpath('.//phone').text
-      @contacts[:email] = customer_xml.xpath('.//email').text
-      @contacts[:fax] = customer_xml.xpath('.//fax').text
+      @customer_json[:name] = customer_xml.xpath('//organization/fullName').first.text
+      @customer_json[:real_address] = customer_xml.xpath('//factualAddress/addressLine').first.text
+      @customer_json[:post_address] = customer_xml.xpath('//organization/postalAddress').text
 
-      @customer[:contacts] = @contacts
+      contacts[:person] = customer_xml.xpath('.//contactPerson/lastName').text + " " + customer_xml.xpath('.//contactPerson/firstName').text + " " + customer_xml.xpath('.//contactPerson/middleName').text
+      contacts[:phone] = customer_xml.xpath('.//phone').text
+      contacts[:email] = customer_xml.xpath('.//email').text
+      contacts[:fax] = customer_xml.xpath('.//fax').text
+
+      @customer_json[:contacts] = contacts
+      
+      @lot_json[:customer] = @customer_json
     end
   end
 end

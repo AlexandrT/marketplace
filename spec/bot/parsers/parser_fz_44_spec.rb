@@ -1,5 +1,6 @@
 require "spec_helper"
 require "bot"
+require "nokogiri"
 
 describe Marketplace::Bot::Parsers::ParserFz44 do
   let(:parser_44) { Marketplace::Bot::Parsers::ParserFz44.new }
@@ -13,6 +14,9 @@ describe Marketplace::Bot::Parsers::ParserFz44 do
       doc = Nokogiri::HTML(open(Rails.root + '../../spec/support/fz_44.html'))
     end
 
+    let(:lot_table) do
+      lot_table = doc.xpath('//table[@class="table"]').first
+    end
 
     it "parse main info about 44_fz" do
       parser_44.get_order_info(doc)
@@ -42,6 +46,11 @@ describe Marketplace::Bot::Parsers::ParserFz44 do
       #   :email => "reception@iroso.ru",
       #   :fax => "8-4242-722501"
       # )
+    end
+
+    it "get_lots" do
+      parser_44.get_lots(lot_table)
+
     end
   end
 end
