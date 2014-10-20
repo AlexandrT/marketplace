@@ -11,7 +11,7 @@ gemspec
 # your gem to rubygems.org.
 
 # To use debugger
-# gem 'debugger'
+gem 'byebug'
 group :test, :development do
   gem 'rspec-rails'
   gem 'nyan-cat-formatter'
@@ -19,7 +19,7 @@ group :test, :development do
 end
 
 group :test do
-  gem 'mongoid-rspec'
+  gem 'mongoid-rspec', github: 'mongoid-rspec/mongoid-rspec', :branch => 'mongoid-4-0'
 end
 
 group :development do

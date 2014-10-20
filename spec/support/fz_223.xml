@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:purchaseNoticeEP xsi:schemaLocation="http://zakupki.gov.ru/223/integration/schema/TFF-3.5 http://zakupki.gov.ru/223/integration/schema/TFF-3.5/purchase.xsd" xmlns:ns5="http://zakupki.gov.ru/223fz/orderClauseList/1" xmlns="http://zakupki.gov.ru/223fz/types/1" xmlns:ns6="http://zakupki.gov.ru/223fz/complaint/1" xmlns:ns7="http://zakupki.gov.ru/223fz/reference/1" xmlns:ns8="http://zakupki.gov.ru/223fz/purchasePlan/1" xmlns:ns9="http://zakupki.gov.ru/223fz/webRequest/1" xmlns:ns2="http://zakupki.gov.ru/223fz/purchase/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns3="http://zakupki.gov.ru/223fz/dishonestSupplier/1" xmlns:ns4="http://zakupki.gov.ru/223fz/revenue/1">
+  <header>
+    <guid>1ac8bbfd-199b-4cfc-ad59-5f84077601cf</guid>
+    <createDateTime>2014-08-20T10:20:51</createDateTime>
+  </header>
+  <ns2:body>
+    <ns2:item>
+      <guid>ed90b159-530b-4948-b717-c1400480a1b2</guid>
+      <ns2:purchaseNoticeEPData>
+        <ns2:guid>ed90b159-530b-4948-b717-c1400480a1b2</ns2:guid>
+        <ns2:createDateTime>2014-08-20T18:15:10</ns2:createDateTime>
+        <ns2:urlOOS>https://zakupki.gov.ru/223/pбurchase/private/purchase/notice-info/details.html?noticeInfoId=1704131</ns2:urlOOS>
+        <ns2:registrationNumber>31401442598</ns2:registrationNumber>
+        <ns2:name>Лекарственные средства</ns2:name>
+        <ns2:customer>
+          <mainInfo>
+            <fullName>Областное государственное унитарное предприятие "Магаданфармация"</fullName>
+            <shortName>ОГУП "Магаданфармация"</shortName>
+            <inn>4900000025</inn>
+            <kpp>490901001</kpp>
+            <ogrn>1024900950491</ogrn>
+            <legalAddress>685000, Магаданская, Магадан, 3-й Транспортный, дом 12</legalAddress>
+            <postalAddress>685000, Магаданская, Магадан, 3-й Транспортный, дом 12</postalAddress>
+            <phone>7-4132-607485</phone>
+            <fax>7-4132-630187</fax>
+            <email>magfarm@online.magadan.su</email>
+            <okato>44401000000</okato>
+          </mainInfo>
+        </ns2:customer>
+        <ns2:purchaseMethodCode>3363</ns2:purchaseMethodCode>
+        <ns2:purchaseCodeName>Закупка у единственного поставщика (исполнителя, подрядчика)</ns2:purchaseCodeName>
+        <ns2:placer>
+          <mainInfo>
+            <fullName>Областное государственное унитарное предприятие "Магаданфармация"</fullName>
+            <shortName>ОГУП "Магаданфармация"</shortName>
+            <inn>4900000025</inn>
+            <kpp>490901001</kpp>
+            <ogrn>1024900950491</ogrn>
+            <legalAddress>685000, Магаданская, Магадан, 3-й Транспортный, дом 12</legalAddress>
+            <postalAddress>685000, Магаданская, Магадан, 3-й Транспортный, дом 12</postalAddress>
+            <phone>7-4132-607485</phone>
+            <fax>7-4132-630187</fax>
+            <email>magfarm@online.magadan.su</email>
+            <okato>44401000000</okato>
+          </mainInfo>
+        </ns2:placer>
+        <ns2:contact>
+          <firstName>Инна</firstName>
+          <middleName>Геннадиевна</middleName>
+          <lastName>Король</lastName>
+          <phone>+8 (4132) 634253</phone>
+          <fax>+8 (4132) 631417</fax>
+          <email>inna_korol@inbox.ru</email>
+          <organization>
+            <mainInfo>
+              <fullName>Областное государственное унитарное предприятие "Магаданфармация"</fullName>
+              <shortName>ОГУП "Магаданфармация"</shortName>
+              <inn>4900000025</inn>
+              <kpp>490901001</kpp>
+              <ogrn>1024900950491</ogrn>
+              <legalAddress>685000, Магаданская, Магадан, 3-й Транспортный, дом 12</legalAddress>
+              <postalAddress>685000, Магаданская, Магадан, 3-й Транспортный, дом 12</postalAddress>
+              <phone>7-4132-607485</phone>
+              <fax>7-4132-630187</fax>
+              <email>magfarm@online.magadan.su</email>
+              <okato>44401000000</okato>
+            </mainInfo>
+          </organization>
+        </ns2:contact>
+        <ns2:publicationDateTime>2014-08-20T18:20:51</ns2:publicationDateTime>
+        <ns2:documentationDelivery>
+          <deliveryStartDateTime>2014-08-01</deliveryStartDateTime>
+          <deliveryEndDateTime>2014-08-21</deliveryEndDateTime>
+          <place>Российская Федерация, 685000, Магаданская область, город Магадан, 3-й Транспортный переулок 12.</place>
+          <procedure>п.22«Положение о закупках товаров, работ, услуг для нужд областного государственного унитарного                       предприятия «Магаданфармация»</procedure>
+        </ns2:documentationDelivery>
+        <ns2:status>P</ns2:status>
+        <ns2:version>1</ns2:version>
+        <ns2:attachments>
+          <totalDocumentsCount>1</totalDocumentsCount>
+          <document>
+            <guid>ea621c32-4b26-4d6e-a80f-2b8b388cfe3d</guid>
+            <createDateTime>2014-08-20T10:19:32</createDateTime>
+            <fileName>ЕП0001 от 01.08.2014 Извещение и документация о прямой закупке препараты и средства медицинские и                      прочие.doc</fileName>
+            <description>ЕП0001 от 01.08.2014 Извещение и документация о прямой закупке препараты и средства медицинские и
+            прочие</description>
+            <url>http://zakupki.gov.ru/223/purchase/public/download/download.html?id=7970271</url>
+          </document>
+        </ns2:attachments>
+        <ns2:modificationDate>2014-08-20T18:20:51</ns2:modificationDate>
+        <ns2:saveUserId>26367</ns2:saveUserId>
+        <ns2:lots>
+          <lot>
+            <guid>f430c831-7cf6-4b58-b49d-963a99e27290</guid>
+            <ordinalNumber>1</ordinalNumber>
+            <lotEditEnabled>false</lotEditEnabled>
+            <lotData>
+              <subject>открытие невозобновляемой кредитной линии лимитом на 11 814 000,00 евро для целевого использования денежных средств.</subject>
+              <currency>
+                <code>EUR</code>
+                <digitalCode>978</digitalCode>
+                <name>Евро</name>
+              </currency>
+              <initialSum>11814000.00</initialSum>
+              <deliveryPlace>
+                <state>Дальневосточный федеральный округ</state>
+                <region>Хабаровский край</region>
+                <regionOkato>08000000000</regionOkato>
+                <address>г. Хабаровск, ул. Воронежское шоссе, д.159.</address>
+              </deliveryPlace>
+              <lotItems>
+                <lotItem>
+                  <guid>6b762098-6820-4a84-bf00-1d5842167e17</guid>
+                  <ordinalNumber>1</ordinalNumber>
+                  <okdp>
+                    <code>6512020</code>
+                    <name>Предоставление кредитов [6512151] - [6512154]</name>
+                  </okdp>
+                  <okved>
+                    <code>65.22</code>
+                    <name>Предоставление кредита</name>
+                  </okved>
+                  <okei>
+                    <code>796</code>
+                    <name>Штука</name>
+                  </okei>
+                  <qty>1</qty>
+                </lotItem>
+              </lotItems>
+            </lotData>
+            <deliveryPlaceIndication>GL</deliveryPlaceIndication>
+            <jointLotData>
+              <jointLot>false</jointLot>
+            </jointLotData>
+            <cancelled>false</cancelled>
+          </lot>
+          <lot>
+            <guid>9828a49e-4f52-4701-bdd8-76bab1b69025</guid>
+            <ordinalNumber>2</ordinalNumber>
+            <lotEditEnabled>false</lotEditEnabled>
+            <lotData>
+              <subject>открытие невозобновляемой кредитной линии лимитом 188 524000,00 рублей для целевого использования денежных средств.</subject>
+              <currency>
+                <code>RUB</code>
+                <digitalCode>643</digitalCode>
+                <name>Российский рубль</name>
+              </currency>
+              <initialSum>188524000.00</initialSum>
+              <deliveryPlace>
+                <address>г. Магадан, Магаданский морской торговый порт</address>
+              </deliveryPlace>
+              <lotItems>
+                <lotItem>
+                  <guid>cbcad56e-3029-484e-a6e4-d242a4277c37</guid>
+                  <ordinalNumber>1</ordinalNumber>
+                  <okdp>
+                    <code>6512020</code>
+                    <name>Предоставление кредитов [6512151] - [6512154]</name>
+                  </okdp>
+                  <okved>
+                    <code>65.22</code>
+                    <name>Предоставление кредита</name>
+                  </okved>
+                </lotItem>
+              </lotItems>
+            </lotData>
+            <deliveryPlaceIndication>GL</deliveryPlaceIndication>
+            <jointLotData>
+              <jointLot>false</jointLot>
+            </jointLotData>
+            <cancelled>false</cancelled>
+          </lot>
+        </ns2:lots>
+      </ns2:purchaseNoticeEPData>
+    </ns2:item>
+  </ns2:body>
+</ns2:purchaseNoticeEP> 

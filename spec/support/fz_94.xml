@@ -1,0 +1,367 @@
+<?xml-stylesheet type="text/xsl" href="printForms/notificationPF_15.xsl"?>
+<notification>
+  <competitiveDocumentProvisioning>
+    <currency>
+      <code>RUB</code>
+      <digitalCode>643</digitalCode>
+      <name>Российский рубль</name>
+    </currency>
+    <deliveryPlace>107045, г.Москва, Печатников пер., д.12</deliveryPlace>
+    <deliveryProcedure>Конкурсная документация (КД) в печатном виде предоставляется всем заинтересованным лицам по письменному запросу на получение КД, направленному в службу «Одного окна» Департамента города Москвы по конкурентной политике (107045, г.Москва, Печатников пер., д.12). Запрос на предоставление КД должен содержать наименование конкурса, его реестровый номер, реквизиты заинтересованного лица, запрашивающего КД (полное наименование, почтовый и юридический адреса, адрес электронной почты, телефон, факс). КД предоставляется в течение двух рабочих дней с момента получения письменного запроса. КД  выдается в службе «Одного окна», кроме выходных и праздничных дней с 8 до 16 часов московского времени, в пятницу и предпраздничные дни с 8 до 15 часов. КД выдается при предъявлении платежного документа, подтверждающего оплату ее стоимости с оригинальной отметкой финансового учреждения, осуществившего перевод о принятии к исполнению. Оплата наличными денежными средствами в кассу специализированной организации не допускается.</deliveryProcedure>
+    <deliveryTerm>26.12.2013 00:00:00</deliveryTerm>
+    <deliveryTerm2>25.09.2014 00:00:00</deliveryTerm2>
+    <www>www.zakupki.gov.ru</www>
+  </competitiveDocumentProvisioning>
+  <contactInfo>
+    <orgName>Департамент города Москвы по конкурентной политике</orgName>
+    <orgShortName>Тендерный комитет</orgShortName>
+    <orgInn>7704515009</orgInn>
+    <orgKpp>770101001</orgKpp>
+    <orgFactAddress>Российская Федерация, 105062, Москва, Макаренко, 4/1, -</orgFactAddress>
+    <orgPostAddress>Российская Федерация, 107045, г. Москва, Печатников пер. , д.12</orgPostAddress>
+    <contactPerson>
+      <lastName>служба</lastName>
+      <firstName>"Одного</firstName>
+      <middleName>окна"</middleName>
+    </contactPerson>
+    <contactEMail>mostender@mos.ru</contactEMail>
+    <contactPhone>+8 (495) 9577500</contactPhone>
+    <contactFax>+8 (495) 9579992</contactFax>
+  </contactInfo>
+  <createDate>13.08.2014 16:33:40</createDate>
+  <currentDate>13.08.2014 16:40:53</currentDate>
+  <energyService>false</energyService>
+  <external>false</external>
+  <externalClientType>VSRZ</externalClientType>
+  <harmonized>true</harmonized>
+  <lots>
+    <lot>
+      <auctionItems/>
+      <contractSum>422 484 133,80</contractSum>
+      <currency>
+        <code>RUB</code>
+        <digitalCode>643</digitalCode>
+        <name>Российский рубль</name>
+      </currency>
+      <customerRequirements>
+        <customerRequirement>
+          <deliveryPlace>район Хорошево-Мневники, СЗАО города Москвы, Хорошевский район САО города Москвы; район Хорошево-Мневники, СЗАО города Москвы, Хорошевский район САО города Москвы</deliveryPlace>
+          <deliveryTerm>в соответствии с условиями государственного контракта, проект которого представлен в настоящей конкурсной документации, и технической её частью; не менее 9 месяцев и не более 12 месяцев со дня заключения государственного контракта; в соответствии с условиями государственного контракта, проект которого представлен в настоящей конкурсной документации, и технической её частью; не менее 9 месяцев и не более 12 месяцев со дня заключения государственного контракта</deliveryTerm>
+          <guaranteeApp>
+            <amount>70 414 022,30</amount>
+            <isBail>false</isBail>
+            <bik>044583001</bik>
+            <personalAccount>2180631000451092</personalAccount>
+            <procedure>Денежные средства вносятся Участником размещения заказа на расчетный счет Государственного заказчика, указанный в п. 8.18 настоящей Информационной карты. Факт внесения Участником размещения заказа денежных средств в качестве обеспечения заявки на участие в конкурсе подтверждается платежным поручением (квитанцией в случае наличной формы оплаты) с отметкой банка об оплате. В том случае, если перевод денежных средств в качестве обеспечения заявки на участие в конкурсе осуществляется Участником размещения заказа при помощи системы «Банк-Клиент», факт внесения денежных средств в обеспечение заявки на участие в конкурсе подтверждается выпиской из лицевого счета, подтверждающей перевод денежных средств. Соответствующее платежное поручение с отметкой банка об оплате (квитанция в случае наличной формы оплаты, выписка из лицевого счета в случае внесения соответствующих денежных средств при помощи системы «Банк-Клиент») должно быть подано Участником размещения заказа в составе документов, входящих в заявку на участие в конкурсе. В платежном поручении обязательно указывать назначение платежа «Оплата финансового обеспечения заявки на участие в открытом конкурсе на Открытый конкурс на право заключения государственного контракта на выполнение подрядных работ по строительству объекта: «Реконструкция Звенигородского путепровода». Реестровый номер торгов: . НДС не облагается)». В случае отсутствия в составе заявки документа, подтверждающего внесение денежных средств в качестве обеспечения заявки на участие в конкурсе, Участнику размещения заказа отказывается в допуске к участию в конкурсе.</procedure>
+            <settlementAccount>40302810900004000060</settlementAccount>
+          </guaranteeApp>
+          <guaranteeContract>
+            <amount>422 484 133,80</amount>
+            <isBail>false</isBail>
+            <bik>044583001</bik>
+            <personalAccount>2180631000451092</personalAccount>
+            <procedure>Государственный контракт заключается после предоставления государственному заказчику обеспечения исполнения государственного контракта. Обеспечение исполнения государственного контракта может быть представлено в виде безотзывной банковской гарантии, договора поручительства или передачи государственному заказчику в залог денежных средств, в том числе в форме вклада (депозита), в размере обеспечения исполнения контракта, указанном в документации о торгах. Способ обеспечения исполнения государственного контракта определяется участником конкурса, с которым заключается контракт, самостоятельно.</procedure>
+            <settlementAccount>40302810900004000060</settlementAccount>
+          </guaranteeContract>
+          <kbk1>806</kbk1>
+          <kbk2>0409</kbk2>
+          <kbk3>01Д0100</kbk3>
+          <kbk4>414</kbk4>
+          <kbk5>310</kbk5>
+          <maxPrice>1 408 280 446,00</maxPrice>
+          <maxPricePercent>1.0</maxPricePercent>
+          <organization>
+            <regNumber>01732000015</regNumber>
+            <contactPerson>
+              <lastName>Шляхова</lastName>
+              <firstName>Ирина</firstName>
+              <middleName>Александровна</middleName>
+            </contactPerson>
+            <displayEmail>ds-info@mos.ru</displayEmail>
+            <email>ShlyakhovaIA@mos.ru</email>
+            <factualAddress>
+              <addressLine>Российская Федерация, 107031, Москва, ул.Б.Дмитровка, д.16, стр.2, -</addressLine>
+              <addressLineFromFields>Российская Федерация, 107031, Москва, ул.Б.Дмитровка, д.16, стр.2, -</addressLineFromFields>
+              <building>д.16, стр.2</building>
+              <buildingAddress>ул.Б.Дмитровка, д.16, стр.2, -</buildingAddress>
+              <country>
+                <countryCode>643</countryCode>
+                <countryFullName>Российская Федерация</countryFullName>
+              </country>
+              <filledManually>false</filledManually>
+              <fullAddress>Российская Федерация, 107031, Москва, ул.Б.Дмитровка, д.16, стр.2, -</fullAddress>
+              <municipalAddress>Москва</municipalAddress>
+              <office>-</office>
+              <okato>
+                <name>Тверской</name>
+                <okato>45286585000</okato>
+              </okato>
+              <region>
+                <fullName>Москва</fullName>
+                <kladrCode>77000000000</kladrCode>
+                <kladrType>R</kladrType>
+              </region>
+              <shortStreet>ул.Б.Дмитровка</shortStreet>
+              <zip>107031</zip>
+            </factualAddress>
+            <fax>+7 (499) 9224209</fax>
+            <fullName>Департамент строительства города Москвы</fullName>
+            <inn>7707639796</inn>
+            <kpp>770701001</kpp>
+            <ogrn>1077760867304</ogrn>
+            <okfs>
+              <code>13</code>
+              <id>4</id>
+              <name>Собственность субъектов Российской Федерации</name>
+            </okfs>
+            <okopf>
+              <code>73</code>
+              <fullName>Автономные учреждения</fullName>
+              <organizationFormType>i73</organizationFormType>
+              <singularName>Автономное учреждение</singularName>
+            </okopf>
+            <okopf2012>
+              <actual>true</actual>
+              <code>20903</code>
+              <parentOkopf>
+                <actual>true</actual>
+                <code>20900</code>
+                <parentOkopf>
+                  <actual>true</actual>
+                  <code>20000</code>
+                  <pluralName>ОРГАНИЗАЦИОННО-ПРАВОВЫЕ ФОРМЫ ЮРИДИЧЕСКИХ ЛИЦ, ЯВЛЯЮЩИХСЯ НЕКОММЕРЧЕСКИМИ ОРГАНИЗАЦИЯМИ</pluralName>
+                  <singularName>ОРГАНИЗАЦИОННО-ПРАВОВАЯ ФОРМА ЮРИДИЧЕСКОГО ЛИЦА, ЯВЛЯЮЩЕГОСЯ НЕКОММЕРЧЕСКОЙ ОРГАНИЗАЦИЕЙ</singularName>
+                </parentOkopf>
+                <pluralName>Учреждения</pluralName>
+                <singularName>Учреждение</singularName>
+              </parentOkopf>
+              <pluralName>Бюджетные учреждения</pluralName>
+              <singularName>Бюджетное учреждение</singularName>
+            </okopf2012>
+            <OKPO>83111926</OKPO>
+            <OKVED>75.14</OKVED>
+            <organizationForm>Бюджетное учреждение</organizationForm>
+            <organizationType>
+              <description>федеральный орган исполнительной власти, орган исполнительной власти субъекта Российской Федерации, федеральный орган государственной власти (орган государственной власти субъекта Российской Федерации, орган местного самоуправления), в том числе его территориальные органы, государственный орган, муниципальный орган</description>
+              <id>1</id>
+              <name>федеральный ОГВ</name>
+              <organizationCode>01</organizationCode>
+            </organizationType>
+            <phone>+7 (499) 9224209</phone>
+            <postalAddress>Российская Федерация, 107031, Москва, ул.Б.Дмитровка, д.16, стр.2, -</postalAddress>
+            <shortName>Департамент строительства города Москвы</shortName>
+            <subordinationType>
+              <description>Уровень субъекта РФ</description>
+              <id>2</id>
+            </subordinationType>
+            <url>ds.mos.ru</url>
+          </organization>
+          <quantity>Инженерные услуги в области проектно - строительных работ прочие - 1 Условная единица 04.04.01.04.01.05: Выполнение подрядных работ по строительству, реконструкции, капитальному ремонту объектов улично-дорожной сети; Инженерные услуги в области проектно - строительных работ прочие - 1 Условная единица Выполнение  подрядных работ по строительству объекта: «Реконструкция Звенигородского путепровода», по адресу: район Хорошево-Мневники, СЗАО города Москвы, Хорошевский район САО города Москвы</quantity>
+          <quantityNotDefined>false</quantityNotDefined>
+        </customerRequirement>
+      </customerRequirements>
+      <guaranteeAppTotal>70 414 022,30</guaranteeAppTotal>
+      <maxPrice>1 408 280 446,00</maxPrice>
+      <maxPriceDescription>Российский рубль</maxPriceDescription>
+      <maxPriceDescriptionWithCurrency>Российский рубль</maxPriceDescriptionWithCurrency>
+      <maxPricePreDescription></maxPricePreDescription>
+      <maxPriceType>NUMERIC</maxPriceType>
+      <maxPriceTypeDescription></maxPriceTypeDescription>
+      <maxPriceXml>1 408 280 446,00</maxPriceXml>
+      <notificationFeatures>
+        <notificationFeature>
+          <enabled>false</enabled>
+          <placementFeature>
+            <featureId>9</featureId>
+            <name>Для субъектов малого предпринимательства</name>
+            <shortName>MP</shortName>
+            <type>F</type>
+          </placementFeature>
+        </notificationFeature>
+        <notificationFeature>
+          <enabled>false</enabled>
+          <placementFeature>
+            <featureId>7836549</featureId>
+            <name>Преференции на поставку товаров российского и (или) белорусского происхождения (приказ МЭР от 12 мая 2011 г. № 217, от 12 марта 2012 г. N 120 и приказ МЭР от 17.04.2013 г. N 211)</name>
+            <shortName>RM</shortName>
+            <type>P</type>
+            <usage>U</usage>
+          </placementFeature>
+          <prefValue>15,00</prefValue>
+        </notificationFeature>
+      </notificationFeatures>
+      <ordinalNumber>1</ordinalNumber>
+      <priceInWord>один миллиард четыреста восемь миллионов двести восемьдесят тысяч четыреста сорок шесть рублей</priceInWord>
+      <priceItemInWord></priceItemInWord>
+      <priceNotSet>false</priceNotSet>
+      <quantityUndefined>false</quantityUndefined>
+      <status>A</status>
+      <subject>Открытый конкурс на право заключения государственного контракта на выполнение  подрядных работ по строительству объекта: «Реконструкция Звенигородского путепровода», по адресу: район Хорошево-Мневники, СЗАО города Москвы, Хорошевский район САО города Москвы</subject>
+      <products>
+        <product>
+          <code>7421029</code>
+          <name>Инженерные услуги в области проектно - строительных работ прочие</name>
+          <okdpGroups>
+            <active>true</active>
+            <createDate>2013-01-12T08:05:56.923+04:00</createDate>
+            <groupName>Услуги по разработке проектной документации, инженерные услуги в области архитектуры, гражданского и промышленного строительства</groupName>
+            <groupNumber>174</groupNumber>
+            <includedProducts>4560000;7421000</includedProducts>
+            <updateDate>2013-09-17T18:40:17.227+04:00</updateDate>
+          </okdpGroups>
+        </product>
+      </products>
+    </lot>
+  </lots>
+  <modificationStatus>M</modificationStatus>
+  <modification>
+    <initiativeType>Z</initiativeType>
+    <modificationDate>13.08.2014 00:00:00</modificationDate>
+    <modificationDescription>перенос сроков</modificationDescription>
+    <modificationType>M</modificationType>
+    <partial>false</partial>
+    <useRegisterPrescription>false</useRegisterPrescription>
+  </modification>
+  <multiLot>false</multiLot>
+  <needReturnAcceptOperationEvent>false</needReturnAcceptOperationEvent>
+  <notificationCommission>
+    <p1Date>25.09.2014 11:00:00</p1Date>
+    <p1Place>г. Москва, Печатников пер., д. 12</p1Place>
+    <p2Date>02.10.2014 00:00:00</p2Date>
+    <p2Place>г. Москва, Печатников пер., д. 12</p2Place>
+    <p3Date>02.10.2014 00:00:00</p3Date>
+    <p3Place>г. Москва, Печатников пер., д. 12</p3Place>
+  </notificationCommission>
+  <notificationNumber>0173200001413001511</notificationNumber>
+  <notificationPlacement>
+    <deliveryPlaceAll>false</deliveryPlaceAll>
+    <deliveryTermAll>false</deliveryTermAll>
+    <ensureContractAll>false</ensureContractAll>
+    <ensureNotifAll>false</ensureNotifAll>
+    <featuresAll>false</featuresAll>
+    <notificationFeatures>
+      <notificationFeature>
+        <enabled>false</enabled>
+        <placementFeature>
+          <featureId>7836549</featureId>
+          <name>Преференции на поставку товаров российского и (или) белорусского происхождения (приказ МЭР от 12 мая 2011 г. № 217, от 12 марта 2012 г. N 120 и приказ МЭР от 17.04.2013 г. N 211)</name>
+          <shortName>RM</shortName>
+          <type>P</type>
+          <usage>U</usage>
+        </placementFeature>
+        <prefValue>15,00</prefValue>
+      </notificationFeature>
+      <notificationFeature>
+        <enabled>false</enabled>
+        <placementFeature>
+          <featureId>9</featureId>
+          <name>Для субъектов малого предпринимательства</name>
+          <shortName>MP</shortName>
+          <type>F</type>
+        </placementFeature>
+      </notificationFeature>
+    </notificationFeatures>
+  </notificationPlacement>
+  <okfDate1>13.08.2014 16:40:53</okfDate1>
+  <okfDate2>24.09.2014 11:00:00</okfDate2>
+  <order>
+    <placementStage>AP</placementStage>
+    <placerOrgType>U</placerOrgType>
+    <placerOrganization>
+      <regNumber>01732000014</regNumber>
+      <contactPerson>
+        <lastName>cлужба</lastName>
+        <firstName>одного</firstName>
+        <middleName>окна</middleName>
+      </contactPerson>
+      <displayEmail>mostender@mos.ru</displayEmail>
+      <email>moskonkurs@ka.mos.ru</email>
+      <factualAddress>
+        <addressLine>Российская Федерация, 105062, Москва, Макаренко, 4/1, -</addressLine>
+        <addressLineFromFields>Российская Федерация, 105062, Москва, Макаренко, 4/1, -</addressLineFromFields>
+        <building>4/1</building>
+        <buildingAddress>Макаренко, 4/1, -</buildingAddress>
+        <country>
+          <countryCode>643</countryCode>
+          <countryFullName>Российская Федерация</countryFullName>
+        </country>
+        <filledManually>false</filledManually>
+        <fullAddress>Российская Федерация, 105062, Москва, Макаренко, 4/1, -</fullAddress>
+        <municipalAddress>Москва</municipalAddress>
+        <office>-</office>
+        <okato>
+          <name>Басманный</name>
+          <okato>45286555000</okato>
+        </okato>
+        <region>
+          <fullName>Москва</fullName>
+          <kladrCode>77000000000</kladrCode>
+          <kladrType>R</kladrType>
+        </region>
+        <shortStreet>Макаренко</shortStreet>
+        <zip>105062</zip>
+      </factualAddress>
+      <fax>+7 (495) 9579995</fax>
+      <fullName>Департамент города Москвы по конкурентной политике</fullName>
+      <inn>7704515009</inn>
+      <kpp>770101001</kpp>
+      <ogrn>1047796171390</ogrn>
+      <okfs>
+        <code>13</code>
+        <id>4</id>
+        <name>Собственность субъектов Российской Федерации</name>
+      </okfs>
+      <okopf>
+        <assemblyAlgorithm>71+72+73+74</assemblyAlgorithm>
+        <code>81</code>
+        <fullName>Учреждения</fullName>
+        <organizationFormType>i81</organizationFormType>
+        <singularName>Учреждение</singularName>
+      </okopf>
+      <okopf2012>
+        <actual>true</actual>
+        <code>20900</code>
+        <parentOkopf>
+          <actual>true</actual>
+          <code>20000</code>
+          <pluralName>ОРГАНИЗАЦИОННО-ПРАВОВЫЕ ФОРМЫ ЮРИДИЧЕСКИХ ЛИЦ, ЯВЛЯЮЩИХСЯ НЕКОММЕРЧЕСКИМИ ОРГАНИЗАЦИЯМИ</pluralName>
+          <singularName>ОРГАНИЗАЦИОННО-ПРАВОВАЯ ФОРМА ЮРИДИЧЕСКОГО ЛИЦА, ЯВЛЯЮЩЕГОСЯ НЕКОММЕРЧЕСКОЙ ОРГАНИЗАЦИЕЙ</singularName>
+        </parentOkopf>
+        <pluralName>Учреждения</pluralName>
+        <singularName>Учреждение</singularName>
+      </okopf2012>
+      <OKPO>72171598</OKPO>
+      <OKVED>75.11.22</OKVED>
+      <organizationForm>Учреждение</organizationForm>
+      <organizationType>
+        <description>федеральный орган исполнительной власти, орган исполнительной власти субъекта Российской Федерации, федеральный орган государственной власти (орган государственной власти субъекта Российской Федерации, орган местного самоуправления), в том числе его территориальные органы, государственный орган, муниципальный орган</description>
+        <id>1</id>
+        <name>федеральный ОГВ</name>
+        <organizationCode>01</organizationCode>
+      </organizationType>
+      <phone>+7 (495) 9579931</phone>
+      <postalAddress>Российская Федерация, 107045, г. Москва, Печатников пер. , д.12</postalAddress>
+      <shortName>Тендерный комитет</shortName>
+      <subordinationType>
+        <description>Уровень субъекта РФ</description>
+        <id>2</id>
+      </subordinationType>
+      <url>www.tender.mos.ru</url>
+    </placerOrganization>
+    <placerOrganizationPrivateCabinetType>U</placerOrganizationPrivateCabinetType>
+    <publishDate>26.12.2013 08:46:26</publishDate>
+  </order>
+  <orderName>Открытый конкурс на право заключения государственного контракта на выполнение  подрядных работ по строительству объекта: «Реконструкция Звенигородского путепровода», по адресу: район Хорошево-Мневники, СЗАО города Москвы, Хорошевский район САО города Москвы</orderName>
+  <placingWay>
+    <code>OK</code>
+    <gosType>1</gosType>
+    <name>Открытый конкурс</name>
+    <placingWayId>3</placingWayId>
+    <subsystemType>FZ94</subsystemType>
+    <title>Открытый конкурс</title>
+    <type>OK</type>
+  </placingWay>
+  <publishDate>13.08.2014 16:40:53</publishDate>
+  <status>P</status>
+  <versionNumber>17</versionNumber>
+</notification>
