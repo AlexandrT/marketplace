@@ -44,18 +44,6 @@ module Marketplace
     def get_all_lots(lots_xml)
       lots_set = lots_xml.xpath('.//lot')
 
-      # жсон с отдельным лотом. после наполнения сливаем его в массив лотов
-      lot_json = Hash.new
-
-      # хэш с пунктами, входящими в лот  (<lotItem>)
-      lot_item = Hash.new
-
-      # массив со всеми пунктами лота, сливается в lots для каждого отдельного лота
-      lot_items = Array.new
-
-      # массив со всеми лотами, который сливаем в @order_json
-      lots = Array.new
-
       lots_set.each do |lot|
         get_common_lot_info(lot)
         

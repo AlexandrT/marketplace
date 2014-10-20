@@ -30,8 +30,21 @@ module Marketplace
     end
 
     def get_lots(lot_table)
-      name = lot_table.xpath('//td[not(@colspan) and contains(., "Наименование товара, работ, услуг")]').first
-      byebug
+      @lot_json[:currency] = lot_table.xpath('//td[@id="invis" and not(contains(., "Итого"))]').first.text
+      total_sum = lot_table.xpath('//td[@id="invis" and contains(., "Итого")]').first.text
+      @lot_json[:price] = total_sum.split(":")[1].strip
+      
+      tr_header_num = lot_table.xpath('count(//td[not(@colspan) and contains(., "Наименование товара, работ, услуг")]/../preceding-sibling::*)+1').to_i
+      # сделать для этого отдельный метод. передавать туда текст в столбце и возвращать его номер
+      td_name_num = lot_table.xpath('count(//td[not(@colspan) and contains(., "Наименование товара, работ, услуг")]/preceding-sibling::*)+1').to_i
+      td_okpd_num = lot_table.xpath('count(//td[not(@colspan) and contains(., "Код по ОКПД")]/preceding-sibling::*)+1').to_i
+      td_customer_num = lot_table.xpath('count(//td[not(@colspan) and contains(., "Заказчик")]/preceding-sibling::*)+1').to_i
+      td_measure_num = lot_table.xpath('count(//td[not(@colspan) and contains(., "Единица измерения")]/preceding-sibling::*)+1').to_i
+      td_count_num = lot_table.xpath('count(//td[not(@colspan) and contains(., "Количество")]/preceding-sibling::*)+1').to_i
+      td_price_num = lot_table.xpath('count(//td[not(@colspan) and contains(., "Стоимость")]/preceding-sibling::*)+1').to_i
+
+      rows = lot_table.xpath('.//tr[not(@id="invis")]')
+      # byebug
     end
   end
 end

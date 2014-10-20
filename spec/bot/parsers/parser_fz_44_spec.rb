@@ -7,6 +7,7 @@ describe Marketplace::Bot::Parsers::ParserFz44 do
   let(:order_json) { parser_44.instance_variable_get(:@order_json) }
   let(:auth_organization_json) { parser_44.instance_variable_get(:@auth_organization_json) }
   let(:contacts_json) { parser_44.instance_variable_get(:@contacts_json) }
+  let(:lot_json) { parser_44.instance_variable_get(:@lot_json) }
   
   context "get_order_info" do
 
@@ -39,18 +40,13 @@ describe Marketplace::Bot::Parsers::ParserFz44 do
         :email => "reception@iroso.ru",
         :fax => "8-4242-722501",
       )
-
-      # expect(parser_44.instance_variable_get(:@contacts_json)[:contacts]).to include(
-      #   :person => "Графенина Ольга Сергеевна",
-      #   :phone => "8-4242-300283",
-      #   :email => "reception@iroso.ru",
-      #   :fax => "8-4242-722501"
-      # )
     end
 
     it "get_lots" do
       parser_44.get_lots(lot_table)
 
+      expect(lot_json[:currency]).to eq("Российский рубль")
+      expect(lot_json[:price]).to eq("12062096.00")
     end
   end
 end
