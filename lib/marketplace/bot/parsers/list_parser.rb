@@ -16,7 +16,7 @@ module Marketplace
           source = Bot::Loaders::ListLoader.new()  # date?
           page = page_source(source.list(start_date, end_date, page_num))
       
-          page.xpath("//a[child::span[@class='printBtn']]").each{|link| orders_id << link["href"]}
+          page.xpath("//a[child::span[@class='printBtn']]").each{ |link| orders_id << link["href"] }
           break if i > 9
         end while page.at_css(".rightArrow")
         return orders_id

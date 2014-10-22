@@ -11,10 +11,10 @@ module Marketplace
     def get(company_page)
       page = Nokogiri::HTML(company_page, nil, 'utf-8')
       # file = File.new("parser.log", "w")
-      main_block = page.xpath('//td[@class="icePnlGrdCol mainPageCol paddL10 paddR10"]')
+      main_block = page.xpath('//td[@class="icePnlGrdCol mainPageCol paddL10 paddR10"]').first
 
       # NodeSet ключей хэша
-      tags_td = main_block[0].xpath('//td[@class="iceOutLbl"]')
+      tags_td = main_block.xpath('//td[@class="iceOutLbl"]')
 
 
       embedded_flag = false

@@ -1,5 +1,5 @@
 module Marketplace
-  class Bot::Parsers::OrderParserXml
+  class Bot::Parsers::Base
     def initialize
       @order_json = Hash.new
       @order_json = {lots:[]}

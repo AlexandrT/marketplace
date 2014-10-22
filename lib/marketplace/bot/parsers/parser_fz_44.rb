@@ -1,5 +1,5 @@
 module Marketplace
-  class Bot::Parsers::ParserFz44 < Bot::Parsers::OrderParserXml
+  class Bot::Parsers::ParserFz44 < Bot::Parsers::Base
     def fill_json(info_page)
       get_order_info(info_page)
       
@@ -8,23 +8,23 @@ module Marketplace
     end
 
     def get_order_info(info_page)
-      @order_json[:remote_id] = info_page.xpath('//td[p[@class="parameter" and contains(.,"Номер извещения")]]/following-sibling::td/p/text()').text
-      @order_json[:name] = info_page.xpath('//td[p[@class="parameter" and contains(.,"Наименование объекта закупки")]]/following-sibling::td/p/text()').text
-      @order_json[:type] = info_page.xpath('//td[p[@class="parameter" and contains(.,"Способ определения поставщика")]]/following-sibling::td/p/text()').text
+      @order_json[:remote_id] = get_content(info_page, 'Номер извещения')
+      @order_json[:name] = get_content(info_page, 'Наименование объекта закупки')
+      @order_json[:type] = get_content(info_page, 'Способ определения поставщика')
     end
 
     def get_customer(info_page)
     end
 
     def get_auth_organization(info_page)
-      @auth_organization_json[:full_name] = info_page.xpath('//td[p[@class="parameter" and contains(.,"Организация, осуществляющая закупку")]]/following-sibling::td/p/text()').text
-      @auth_organization_json[:post_address] = info_page.xpath('//td[p[@class="parameter" and contains(.,"Почтовый адрес")]]/following-sibling::td/p/text()').text
-      @auth_organization_json[:address] = info_page.xpath('//td[p[@class="parameter" and contains(.,"Место нахождения")]]/following-sibling::td/p/text()').text
+      @auth_organization_json[:full_name] = get_content(info_page, 'Организация, осуществляющая закупку')
+      @auth_organization_json[:post_address] = get_content(info_page, 'Почтовый адрес')
+      @auth_organization_json[:address] = get_content(info_page, 'Место нахождения')
 
-      @contacts_json[:person] = info_page.xpath('//td[p[@class="parameter" and contains(.,"Ответственное должностное лицо")]]/following-sibling::td/p/text()').text
-      @contacts_json[:phone] = info_page.xpath('//td[p[@class="parameter" and contains(.,"Номер контактного телефона")]]/following-sibling::td/p/text()').text
-      @contacts_json[:email] = info_page.xpath('//td[p[@class="parameter" and contains(.,"Адрес электронной почты")]]/following-sibling::td/p/text()').text
-      @contacts_json[:fax] = info_page.xpath('//td[p[@class="parameter" and contains(.,"Факс")]]/following-sibling::td/p/text()').text
+      @contacts_json[:person] = get_content(info_page, 'Ответственное должностное лицо')
+      @contacts_json[:phone] = get_content(info_page, 'Номер контактного телефона')
+      @contacts_json[:email] = get_content(info_page, 'Адрес электронной почты')
+      @contacts_json[:fax] = get_content(info_page, 'Факс')
 
       @auth_organization_json[:contacts] = @contacts_json
     end
@@ -35,16 +35,24 @@ module Marketplace
       @lot_json[:price] = total_sum.split(":")[1].strip
       
       tr_header_num = lot_table.xpath('count(//td[not(@colspan) and contains(., "Наименование товара, работ, услуг")]/../preceding-sibling::*)+1').to_i
-      # сделать для этого отдельный метод. передавать туда текст в столбце и возвращать его номер
-      td_name_num = lot_table.xpath('count(//td[not(@colspan) and contains(., "Наименование товара, работ, услуг")]/preceding-sibling::*)+1').to_i
-      td_okpd_num = lot_table.xpath('count(//td[not(@colspan) and contains(., "Код по ОКПД")]/preceding-sibling::*)+1').to_i
-      td_customer_num = lot_table.xpath('count(//td[not(@colspan) and contains(., "Заказчик")]/preceding-sibling::*)+1').to_i
-      td_measure_num = lot_table.xpath('count(//td[not(@colspan) and contains(., "Единица измерения")]/preceding-sibling::*)+1').to_i
-      td_count_num = lot_table.xpath('count(//td[not(@colspan) and contains(., "Количество")]/preceding-sibling::*)+1').to_i
-      td_price_num = lot_table.xpath('count(//td[not(@colspan) and contains(., "Стоимость")]/preceding-sibling::*)+1').to_i
+      
+      td_name_num = get_table_content(lot_table, 'Наименование товара, работ, услуг')
+      td_okpd_num = get_table_content(lot_table, 'Код по ОКПД')
+      td_customer_num = get_table_content(lot_table, 'Заказчик')
+      td_measure_num = get_table_content(lot_table, 'Единица измерения')
+      td_count_num = get_table_content(lot_table, 'Количество')
+      td_price_num = get_table_content(lot_table, 'Стоимость')
 
       rows = lot_table.xpath('.//tr[not(@id="invis")]')
-      # byebug
+    end
+
+    def get_content(html, contains_str)
+      html.xpath('//td[p[@class="parameter" and contains(.,"' + contains_str + '")]]/following-sibling::td/p/text()').first.text
+      # html.xpath('//td[p[@class="parameter" and contains(.,"#{contains_str}")]]/following-sibling::td/p/text()').first.text
+    end
+
+    def get_table_content(table_html, header)
+      table_html.xpath('count(//td[not(@colspan) and contains(., "' + header + '")]/preceding-sibling::*)+1').to_i
     end
   end
 end

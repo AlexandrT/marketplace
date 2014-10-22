@@ -10,7 +10,7 @@ module Marketplace
       autoload :CompanyParser, "marketplace/bot/parsers/company_parser"
       autoload :ListParser, "marketplace/bot/parsers/list_parser"
       autoload :OrderParser, "marketplace/bot/parsers/order_parser"
-      autoload :OrderParserXml, "marketplace/bot/parsers/order_parser_xml"
+      autoload :Base, "marketplace/bot/parsers/base"
       autoload :ParserFz223, "marketplace/bot/parsers/parser_fz_223"
       autoload :ParserFz94, "marketplace/bot/parsers/parser_fz_94"
       autoload :ParserFz44, "marketplace/bot/parsers/parser_fz_44"
