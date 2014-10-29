@@ -9,3 +9,7 @@ test/dummy/.sass-cache
 *.lock
 
 *.sw[a-z]
+
+doc/
+.yardoc/
+Gemfile.lock

@@ -26,6 +26,12 @@ group :development do
   gem 'guard-bundler', require: false
   gem 'guard-rspec', require: false
   gem 'guard-spork'
+  gem 'yard'
+  gem 'redcarpet'
 end
 
 gem 'tzinfo-data', platforms: [:x64_mingw,:mingw, :mswin]
+
+gem 'chef', '~> 11.16.4'
+gem 'knife-solo'
+gem 'berkshelf', '~> 3.1.5'

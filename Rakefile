@@ -5,6 +5,9 @@ rescue LoadError
 end
 
 require 'rdoc/task'
+require 'yard'
+
+YARD::Rake::YardocTask.new
 
 RDoc::Task.new(:rdoc) do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
