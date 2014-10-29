@@ -9,7 +9,7 @@ module Marketplace
         orders_id = []
         i = 0
         begin
-          sleep Random.rand(15)
+          sleep(Rails.env.test?? 0 : Random.rand(15))
           i += 1
           page_num = i.to_s
 
