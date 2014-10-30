@@ -15,5 +15,9 @@ module Marketplace
       autoload :ParserFz94, "marketplace/bot/parsers/parser_fz_94"
       autoload :ParserFz44, "marketplace/bot/parsers/parser_fz_44"
     end
+
+    module Workers
+      autoload :Worker, "marketplace/bot/workers/worker"
+    end
   end
 end

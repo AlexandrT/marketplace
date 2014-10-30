@@ -20,5 +20,5 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", "~> 4.1.4"
   s.add_dependency "nokogiri"
   s.add_dependency "httparty"
-  s.add_dependency "sidekiq"
+  s.add_dependency "bunny", "~> 1.5.0"
 end
