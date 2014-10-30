@@ -5,9 +5,6 @@ rescue LoadError
 end
 
 require 'rdoc/task'
-require 'yard'
-
-YARD::Rake::YardocTask.new
 
 RDoc::Task.new(:rdoc) do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
@@ -16,8 +13,6 @@ RDoc::Task.new(:rdoc) do |rdoc|
   rdoc.rdoc_files.include('README.rdoc')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
-
-
 
 
 Bundler::GemHelper.install_tasks
@@ -33,3 +28,9 @@ end
 
 
 task default: :test
+
+require 'yard'
+
+YARD::Rake::YardocTask.new
+
+require 'lib/tasks/marketplace.rake'
