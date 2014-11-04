@@ -13,3 +13,4 @@ test/dummy/.sass-cache
 doc/
 .yardoc/
 Gemfile.lock
+.vagrant/
