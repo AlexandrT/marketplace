@@ -1,5 +1,6 @@
 require "spec_helper"
 require "bot"
+require "webmock/rspec"
 
 describe Marketplace::Bot::Parsers::ListParser do
   let(:list_parser) { Marketplace::Bot::Parsers::ListParser.new }
@@ -15,8 +16,7 @@ describe Marketplace::Bot::Parsers::ListParser do
 
   context "get_ids on one page" do
     before(:each) do
-    	doc = Nokogiri::HTML(open(Rails.root + '../../spec/support/order_list_without_arrow.html'))
-      list_parser.stub(:page_source).and_return(doc)
+      WebMock.stub_request(:get, /.*zakupki\.gov\.ru.*/).to_return(:body => File.open(Rails.root + '../../spec/support/order_list_without_arrow.html'), :status => 200)
     end
 
     it "check size and elements of array" do
@@ -38,8 +38,7 @@ describe Marketplace::Bot::Parsers::ListParser do
 
   context "get_ids on several pages" do
   	before(:each) do
-    	doc = Nokogiri::HTML(open(Rails.root + '../../spec/support/order_list_with_arrow.html'))
-      list_parser.stub(:page_source).and_return(doc)
+      WebMock.stub_request(:get, /.*zakupki\.gov\.ru.*/).to_return(:body => File.open(Rails.root + '../../spec/support/order_list_with_arrow.html'), :status => 200)
     end
 
     it "check size and elements of array" do

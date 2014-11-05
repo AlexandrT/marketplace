@@ -16,6 +16,7 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'nyan-cat-formatter'
   gem 'factory_girl_rails'
+  gem 'webmock'
 end
 
 group :test do
