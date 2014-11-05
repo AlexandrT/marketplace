@@ -3,12 +3,12 @@ require 'httparty'
 module Marketplace
   class Bot::Loaders::ListLoader
     include HTTParty
-    debug_output $stdout
+    # debug_output $stdout
     headers 'User-Agent' => 'Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)'
     headers 'referer' => 'http://zakupki.gov.ru'
     base_uri 'zakupki.gov.ru'
-    logger Logger.new 'http_logger.log', :info, :apache
-    http_proxy 'http://foo.com', 80, 'user', 'pass'
+    # logger Logger.new 'http_logger.log', :info, :apache
+    # http_proxy 'http://foo.com', 80, 'user', 'pass'
     
     # Скачивает страницу со списком закупок
     # @note 

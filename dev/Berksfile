@@ -1,6 +1,9 @@
 source "https://api.berkshelf.com"
 
-cookbook 'vim', '~> 1.1.2'
-cookbook 'tmux', '~> 1.4.0'
-cookbook 'rbenv', '~> 1.7.1'
-cookbook 'curl', '~> 2.0.0'
+cookbook 'vim'
+cookbook 'tmux'
+cookbook 'rbenv'
+cookbook 'curl'
+cookbook 'git'
+cookbook 'mongodb'
+cookbook 'rabbirmq'
