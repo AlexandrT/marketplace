@@ -3,19 +3,27 @@ require 'mongoid'
 
 module Marketplace
   class Bot::Producers::Producer
-    def create_tasks(types, start_date, end_date)
+    def initialize
       conn = Bunny.new
       conn.start
 
       ch = conn.create_channel
-      x = ch.fanout("load_list")
+      x = ch.topic("load_list")
+      
+    end
 
+    def create_tasks(types, start_date, end_date)
       types.each do |type|
-        msg = "#{type} #{start_date} #{end_date}"
-        x.publish(msg)
+        begin
+          msg = Hash.new { type: type, start_date: start_date, end_date: end_date  }
+          payload = msg.as_json
+          x.publish(payload, :routing_key => "list")
 
-        current_download = Download.new
-        current_download.write_attributes(order_type: type, start_date: start_date, end_date: end_date)
+          current_download = Download.new(order_type: type, start_date: start_date, end_date: end_date)
+          current_download.save
+        rescue Exception => e
+          puts e.message
+        end
       end
 
       conn.close
