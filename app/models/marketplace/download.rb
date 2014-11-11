@@ -1,5 +1,5 @@
 module Marketplace
-  class Task
+  class Download
     include Mongoid::Document
 
     field :start_date, type: DateTime

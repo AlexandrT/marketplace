@@ -19,5 +19,9 @@ module Marketplace
     module Workers
       autoload :Worker, "marketplace/bot/workers/worker"
     end
+
+    module Producers
+      autoload :Producer, "marketplace/bot/producers/producer"
+    end
   end
 end
