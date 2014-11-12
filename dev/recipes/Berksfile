@@ -1,9 +1,12 @@
 source "https://api.berkshelf.com"
 
+cookbook 'main', path:'cookbooks/main'
 cookbook 'vim'
 cookbook 'tmux'
 cookbook 'rbenv'
 cookbook 'curl'
 cookbook 'git'
+cookbook 'tig'
 cookbook 'mongodb'
 cookbook 'rabbitmq'
+cookbook 'timezone-ii'

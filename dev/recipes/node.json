@@ -1,0 +1,11 @@
+{
+  "run_list": [],
+  "rbenv": {
+    "group_users": ["vagrant"]
+  },
+  "mongodb": {
+    "install_method": "mongodb-org",
+    "package_version": "2.6.4"
+  },
+  "tz": "Europe/Moscow"
+}
