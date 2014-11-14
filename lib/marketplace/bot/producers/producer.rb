@@ -15,7 +15,13 @@ module Marketplace
     def create_tasks(types, start_date, end_date)
       types.each do |type|
         begin
-          msg = Hash.new { type: type, start_date: start_date, end_date: end_date  }
+          
+          msg = Hash.new 
+          msg[:type] = type
+          msg[:start_date] = start_date
+          byebug
+          msg[:end_date] = end_date
+
           payload = msg.as_json
           x.publish(payload, :routing_key => "list")
 
