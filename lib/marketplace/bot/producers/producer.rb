@@ -8,7 +8,9 @@ module Marketplace
       conn.start
 
       ch = conn.create_channel
-      x = ch.topic("load_list")
+      @x = ch.topic("load_list")
+      q = ch.queue("load_list", :exclusive => true)
+      q.bind(@x, :routing_key => "list.load")
       
     end
 
@@ -22,8 +24,8 @@ module Marketplace
           byebug
           msg[:end_date] = end_date
 
-          payload = msg.as_json
-          x.publish(payload, :routing_key => "list")
+          payload = msg.to_s
+          @x.publish(payload, :routing_key => "list")
 
           current_download = Download.new(order_type: type, start_date: start_date, end_date: end_date)
           current_download.save

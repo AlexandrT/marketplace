@@ -3,6 +3,7 @@ require "bot"
 
 describe Marketplace::Bot::Producers::Producer do
   let(:producer) { Marketplace::Bot::Producers::Producer.new }
+  let(:producer) { Marketplace::Bot::Workers::Worker.new }
 
   context "test rabbit" do
     xit "create task" do 

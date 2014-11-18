@@ -14,16 +14,7 @@ module Marketplace
       
       begin
         q.subscribe(:block => true) do |delivery_info, properties, body|
-          puts "#{routing_key}:#{body}"
-          
-          case type
-          when "44_fz"
-          when "94_fz"
-          when "223_fz"
-          else
-            puts "unknown parser's type"
-          end
-          
+          puts "#{routing_key}:#{body}"         
         end
       rescue Interrupt => _
         ch.close
