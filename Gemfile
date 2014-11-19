@@ -33,6 +33,6 @@ end
 
 gem 'tzinfo-data', platforms: [:x64_mingw,:mingw, :mswin]
 
-gem 'chef', '~> 11.16.4'
-gem 'knife-solo'
-gem 'berkshelf', '~> 3.1.5'
+# gem 'chef', '~> 11.16.4'
+# gem 'knife-solo'
+# gem 'berkshelf', '~> 3.1.5'

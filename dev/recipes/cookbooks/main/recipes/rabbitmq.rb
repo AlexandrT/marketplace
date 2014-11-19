@@ -1,6 +1,9 @@
 include_recipe "rabbitmq"
 
-node['rabbitmq']['enabled_plugins'] = ['plugin_management']
+rabbitmq_plugin "rabbitmq_management" do
+	action :enable
+end
+# node.set['rabbitmq']['enabled_plugins'] = ['rabbitmq_management']
 
 rabbitmq_user "guest" do
   action :delete

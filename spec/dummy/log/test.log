@@ -1,0 +1,55 @@
+  MOPED: 127.0.0.1:27017 COMMAND      database=admin command={:ismaster=>1} runtime: 1.9162ms
+  MOPED: 127.0.0.1:27017 INSERT       database=order_test collection=marketplace_downloads documents=[{"_id"=>BSON::ObjectId('546afbdf7465731725000000'), "order_type"=>"fz94", "start_date"=>2014-11-11 00:00:00 UTC, "end_date"=>2014-11-11 00:00:00 UTC, "result"=>false}] flags=[]
+                         COMMAND      database=order_test command={:getlasterror=>1, :w=>1} runtime: 1.2590ms
+  MOPED: 127.0.0.1:27017 INSERT       database=order_test collection=marketplace_downloads documents=[{"_id"=>BSON::ObjectId('546afbe07465731725010000'), "order_type"=>"fz223", "start_date"=>2014-11-11 00:00:00 UTC, "end_date"=>2014-11-11 00:00:00 UTC, "result"=>false}] flags=[]
+                         COMMAND      database=order_test command={:getlasterror=>1, :w=>1} runtime: 1.6476ms
+  MOPED: 127.0.0.1:27017 COMMAND      database=admin command={:ismaster=>1} runtime: 2.0844ms
+  MOPED: 127.0.0.1:27017 INSERT       database=order_test collection=marketplace_downloads documents=[{"_id"=>BSON::ObjectId('546afc3a7465731775000000'), "order_type"=>"fz94", "start_date"=>2014-11-11 00:00:00 UTC, "end_date"=>2014-11-11 00:00:00 UTC, "result"=>false}] flags=[]
+                         COMMAND      database=order_test command={:getlasterror=>1, :w=>1} runtime: 1.3350ms
+  MOPED: 127.0.0.1:27017 INSERT       database=order_test collection=marketplace_downloads documents=[{"_id"=>BSON::ObjectId('546afc3b7465731775010000'), "order_type"=>"fz223", "start_date"=>2014-11-11 00:00:00 UTC, "end_date"=>2014-11-11 00:00:00 UTC, "result"=>false}] flags=[]
+                         COMMAND      database=order_test command={:getlasterror=>1, :w=>1} runtime: 2.4806ms
+  MOPED: 127.0.0.1:27017 COMMAND      database=admin command={:ismaster=>1} runtime: 2.2145ms
+  MOPED: 127.0.0.1:27017 INSERT       database=order_test collection=marketplace_downloads documents=[{"_id"=>BSON::ObjectId('546afc9874657317d7000000'), "order_type"=>"fz94", "start_date"=>2014-11-11 00:00:00 UTC, "end_date"=>2014-11-11 00:00:00 UTC, "result"=>false}] flags=[]
+                         COMMAND      database=order_test command={:getlasterror=>1, :w=>1} runtime: 1.3868ms
+  MOPED: 127.0.0.1:27017 INSERT       database=order_test collection=marketplace_downloads documents=[{"_id"=>BSON::ObjectId('546afc9974657317d7010000'), "order_type"=>"fz223", "start_date"=>2014-11-11 00:00:00 UTC, "end_date"=>2014-11-11 00:00:00 UTC, "result"=>false}] flags=[]
+                         COMMAND      database=order_test command={:getlasterror=>1, :w=>1} runtime: 1.6123ms
+  MOPED: 127.0.0.1:27017 COMMAND      database=admin command={:ismaster=>1} runtime: 2.0061ms
+  MOPED: 127.0.0.1:27017 INSERT       database=order_test collection=marketplace_downloads documents=[{"_id"=>BSON::ObjectId('546afcd47465731833000000'), "order_type"=>"fz94", "start_date"=>2014-11-11 00:00:00 UTC, "end_date"=>2014-11-11 00:00:00 UTC, "result"=>false}] flags=[]
+                         COMMAND      database=order_test command={:getlasterror=>1, :w=>1} runtime: 1.5540ms
+  MOPED: 127.0.0.1:27017 INSERT       database=order_test collection=marketplace_downloads documents=[{"_id"=>BSON::ObjectId('546afcd57465731833010000'), "order_type"=>"fz223", "start_date"=>2014-11-11 00:00:00 UTC, "end_date"=>2014-11-11 00:00:00 UTC, "result"=>false}] flags=[]
+                         COMMAND      database=order_test command={:getlasterror=>1, :w=>1} runtime: 1.4418ms
+  MOPED: 127.0.0.1:27017 COMMAND      database=admin command={:ismaster=>1} runtime: 2.0182ms
+  MOPED: 127.0.0.1:27017 INSERT       database=order_test collection=marketplace_downloads documents=[{"_id"=>BSON::ObjectId('546afe5074657318ce000000'), "order_type"=>"fz94", "start_date"=>2014-11-11 00:00:00 UTC, "end_date"=>2014-11-11 00:00:00 UTC, "result"=>false}] flags=[]
+                         COMMAND      database=order_test command={:getlasterror=>1, :w=>1} runtime: 1.7395ms
+  MOPED: 127.0.0.1:27017 INSERT       database=order_test collection=marketplace_downloads documents=[{"_id"=>BSON::ObjectId('546afe5174657318ce010000'), "order_type"=>"fz223", "start_date"=>2014-11-11 00:00:00 UTC, "end_date"=>2014-11-11 00:00:00 UTC, "result"=>false}] flags=[]
+                         COMMAND      database=order_test command={:getlasterror=>1, :w=>1} runtime: 1.3784ms
+  MOPED: 127.0.0.1:27017 COMMAND      database=admin command={:ismaster=>1} runtime: 2.1482ms
+  MOPED: 127.0.0.1:27017 INSERT       database=order_test collection=marketplace_downloads documents=[{"_id"=>BSON::ObjectId('546afebf7465731935000000'), "order_type"=>"fz94", "start_date"=>2014-11-11 00:00:00 UTC, "end_date"=>2014-11-11 00:00:00 UTC, "result"=>false}] flags=[]
+                         COMMAND      database=order_test command={:getlasterror=>1, :w=>1} runtime: 1.1522ms
+  MOPED: 127.0.0.1:27017 INSERT       database=order_test collection=marketplace_downloads documents=[{"_id"=>BSON::ObjectId('546afec07465731935010000'), "order_type"=>"fz223", "start_date"=>2014-11-11 00:00:00 UTC, "end_date"=>2014-11-11 00:00:00 UTC, "result"=>false}] flags=[]
+                         COMMAND      database=order_test command={:getlasterror=>1, :w=>1} runtime: 1.2748ms
+  MOPED: 127.0.0.1:27017 COMMAND      database=admin command={:ismaster=>1} runtime: 2.3047ms
+  MOPED: 127.0.0.1:27017 INSERT       database=order_test collection=marketplace_downloads documents=[{"_id"=>BSON::ObjectId('546b007e74657319e1000000'), "order_type"=>"fz94", "start_date"=>2014-11-11 00:00:00 UTC, "end_date"=>2014-11-11 00:00:00 UTC, "result"=>false}] flags=[]
+                         COMMAND      database=order_test command={:getlasterror=>1, :w=>1} runtime: 1.9351ms
+  MOPED: 127.0.0.1:27017 INSERT       database=order_test collection=marketplace_downloads documents=[{"_id"=>BSON::ObjectId('546b007f74657319e1010000'), "order_type"=>"fz223", "start_date"=>2014-11-11 00:00:00 UTC, "end_date"=>2014-11-11 00:00:00 UTC, "result"=>false}] flags=[]
+                         COMMAND      database=order_test command={:getlasterror=>1, :w=>1} runtime: 2.7924ms
+  MOPED: 127.0.0.1:27017 COMMAND      database=admin command={:ismaster=>1} runtime: 1.1575ms
+  MOPED: 127.0.0.1:27017 INSERT       database=order_test collection=marketplace_downloads documents=[{"_id"=>BSON::ObjectId('546b02177465731a83000000'), "order_type"=>"fz94", "start_date"=>2014-11-11 00:00:00 UTC, "end_date"=>2014-11-11 00:00:00 UTC, "result"=>false}] flags=[]
+                         COMMAND      database=order_test command={:getlasterror=>1, :w=>1} runtime: 0.5274ms
+  MOPED: 127.0.0.1:27017 INSERT       database=order_test collection=marketplace_downloads documents=[{"_id"=>BSON::ObjectId('546b02177465731a83010000'), "order_type"=>"fz223", "start_date"=>2014-11-11 00:00:00 UTC, "end_date"=>2014-11-11 00:00:00 UTC, "result"=>false}] flags=[]
+                         COMMAND      database=order_test command={:getlasterror=>1, :w=>1} runtime: 0.3679ms
+  MOPED: 127.0.0.1:27017 COMMAND      database=admin command={:ismaster=>1} runtime: 1.2886ms
+  MOPED: 127.0.0.1:27017 INSERT       database=order_test collection=marketplace_downloads documents=[{"_id"=>BSON::ObjectId('546b468c7465732b66000000'), "order_type"=>"fz94", "start_date"=>2014-11-11 00:00:00 UTC, "end_date"=>2014-11-11 00:00:00 UTC, "result"=>false}] flags=[]
+                         COMMAND      database=order_test command={:getlasterror=>1, :w=>1} runtime: 0.6227ms
+  MOPED: 127.0.0.1:27017 INSERT       database=order_test collection=marketplace_downloads documents=[{"_id"=>BSON::ObjectId('546b468c7465732b66010000'), "order_type"=>"fz223", "start_date"=>2014-11-11 00:00:00 UTC, "end_date"=>2014-11-11 00:00:00 UTC, "result"=>false}] flags=[]
+                         COMMAND      database=order_test command={:getlasterror=>1, :w=>1} runtime: 0.4759ms
+  MOPED: 127.0.0.1:27017 COMMAND      database=admin command={:ismaster=>1} runtime: 1.1923ms
+  MOPED: 127.0.0.1:27017 INSERT       database=order_test collection=marketplace_downloads documents=[{"_id"=>BSON::ObjectId('546b47337465732bd8000000'), "order_type"=>"fz94", "start_date"=>2014-11-11 00:00:00 UTC, "end_date"=>2014-11-11 00:00:00 UTC, "result"=>false}] flags=[]
+                         COMMAND      database=order_test command={:getlasterror=>1, :w=>1} runtime: 0.6057ms
+  MOPED: 127.0.0.1:27017 INSERT       database=order_test collection=marketplace_downloads documents=[{"_id"=>BSON::ObjectId('546b47337465732bd8010000'), "order_type"=>"fz223", "start_date"=>2014-11-11 00:00:00 UTC, "end_date"=>2014-11-11 00:00:00 UTC, "result"=>false}] flags=[]
+                         COMMAND      database=order_test command={:getlasterror=>1, :w=>1} runtime: 0.3413ms
+  MOPED: 127.0.0.1:27017 COMMAND      database=admin command={:ismaster=>1} runtime: 2.1497ms
+  MOPED: 127.0.0.1:27017 INSERT       database=order_test collection=marketplace_downloads documents=[{"_id"=>BSON::ObjectId('546b49047465732c88000000'), "order_type"=>"fz94", "start_date"=>2014-11-11 00:00:00 UTC, "end_date"=>2014-11-11 00:00:00 UTC, "result"=>false}] flags=[]
+                         COMMAND      database=order_test command={:getlasterror=>1, :w=>1} runtime: 1.5053ms
+  MOPED: 127.0.0.1:27017 INSERT       database=order_test collection=marketplace_downloads documents=[{"_id"=>BSON::ObjectId('546b49067465732c88010000'), "order_type"=>"fz223", "start_date"=>2014-11-11 00:00:00 UTC, "end_date"=>2014-11-11 00:00:00 UTC, "result"=>false}] flags=[]
+                         COMMAND      database=order_test command={:getlasterror=>1, :w=>1} runtime: 1.6121ms
