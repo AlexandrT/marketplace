@@ -11,7 +11,6 @@ module Marketplace
     # http_proxy 'http://foo.com', 80, 'user', 'pass'
     
     # Скачивает страницу со списком закупок
-    # @note 
     # @param type [String] тип закупки
     # @param start_date [String] начальная дата создания/обновления закупки
     # @param end_date [String] конечная дата создания/обновления закупки
@@ -38,6 +37,13 @@ module Marketplace
       analyze(response)
     end
 
+    # Анализирует ответ сервера по коду ответа и принимает решение для дальнейших действий.
+    # Если проблемы сервера (5хх ошибка), то перепосылаем задание на загрузку через TIMEOUT секунд.
+    # Если загрузка удачная (код 200), то отправляем задание на парсинг.
+    # @note При ошибках отличных от 200 и 5хх, просто сообщение в лог
+    # @param response [HTTParty::Response] ответ сервера на get-запрос
+    # @example
+    #   analyze(response)
     def analyze(response)
       code = response.code
 
@@ -46,7 +52,7 @@ module Marketplace
         sleep TIMEOUT
         Producer.load_list(@type, @start_date, @end_date, @page_number)
       when 200
-        Producer.parse_list(body)
+        Producer.parse_list(@type, response.body)
       else
         puts "Strange response code during list load - #{code}"
       end

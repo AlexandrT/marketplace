@@ -10,7 +10,7 @@ module Marketplace
       x = ch.topic("common")
       q = ch.queue("load", :exclusive => true)
 
-      q.bind(x, :routing_key => "*.*")
+      q.bind(x, :routing_key => "#.load")
       
       begin
         q.subscribe(:block => true) do |delivery_info, properties, body|
@@ -25,7 +25,6 @@ module Marketplace
           else
             puts "unknown object"
           end
-              
         end
       rescue Interrupt => _
         ch.close

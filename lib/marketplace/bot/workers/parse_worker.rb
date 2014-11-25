@@ -10,7 +10,7 @@ module Marketplace
       x = ch.topic("common")
       q = ch.queue("parse", :exclusive => true)
 
-      q.bind(x, :routing_key => "*.*")
+      q.bind(x, :routing_key => "#.parse")
       
       begin
         q.subscribe(:block => true) do |delivery_info, properties, body|
