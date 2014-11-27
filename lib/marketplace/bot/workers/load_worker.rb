@@ -2,7 +2,7 @@ require "bunny"
 
 module Marketplace
   class Bot::Workers::LoadWorker
-    def run()
+    def run
       conn = Bunny.new
       conn.start
 
@@ -15,13 +15,14 @@ module Marketplace
       begin
         q.subscribe(:block => true) do |delivery_info, properties, body|
           type, obj = delivery_info.routing_key.split(".")
-          start_date = body.start_date
-          end_date = body.end_date
-          puts "#{delivery_info.routing_key}:#{body}"   
+          puts "#{delivery_info.routing_key}:#{body}"
 
           if obj == "list"
-            ListLoader.list(type, start_date, end_date, 0)
+            page_loader = PageLoader.new
+            page_loader.load_list(body.start_price, body.end_price)
           elsif obj == "order"
+            page_loader = PageLoader.new
+            page_loader.load_order(body.order_id)
           else
             puts "unknown object"
           end

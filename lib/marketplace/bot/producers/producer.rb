@@ -4,11 +4,20 @@ require 'byebug'
 
 module Marketplace
   class Bot::Producers::Producer
+    include Singleton
+
     attr_accessor :type
     attr_accessor :start_date
     attr_accessor :end_date
+    attr_accessor :page_number
+    attr_accessor :order_id
 
-    def initialize
+    def initialize(type, start_date, end_date, page_number)
+      @type = type
+      @start_date = start_date
+      @end_date = end_date
+      @page_number = 1
+
       conn = Bunny.new
       conn.start
 
@@ -41,15 +50,17 @@ module Marketplace
     # @param end_date [String] конечная дата создания/обновления закупки
     # @param page_num [Integer] номер загружаемой страницы
     # @example
-    #   load_list(["fz44", "fz94"], "09.21.2014", "09.22.2014", 4)
-    def load_list(type, start_date, end_date, page_num)
-      if check_date(start_date) and check_date(end_date)
+    #   load_list("fz44", "09.21.2014", "09.22.2014", 4)
+    def load_list(start_price, end_price)
+      if check_date(@start_date) and check_date(@end_date)
         begin
           msg = Hash.new 
-          @type = msg[:type] = type
-          @start_date = msg[:start_date] = start_date
-          @end_date = msg[:end_date] = end_date
-          msg[:page_num] = page_num
+          msg[:type] = @type
+          msg[:start_date] = @start_date
+          msg[:end_date] = @end_date
+          msg[:page_num] = @page_num
+          msg[:start_price] = start_price
+          msg[:end_price] = end_price
 
           payload = msg.to_s
 
@@ -57,8 +68,8 @@ module Marketplace
 
           puts " [@x] Sent #{type}:#{payload}"
 
-          current_download = Download.new(order_type: @type, start_date: @start_date, end_date: @end_date)
-          current_download.save
+          # current_download = Download.new(order_type: @type, start_date: @start_date, end_date: @end_date)
+          # current_download.save
         rescue Exception => e
           puts e.message
         end
@@ -67,13 +78,56 @@ module Marketplace
 
     # Отправляет задание на парсинг списка закупок с :routing_key = "type.list.parse" в точку доступа
     # @param body [String] строка с html загруженной страницы
-    def parse_list(body)
-      msg = Hash.new
-      msg[:type] = @type
-      msg[:start_date] = @start_date
-      msg[:end_date] = @end_date
+    def parse_list(body, start_price, end_price)
+      begin
+        msg = Hash.new
+        msg[:type] = @type
+        msg[:start_date] = @start_date
+        msg[:end_date] = @end_date
+        msg[:page_num] = @page_num
+        msg[:start_price] = @start_price
+        msg[:end_price] = @end_price
+        msg[:page] = body
 
-      @x.publish(payload, :routing_key => "#{@type}.list.parse")
+        payload = msg.to_s
+
+        @x.publish(payload, :routing_key => "#{@type}.list.parse")
+
+        puts " [@x] Sent #{type}.list.parse"
+      rescue Exception => e
+        puts e.message
+      end
+    end
+
+    def load_order(order_id)
+      order_id ||= @order_id
+      begin
+        msg[:type] = @type
+        msg[:order_id] = order_id
+
+        payload = msg.to_s
+
+        @x.publish(payload, :routing_key => "#{@type}.order.load")
+
+        puts " [@x] Sent #{type}.order.load"
+      rescue Exception => e
+        puts e.message
+      end
+    end
+
+    def parse_order(body)
+      begin
+        msg[:type] = @type
+        msg[:page] = body
+
+        payload=msg.to_s
+
+        @x.publish(payload, :routing_key => "#{type}.order.parse")
+
+        puts " [@x] Sent #{type}.order.parse"
+      rescue Exception => e
+        puts e.message
+      end
     end
   end
 end

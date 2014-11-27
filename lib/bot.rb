@@ -2,8 +2,7 @@ module Marketplace
   module Bot
     module Loaders
       autoload :CompanyLoader, "marketplace/bot/loaders/company_loader"
-      autoload :ListLoader, "marketplace/bot/loaders/list_loader"
-      autoload :OrderLoader, "marketplace/bot/loaders/order_loader"
+      autoload :PageLoader, "marketplace/bot/loaders/page_loader"
     end
 
     module Parsers

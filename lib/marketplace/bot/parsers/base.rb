@@ -11,5 +11,11 @@ module Marketplace
       # жсон с отдельным лотом. после наполнения сливаем его в массив лотов
       @lot_json = Hash.new
     end
+
+    def run(page)
+      fill_json(page)
+
+      # save @order_json into mongo
+    end
   end
 end

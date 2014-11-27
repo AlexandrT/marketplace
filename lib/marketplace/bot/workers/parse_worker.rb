@@ -15,13 +15,23 @@ module Marketplace
       begin
         q.subscribe(:block => true) do |delivery_info, properties, body|
           type, obj = delivery_info.routing_key.split(".")
-          start_date = body.start_date
-          end_date = body.end_date
           puts "#{delivery_info.routing_key}:#{body}"   
 
           if obj == "list"
-            ListParser.get_ids(start_date, end_date)
+            list_parser = ListParser.new
+            list_parser.get_ids(body.page, body.start_price, body.end_price)
           elsif obj == "order"
+            case type
+            when "fz_44"
+              parser = ParserFz44.new
+            when "fz_94"
+              parser = ParserFz94.new
+            when "fz_223"
+              parser = ParserFz223.new
+            else
+              puts "unknown order type in parse_worker"
+            end
+            parser.run(body.page)
           else
             puts "unknown object"
           end
