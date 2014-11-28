@@ -2,6 +2,10 @@ require "bunny"
 
 module Marketplace
   class Bot::Workers::ParseWorker
+
+    # Создает очередь **parse** и начинает слушать ее. Забирает сообщения, _:routing_key_ которых заканчивается на **.parse**
+    # @example
+    #   run()
     def run()
       conn = Bunny.new
       conn.start

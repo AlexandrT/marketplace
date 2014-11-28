@@ -1,6 +1,10 @@
 module Marketplace
   class Bot::Parsers::ParserFz223 < Bot::Parsers::Base
 
+    # Поочередно вызывает методы для парсинга закупки
+    # @param info_page [String] Страница закупки
+    # @example
+    #   fill_json("<html> </html>")
     def fill_json(info_page)
       page = Nokogiri::HTML(clean_trash(info_page), nil, 'utf-8')
 
@@ -22,12 +26,16 @@ module Marketplace
       get_contacts(contacts_xml)
     end
 
+    # Наполняет **@order_json** основной информацией о закупке
+    # @param doc [Nokogiri::XML::Node] 
     def get_order_info(doc)
       @order_json[:remote_id] = doc.xpath('.//ns2:registrationNumber').first.text
       @order_json[:name] = doc.xpath('.//ns2:name').first.text
       @order_json[:type] = doc.xpath('.//ns2:purchaseCodeName').first.text
     end
 
+    # Наполняет хэш **@auth_organization_json** информацией об авторизованной организации и помещает его в **@order_json**
+    # @param auth_org_xml [Nokogiri::XML::Node] 
     def get_auth_organization(auth_org_xml)
       @auth_organization_json[:fullName] = get_content(auth_org_xml, './/ns2:fullName')
       @auth_organization_json[:shortName] = get_content(auth_org_xml, './/ns2:shortName')
@@ -44,6 +52,8 @@ module Marketplace
       @order_json[:auth_organization] = @auth_organization_json
     end
 
+    # Получает информацию о лотах закупки, далее вызывает парсинг каждого отдельного лота
+    # @param lots_xml [Nokogiri::XML::Node] 
     def get_all_lots(lots_xml)
 
       lots_set = lots_xml.xpath('.//ns2:lot', 'ns2' => "http://zakupki.gov.ru/223fz/types/1")
@@ -61,12 +71,16 @@ module Marketplace
       end
     end
 
+    # Получает параметры лота и сохраняет в **@lot_json**
+    # @param lot [Nokogiri::XML::Node] 
     def get_common_lot_info(lot)
       @lot_json[:name] = get_content(lot, './/ns2:lotData/ns2:subject')
       @lot_json[:currency] = get_content(lot, './/ns2:lotData/ns2:currency/ns2:code')
       @lot_json[:price] = get_content(lot, './/ns2:lotData/ns2:initialSum')
     end
 
+    # Получает параметры каждого отдельного лота и добавляет их в **@order_json**
+    # @param lot_item_xml [Nokogiri::XML::Node] 
     def get_lot_item_info(lot_item_xml)
       # хэш с пунктами, входящими в лот  (<lotItem>)
       lot_item = Hash.new
@@ -87,6 +101,8 @@ module Marketplace
     #   @order_json[:customer] = customers
     # end
 
+    # Получает контакты авторизованной организации, сохраняет их в **@auth_organization_json**
+    # @param contacts_xml [Nokogiri::XML::Node] 
     def get_contacts(contacts_xml)
       @contacts_json[:person] = get_content(contacts_xml, './/ns2:lastName') + " " + get_content(contacts_xml, './/ns2:firstName') + " " + get_content(contacts_xml, './/ns2:middleName')
       @contacts_json[:phone] = get_content(contacts_xml, './/ns2:phone')
@@ -96,6 +112,8 @@ module Marketplace
       @auth_organization_json[:contacts] = @contacts_json
     end
 
+    # Получает параметры места доставки для каждого отдельного лота, сохраняет их в **@lot_json**
+    # @param delivery_xml [Nokogiri::XML::Node] 
     def get_delivery_place(delivery_xml)
       delivery_place = Hash.new
 
@@ -105,6 +123,9 @@ module Marketplace
       @lot_json[:delivery_place] = delivery_place
     end
 
+    # Получает текст указанного тэга по _xpath_ с учетом нэймспейса
+    # @param xml [Nokogiri::XML::Node]
+    # @param xpath_str [String] _xpath_
     def get_content(xml, xpath_str)
       xml.xpath(xpath_str, 'ns2' => "http://zakupki.gov.ru/223fz/types/1").first.text
     end

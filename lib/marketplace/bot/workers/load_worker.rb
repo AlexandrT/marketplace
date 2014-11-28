@@ -2,6 +2,10 @@ require "bunny"
 
 module Marketplace
   class Bot::Workers::LoadWorker
+
+    # Создает очередь **load** и начинает слушать ее. Забирает сообщения, _:routing_key_ которых заканчивается на **.load**
+    # @example
+    #   run()
     def run
       conn = Bunny.new
       conn.start

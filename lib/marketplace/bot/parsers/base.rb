@@ -1,5 +1,9 @@
 module Marketplace
   class Bot::Parsers::Base
+
+    # Создает хэши, используемые при парсинге закупок в дочерних методах
+    # @example
+    #   new()
     def initialize
       @order_json = Hash.new
       @order_json = {lots:[]}
@@ -12,10 +16,12 @@ module Marketplace
       @lot_json = Hash.new
     end
 
+    # Запускает парсинг документа - наполняет хэш **@order_json** и все вложенные хэши
+    # @param page [String] Страница закупки для парсинга
+    # @example
+    #   run("<html>test</html>")
     def run(page)
       fill_json(page)
-
-      # save @order_json into mongo
     end
   end
 end
