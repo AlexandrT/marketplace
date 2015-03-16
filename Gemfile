@@ -21,6 +21,7 @@ end
 
 group :test do
   gem 'mongoid-rspec', github: 'mongoid-rspec/mongoid-rspec', :branch => 'mongoid-4-0'
+  gem 'moqueue'
 end
 
 group :development do

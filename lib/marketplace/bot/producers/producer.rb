@@ -21,26 +21,6 @@ module Marketplace
     # _id_ загружаемой закупки
     attr_accessor :order_id
 
-    # Задает значения полей класса, создает соединение с точкой доступа **common**
-    # @param type [String] Тип закупки
-    # @param start_date [String] Начальная дата создания/обновления закупки
-    # @param end_date [String] Конечная дата создания/обновления закупки
-    # @param page_number [Integer] Номер текущей страницы списка закупок
-    # @example
-    #   new("fz_44", "11.11.2014", "11.11.2014", 0)
-    def initialize(type, start_date, end_date, page_number)
-      @type = type
-      @start_date = start_date
-      @end_date = end_date
-      @page_number = 1
-
-      conn = Bunny.new
-      conn.start
-
-      ch = conn.create_channel
-      @x = ch.topic("common")
-    end
-
     # Проверяет дату на соответствие формату и валидность
     # @param input_date [String] Дата в формате _dd.mm.yyyy_
     # @return [Boolean]
@@ -66,7 +46,7 @@ module Marketplace
     # @example
     #   load_list(0б 200000)
     def load_list(start_price, end_price)
-      if check_date(@start_date) and check_date(@end_date)
+      # if check_date(@start_date) and check_date(@end_date)
         begin
           msg = Hash.new 
           msg[:type] = @type
@@ -84,7 +64,7 @@ module Marketplace
         rescue Exception => e
           puts e.message
         end
-      end 
+      # end 
     end
 
     # Отправляет задание на парсинг списка закупок с _:routing_key = "type.list.parse"_ в точку доступа
@@ -151,6 +131,27 @@ module Marketplace
       rescue Exception => e
         puts e.message
       end
+    end
+
+    # Задает значения полей класса, создает соединение с точкой доступа **common**
+    # @param type [String] Тип закупки
+    # @param start_date [String] Начальная дата создания/обновления закупки
+    # @param end_date [String] Конечная дата создания/обновления закупки
+    # @param page_number [Integer] Номер текущей страницы списка закупок
+    # @example
+    #   new("fz_44", "11.11.2014", "11.11.2014", 0)
+    def create(type, start_date = Date.today.strftime('%d.%m.%Y'), end_date = Date.today.strftime('%d.%m.%Y'), page_number = 0)
+      @type = type
+      @start_date = start_date
+      @end_date = end_date
+      @page_number = 1
+
+      conn = Bunny.new
+      conn.start
+
+      ch = conn.create_channel
+      @x = ch.topic("common")
+      instance
     end
   end
 end

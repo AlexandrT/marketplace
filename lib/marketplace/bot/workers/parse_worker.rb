@@ -36,6 +36,7 @@ module Marketplace
               puts "unknown order type in parse_worker"
             end
             parser.run(body.page)
+            # Load to DB
           else
             puts "unknown object"
           end
