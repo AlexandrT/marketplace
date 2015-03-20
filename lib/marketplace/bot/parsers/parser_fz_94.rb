@@ -15,6 +15,7 @@ module Marketplace
 
       lots_xml = info_page.xpath('//notification/lots').first
       get_all_lots(lots_xml)
+      @order_json
     end
 
     # Наполняет **@order_json** основной информацией о закупке

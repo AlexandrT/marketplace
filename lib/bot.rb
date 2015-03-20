@@ -15,10 +15,15 @@ module Marketplace
     module Workers
       autoload :LoadWorker, "marketplace/bot/workers/load_worker"
       autoload :ParseWorker, "marketplace/bot/workers/parse_worker"
+      autoload :WriteeWorker, "marketplace/bot/workers/write_worker"
     end
 
     module Producers
       autoload :Producer, "marketplace/bot/producers/producer"
+    end
+
+    module Writers
+      autoload :Writer, "marketplace/bot/writers/writer"
     end
   end
 end

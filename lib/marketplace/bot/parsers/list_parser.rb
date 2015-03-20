@@ -4,7 +4,7 @@ module Marketplace
   class Bot::Parsers::ListParser
 
     def initialize
-      @producer = Producer.new
+      @producer = Producer.instance
     end
 
     # Парсит страницу, получает массив _id_ закупок, вызывает продюсера для создания таска загрузки каждой закупки.
@@ -36,5 +36,8 @@ module Marketplace
         end
       end
     end
+    # создать страницу без ссылок на следующую - стаб на @producer.load_order(order_id). order_id - кол-во закупок на странице
+    # создать страницу со ссылкой на следующую, число закупок меньше тысячи - стаб на @producer.load_order(order_id). order_id - кол-во закупок на странице, @producer.load_list - таск на загрузку след. страницы
+    # создать страницу со ссылкой на следующую, число закупок больше тысячи - стаб на @producer.load_list(start_price, end_price). @producer.load_list(start_price, end_price/2) и @producer.load_list(end_price/2 + 1, end_price)
   end
 end

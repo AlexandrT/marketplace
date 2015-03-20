@@ -1,6 +1,7 @@
 require 'bunny'
 require 'mongoid'
 require 'byebug'
+require 'bot'
 
 module Marketplace
   class Bot::Producers::Producer
@@ -57,6 +58,8 @@ module Marketplace
           msg[:end_price] = end_price
 
           payload = msg.to_s
+
+          byebug
 
           @x.publish(payload, :routing_key => "#{@type}.list.load")
 
@@ -123,7 +126,7 @@ module Marketplace
         msg[:type] = @type
         msg[:page] = body
 
-        payload=msg.to_s
+        payload = msg.to_s
 
         @x.publish(payload, :routing_key => "#{type}.order.parse")
 
@@ -141,17 +144,39 @@ module Marketplace
     # @example
     #   new("fz_44", "11.11.2014", "11.11.2014", 0)
     def create(type, start_date = Date.today.strftime('%d.%m.%Y'), end_date = Date.today.strftime('%d.%m.%Y'), page_number = 0)
+      byebug
       @type = type
       @start_date = start_date
       @end_date = end_date
       @page_number = 1
 
-      conn = Bunny.new
+      conn = Bunny.new(:host => "localhost", :vhost => "/", :user => "amigo", :password => "42Amigo_Rabbit")
       conn.start
-
       ch = conn.create_channel
       @x = ch.topic("common")
-      instance
+
+      db_conn = Bunny.new(:host => "localhost", :vhost => "/", :user => "amigo", :password => "42Amigo_Rabbit")
+      db_conn.start
+      db_channel = db_conn.create_channel
+      @db_x = ch.fanout("writer")
+
+      # instance
+    end
+
+    def initialize
+      create("fz_94")
+    end
+
+    # Отправляет задание на сохранение json в бд
+    # @param json [Json] Json с информацией о закупке
+    # @example
+    #   load_to_db(json)
+    def load_to_db(json)
+      begin
+        @db_x.publish(json)
+      rescue Exception => e
+        puts e.message
+      end
     end
   end
 end

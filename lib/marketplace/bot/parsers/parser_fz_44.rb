@@ -10,6 +10,7 @@ module Marketplace
       
       lot_table = info_page.xpath('//table[@class="table"]').first
       get_lots(lot_table)
+      @order_json
     end
 
     # Наполняет **@order_json** основной информацией о закупке

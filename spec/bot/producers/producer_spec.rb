@@ -1,19 +1,24 @@
 require "spec_helper"
 require "bot"
 require "moqueue"
+require "byebug"
 
 describe Marketplace::Bot::Producers::Producer do
   let(:producer) { Marketplace::Bot::Producers::Producer.instance }
-  # let(:worker) { Marketplace::Bot::Workers::Worker.new }
+  let(:load_worker) { Marketplace::Bot::Workers::LoadWorker.new }
+  let(:parse_worker) { Marketplace::Bot::Workers::ParseWorker.new }
+
 
   context "test rabbit" do
     
-    before(:each) do
-      reset_broker
-      producer.stub(:connect).and_return(mock_exchange(:topic => "common"))
-    end
+    #before(:each) do
+    #  reset_broker
+    #  producer.stub(:connect).and_return(mock_exchange(:topic => "common"))
+    #end
 
     it "load_list" do 
+      byebug
+      load_worker.run
       producer.load_list(0, 1000)
       # worker.run
     end

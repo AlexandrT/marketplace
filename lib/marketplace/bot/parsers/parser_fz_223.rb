@@ -24,6 +24,7 @@ module Marketplace
 
       contacts_xml = doc.xpath('.//ns2:contact').first
       get_contacts(contacts_xml)
+      @order_json
     end
 
     # Наполняет **@order_json** основной информацией о закупке

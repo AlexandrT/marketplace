@@ -1,4 +1,5 @@
 require "bunny"
+require "bot"
 
 module Marketplace
   class Bot::Workers::LoadWorker
@@ -7,7 +8,7 @@ module Marketplace
     # @example
     #   run()
     def run
-      conn = Bunny.new
+      conn = Bunny.new(:host => "localhost", :vhost => "/", :user => "amigo", :password => "42Amigo_Rabbit")
       conn.start
 
       ch = conn.create_channel

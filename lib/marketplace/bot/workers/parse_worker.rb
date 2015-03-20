@@ -7,7 +7,7 @@ module Marketplace
     # @example
     #   run()
     def run()
-      conn = Bunny.new
+      conn = Bunny.new(:host => "localhost", :vhost => "/", :user => "amigo", :password => "42Amigo_Rabbit")
       conn.start
 
       ch = conn.create_channel
@@ -35,8 +35,11 @@ module Marketplace
             else
               puts "unknown order type in parse_worker"
             end
-            parser.run(body.page)
-            # Load to DB
+            order_json = parser.run(body.page)
+
+            producer = Producer.instance
+            producer.load_to_db(order_json)
+
           else
             puts "unknown object"
           end
