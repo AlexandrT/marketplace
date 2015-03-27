@@ -22,6 +22,12 @@ module Marketplace
     # _id_ загружаемой закупки
     attr_accessor :order_id
 
+    # Точка доступа для заданий на загрузку и парсинг
+    attr_accessor :x
+
+    # Точка доступа для заданий на запись в БД
+    attr_accessor :db_x
+
     # Проверяет дату на соответствие формату и валидность
     # @param input_date [String] Дата в формате _dd.mm.yyyy_
     # @return [Boolean]
@@ -143,13 +149,7 @@ module Marketplace
     # @param page_number [Integer] Номер текущей страницы списка закупок
     # @example
     #   new("fz_44", "11.11.2014", "11.11.2014", 0)
-    def create(type, start_date = Date.today.strftime('%d.%m.%Y'), end_date = Date.today.strftime('%d.%m.%Y'), page_number = 0)
-      byebug
-      @type = type
-      @start_date = start_date
-      @end_date = end_date
-      @page_number = 1
-
+    def create_exchange
       conn = Bunny.new(:host => "localhost", :vhost => "/", :user => "amigo", :password => "42Amigo_Rabbit")
       conn.start
       ch = conn.create_channel
@@ -159,13 +159,19 @@ module Marketplace
       db_conn.start
       db_channel = db_conn.create_channel
       @db_x = ch.fanout("writer")
-
-      # instance
     end
 
-    def initialize
-      create("fz_94")
+    def fill_attr(type, start_date = Date.today.strftime('%d.%m.%Y'), end_date = Date.today.strftime('%d.%m.%Y'), page_number = 0)
+      byebug
+      @type = type
+      @start_date = start_date
+      @end_date = end_date
+      @page_number = page_number + 1
     end
+
+    # def initialize
+      # create("fz_94")
+    # end
 
     # Отправляет задание на сохранение json в бд
     # @param json [Json] Json с информацией о закупке

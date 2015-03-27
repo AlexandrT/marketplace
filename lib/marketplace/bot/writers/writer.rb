@@ -1,4 +1,5 @@
 require "mongoid"
+require "byebug"
 
 module Marketplace
 	class Bot::Writers::Writer
@@ -7,6 +8,7 @@ module Marketplace
 		end
 
 		def to_db(json)
+			byebug
 		end
 	end
 end
