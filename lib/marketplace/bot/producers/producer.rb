@@ -59,15 +59,13 @@ module Marketplace
           msg[:type] = @type
           msg[:start_date] = @start_date
           msg[:end_date] = @end_date
-          msg[:page_num] = @page_num
+          msg[:page_number] = @page_number
           msg[:start_price] = start_price
           msg[:end_price] = end_price
 
           payload = msg.to_s
 
-          byebug
-
-          @x.publish(payload, :routing_key => "#{@type}.list.load")
+          self.x.publish(payload, :key => "#{@type}.list.load")
 
           puts " [@x] Sent #{type}:#{payload}"
         rescue Exception => e
@@ -162,7 +160,6 @@ module Marketplace
     end
 
     def fill_attr(type, start_date = Date.today.strftime('%d.%m.%Y'), end_date = Date.today.strftime('%d.%m.%Y'), page_number = 0)
-      byebug
       @type = type
       @start_date = start_date
       @end_date = end_date

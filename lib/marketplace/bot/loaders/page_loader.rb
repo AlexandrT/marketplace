@@ -30,7 +30,7 @@ module Marketplace
     TIMEOUT = 20
 
     def initialize
-      @producer = Producer.instance
+      @producer = Marketplace::Bot::Producers::Producer.instance
     end
 
     # Приводит цену к виду, используемому в URL закупок
