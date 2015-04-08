@@ -53,7 +53,6 @@ module Marketplace
     # @example
     #   load_list(0б 200000)
     def load_list(start_price, end_price)
-      # if check_date(@start_date) and check_date(@end_date)
         begin
           msg = Hash.new 
           msg[:type] = @type
@@ -63,11 +62,12 @@ module Marketplace
           msg[:start_price] = start_price
           msg[:end_price] = end_price
 
-          payload = msg.to_s
+          # payload = msg.to_s
+          payload = msg
 
           self.x.publish(payload, :key => "#{@type}.list.load")
 
-          puts " [@x] Sent #{type}:#{payload}"
+          puts " [self.x] Sent #{type}:#{payload}"
         rescue Exception => e
           puts e.message
         end
@@ -86,16 +86,16 @@ module Marketplace
         msg[:type] = @type
         msg[:start_date] = @start_date
         msg[:end_date] = @end_date
-        msg[:page_num] = @page_num
-        msg[:start_price] = @start_price
-        msg[:end_price] = @end_price
+        msg[:page_number] = @page_number
+        msg[:start_price] = start_price
+        msg[:end_price] = end_price
         msg[:page] = body
 
-        payload = msg.to_s
+        payload = msg
 
-        @x.publish(payload, :routing_key => "#{@type}.list.parse")
+        self.x.publish(payload, :key => "#{@type}.list.parse")
 
-        puts " [@x] Sent #{type}.list.parse"
+        puts " [self.x] Sent #{type}.list.parse"
       rescue Exception => e
         puts e.message
       end
@@ -106,14 +106,14 @@ module Marketplace
     # @example
     #   load_order("345767215677")
     def load_order(order_id)
-      order_id ||= @order_id
+      @order_id = order_id
       begin
         msg[:type] = @type
         msg[:order_id] = order_id
 
-        payload = msg.to_s
+        payload = msg
 
-        @x.publish(payload, :routing_key => "#{@type}.order.load")
+        self.x.publish(payload, :key => "#{@type}.order.load")
 
         puts " [@x] Sent #{type}.order.load"
       rescue Exception => e
@@ -130,9 +130,9 @@ module Marketplace
         msg[:type] = @type
         msg[:page] = body
 
-        payload = msg.to_s
+        payload = msg
 
-        @x.publish(payload, :routing_key => "#{type}.order.parse")
+        self.x.publish(payload, :key => "#{type}.order.parse")
 
         puts " [@x] Sent #{type}.order.parse"
       rescue Exception => e
@@ -151,12 +151,12 @@ module Marketplace
       conn = Bunny.new(:host => "localhost", :vhost => "/", :user => "amigo", :password => "42Amigo_Rabbit")
       conn.start
       ch = conn.create_channel
-      @x = ch.topic("common")
+      self.x = ch.topic("common")
 
       db_conn = Bunny.new(:host => "localhost", :vhost => "/", :user => "amigo", :password => "42Amigo_Rabbit")
       db_conn.start
       db_channel = db_conn.create_channel
-      @db_x = ch.fanout("writer")
+      self.db_x = ch.fanout("writer")
     end
 
     def fill_attr(type, start_date = Date.today.strftime('%d.%m.%Y'), end_date = Date.today.strftime('%d.%m.%Y'), page_number = 0)
@@ -176,7 +176,7 @@ module Marketplace
     #   load_to_db(json)
     def load_to_db(json)
       begin
-        @db_x.publish(json)
+        self.db_x.publish(json)
       rescue Exception => e
         puts e.message
       end
