@@ -46,17 +46,22 @@ describe Marketplace::Bot::Producers::Producer do
 
   context "amqp tests" do
     overload_amqp
-    let(:mq) { MQ.new }
-    let(:topic) { mq.topic("common") }
-    let(:queue_load) { mq.queue("load") }
-    let(:queue_parse) { mq.queue("parse") }
+    let!(:mq) { MQ.new }
+    let!(:topic) { mq.topic("common") }
+    let!(:queue_load) { mq.queue("load") }
+    let!(:queue_parse) { mq.queue("parse") }
 
-    before(:each) do 
-      overload_amqp
+    after(:each) do 
+      # overload_amqp
       reset_broker
     end
 
+    # queue_load.bind(topic, :key=> "#.load")
+    # queue_parse.bind(topic, :key=> "#.parse")
+    # producer.stub(:x).and_return(topic)
+
     it "load_list" do
+
       queue_load.bind(topic, :key=> "#.load")
       # topic.publish("eatin ur foodz", :key => "cats.inUrFridge")
       # producer.stub(:x).and_return(mock_exchange(:topic => "common"))
@@ -78,6 +83,7 @@ describe Marketplace::Bot::Producers::Producer do
     end
 
     it "parse list" do
+
       queue_parse.bind(topic, :key=> "#.parse")
       producer.stub(:x).and_return(topic)
 
@@ -98,12 +104,11 @@ describe Marketplace::Bot::Producers::Producer do
     end
 
     it "load order" do
+
       queue_load.bind(topic, :key=> "#.load")
       producer.stub(:x).and_return(topic)
 
       producer.load_order(order_id_test)
-
-      byebug
       queue_load.subscribe do |msg| 
         expect(msg).to_not eq(nil)
         expect(msg[:type]).to eq(type_test)
@@ -115,6 +120,7 @@ describe Marketplace::Bot::Producers::Producer do
     end
 
     it "parse order" do
+
       queue_parse.bind(topic, :key=> "#.parse")
       producer.stub(:x).and_return(topic)
 
@@ -123,7 +129,7 @@ describe Marketplace::Bot::Producers::Producer do
       queue_parse.subscribe do |msg|
         expect(msg).to_not eq(nil)
         expect(msg[:type]).to eq(type_test)
-        expect(msg[:body]).to eq(body_test)
+        expect(msg[:page]).to eq(body_test)
       end
       queue_parse.unsubscribe
       expect(queue_parse.received_messages.count).to eq(1)

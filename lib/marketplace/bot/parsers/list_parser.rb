@@ -4,7 +4,7 @@ module Marketplace
   class Bot::Parsers::ListParser
 
     def initialize
-      @producer = Producer.instance
+      @producer = Marketplace::Bot::Producers::Producer.instance
     end
 
     # Парсит страницу, получает массив _id_ закупок, вызывает продюсера для создания таска загрузки каждой закупки.
@@ -19,7 +19,9 @@ module Marketplace
       orders_id = []
       
       page = Nokogiri::HTML(page, nil, 'utf-8')
-      order_count = page.xpath("//div[@class='allReords']").text
+      byebug
+      order_count = page.xpath("//div[@class='allRecords']").first.text[/\d+/].to_i
+      # строку с получением order_count можно вынести в отдельный метод
       if order_count > 1000
         @producer.load_list(start_price, end_price/2)
         @producer.load_list(end_price/2 + 1, end_price)
@@ -27,7 +29,7 @@ module Marketplace
         page.xpath("//a[child::span[@class='printBtn']]").each{ |link| orders_id << link["href"] }
 
         if page.at_css(".rightArrow")
-          @producer.page_num += 1
+          @producer.increment_page_number(1)
           @producer.load_list
         end
 

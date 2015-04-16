@@ -52,7 +52,11 @@ module Marketplace
     # @param end_price [Integer] Конечная стоимость закупки
     # @example
     #   load_list(0б 200000)
-    def load_list(start_price, end_price)
+    def load_list(start_price = @start_price, end_price = @end_price)
+
+      @start_price = start_price
+      @end_price = end_price
+
         begin
           msg = Hash.new 
           msg[:type] = @type
@@ -108,6 +112,7 @@ module Marketplace
     def load_order(order_id)
       @order_id = order_id
       begin
+        msg = Hash.new
         msg[:type] = @type
         msg[:order_id] = order_id
 
@@ -127,6 +132,7 @@ module Marketplace
     #   parse_order("<html> </html>")
     def parse_order(body)
       begin
+        msg = Hash.new
         msg[:type] = @type
         msg[:page] = body
 
@@ -179,6 +185,15 @@ module Marketplace
         self.db_x.publish(json)
       rescue Exception => e
         puts e.message
+      end
+    end
+
+    def increment_page_number(inc)
+      begin
+        inc += 0
+        @page_number += inc
+      rescue Interrupt => _
+        puts "inc is not Numeric"
       end
     end
   end
