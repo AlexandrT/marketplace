@@ -146,13 +146,9 @@ module Marketplace
       end
     end
 
-    # Задает значения полей класса, создает соединение с точкой доступа **common**
-    # @param type [String] Тип закупки
-    # @param start_date [String] Начальная дата создания/обновления закупки
-    # @param end_date [String] Конечная дата создания/обновления закупки
-    # @param page_number [Integer] Номер текущей страницы списка закупок
+    # Создает подключения к точкам доступа
     # @example
-    #   new("fz_44", "11.11.2014", "11.11.2014", 0)
+    #   create_exchange
     def create_exchange
       conn = Bunny.new(:host => "localhost", :vhost => "/", :user => "amigo", :password => "42Amigo_Rabbit")
       conn.start
@@ -165,6 +161,13 @@ module Marketplace
       self.db_x = ch.fanout("writer")
     end
 
+    # Задает значения полей класса
+    # @param type [String] Тип закупки
+    # @param start_date [String] Начальная дата создания/обновления закупки
+    # @param end_date [String] Конечная дата создания/обновления закупки
+    # @param page_number [Integer] Номер текущей страницы списка закупок
+    # @example
+    #   fill_attr("fz_44", "11.11.2014", "11.11.2014", 0)
     def fill_attr(type, start_date = Date.today.strftime('%d.%m.%Y'), end_date = Date.today.strftime('%d.%m.%Y'), page_number = 0)
       @type = type
       @start_date = start_date
@@ -188,6 +191,10 @@ module Marketplace
       end
     end
 
+    # Увеличивает номер текущей страницы в контексте продюсера на 1
+    # @param inc [Fixnum] на сколько увеличиваем (оно вроде всегда 1)
+    # @example
+    #   increment_page_number(1)
     def increment_page_number(inc)
       begin
         inc += 0

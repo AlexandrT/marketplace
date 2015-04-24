@@ -35,7 +35,7 @@ module Marketplace
 
     # Приводит цену к виду, используемому в URL закупок
     # @param price [Integer] Стоимость для форматирования
-    # return [String] "200+000+000"
+    # @return [String] "200+000+000"
     # @example
     #   format_price(200000000)
     def format_price(price)
