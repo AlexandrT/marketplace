@@ -16,30 +16,39 @@ module Marketplace
     # example
     #   get_ids("<html</html", 0, 200000000)
     def get_ids(page, start_price, end_price)
-      orders_id = []
+      orders_url = []
       
       page = Nokogiri::HTML(page, nil, 'utf-8')
-      byebug
-      order_count = page.xpath("//div[@class='allRecords']").first.text[/\d+/].to_i
+      order_count = get_count(page)
       # строку с получением order_count можно вынести в отдельный метод
       if order_count > 1000
         @producer.load_list(start_price, end_price/2)
         @producer.load_list(end_price/2 + 1, end_price)
       else
-        page.xpath("//a[child::span[@class='printBtn']]").each{ |link| orders_id << link["href"] }
+        page.xpath("//a[child::span[@class='printBtn']]").each{ |link| orders_url << link["href"] }
 
         if page.at_css(".rightArrow")
           @producer.increment_page_number(1)
           @producer.load_list
         end
 
-        orders_id.each do |order_id|
-          @producer.load_order(order_id)
+        orders_url.each do |order_url|
+          @producer.load_order(order_url)
         end
       end
     end
     # создать страницу без ссылок на следующую - стаб на @producer.load_order(order_id). order_id - кол-во закупок на странице
     # создать страницу со ссылкой на следующую, число закупок меньше тысячи - стаб на @producer.load_order(order_id). order_id - кол-во закупок на странице, @producer.load_list - таск на загрузку след. страницы
     # создать страницу со ссылкой на следующую, число закупок больше тысячи - стаб на @producer.load_list(start_price, end_price). @producer.load_list(start_price, end_price/2) и @producer.load_list(end_price/2 + 1, end_price)
+    
+    def get_count(page)
+      begin
+        page.xpath("//div[@class='allRecords']").first.text[/\d+/].to_i
+      rescue Exception => e
+        puts e
+        # puts "Something with page"
+      end
+    end
   end
+
 end

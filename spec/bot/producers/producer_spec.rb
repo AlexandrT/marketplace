@@ -1,7 +1,6 @@
 require "spec_helper"
 require "bot"
 require "moqueue"
-require "byebug"
 
 describe Marketplace::Bot::Producers::Producer do
   let(:producer) { Marketplace::Bot::Producers::Producer.instance }
@@ -51,8 +50,7 @@ describe Marketplace::Bot::Producers::Producer do
     let!(:queue_load) { mq.queue("load") }
     let!(:queue_parse) { mq.queue("parse") }
 
-    after(:each) do 
-      # overload_amqp
+    after(:each) do
       reset_broker
     end
 
