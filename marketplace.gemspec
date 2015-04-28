@@ -22,4 +22,5 @@ Gem::Specification.new do |s|
   s.add_dependency "httparty"
   s.add_dependency "bunny", "~> 1.5.0"
   s.add_dependency "whenever"
+  s.add_dependency "mongoid", "~> 4.0.2"
 end
