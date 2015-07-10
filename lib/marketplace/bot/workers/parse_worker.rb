@@ -19,11 +19,12 @@ module Marketplace
       begin
         q.subscribe(:block => true) do |delivery_info, properties, body|
           type, obj = delivery_info.routing_key.split(".")
-          puts "#{delivery_info.routing_key}:#{body}"   
+
+          parsed_str = JSON.parse(body)
 
           if obj == "list"
             list_parser = ListParser.new
-            list_parser.get_ids(body.page, body.start_price, body.end_price)
+            list_parser.get_ids(parsed_str[:page], parsed_str[:start_price], parsed_str[:end_price])
           elsif obj == "order"
             case type
             when "fz_44"
@@ -35,7 +36,7 @@ module Marketplace
             else
               puts "unknown order type in parse_worker"
             end
-            order_json = parser.run(body.page)
+            order_json = parser.run(parsed_str[:page])
 
             producer = Producer.instance
             producer.load_to_db(order_json)

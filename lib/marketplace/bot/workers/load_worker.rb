@@ -20,14 +20,15 @@ module Marketplace
       begin
         q.subscribe(:block => true) do |delivery_info, properties, body|
           type, obj = delivery_info.routing_key.split(".")
-          puts "#{delivery_info.routing_key}:#{body}"
+
+          parsed_str = JSON.parse(body)
 
           if obj == "list"
             page_loader = PageLoader.new
-            page_loader.load_list(body.start_price, body.end_price)
+            page_loader.load_list(parsed_str[:start_price], parsed_str[:end_price], parsed_str[:type])
           elsif obj == "order"
             page_loader = PageLoader.new
-            page_loader.load_order(body.order_id)
+            page_loader.load_order(parsed_str[:order_id])
           else
             puts "unknown object"
           end

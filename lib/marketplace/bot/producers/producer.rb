@@ -7,21 +7,6 @@ module Marketplace
   class Bot::Producers::Producer
     include Singleton
 
-    # Тип закупки
-    attr_accessor :type
-
-    # Начальная дата создания/обновления закупки
-    attr_accessor :start_date
-    
-    # Конечная дата создания/обновления закупки
-    attr_accessor :end_date
-
-    # Номер текущей страницы списка закупок
-    attr_accessor :page_number
-
-    # _id_ загружаемой закупки
-    attr_accessor :order_id
-
     # Точка доступа для заданий на загрузку и парсинг
     attr_accessor :x
 
@@ -52,26 +37,13 @@ module Marketplace
     # @param end_price [Integer] Конечная стоимость закупки
     # @example
     #   load_list(0б 200000)
-    def load_list(start_price = @start_price, end_price = @end_price)
-
-      @start_price = start_price
-      @end_price = end_price
+    def load_list(search_params)
 
         begin
-          msg = Hash.new 
-          msg[:type] = @type
-          msg[:start_date] = @start_date
-          msg[:end_date] = @end_date
-          msg[:page_number] = @page_number
-          msg[:start_price] = start_price
-          msg[:end_price] = end_price
+          payload = search_params.to_s
 
-          # payload = msg.to_s
-          payload = msg
+          self.x.publish(payload, :key => "#{search_params[:type]}.list.load")
 
-          self.x.publish(payload, :key => "#{@type}.list.load")
-
-          puts " [self.x] Sent #{type}:#{payload}"
         rescue Exception => e
           puts e.message
         end
@@ -84,22 +56,11 @@ module Marketplace
     # @param end_price [Integer] Конечная стоимость закупки
     # @example
     #   parse_list("<html></html>", 0, 200000)
-    def parse_list(body, start_price, end_price)
+    def parse_list(order_params)
       begin
-        msg = Hash.new
-        msg[:type] = @type
-        msg[:start_date] = @start_date
-        msg[:end_date] = @end_date
-        msg[:page_number] = @page_number
-        msg[:start_price] = start_price
-        msg[:end_price] = end_price
-        msg[:page] = body
+        payload = order_params.to_s
 
-        payload = msg
-
-        self.x.publish(payload, :key => "#{@type}.list.parse")
-
-        puts " [self.x] Sent #{type}.list.parse"
+        self.x.publish(payload, :key => "#{order_params[:type]}.list.parse")
       rescue Exception => e
         puts e.message
       end
@@ -109,18 +70,11 @@ module Marketplace
     # @param order_id [String] _id_ закупки, которую надо загрузить
     # @example
     #   load_order("345767215677")
-    def load_order(order_id)
-      @order_id = order_id
+    def load_order(order_params)
       begin
-        msg = Hash.new
-        msg[:type] = @type
-        msg[:order_id] = order_id
+        payload = order_params.to_s
 
-        payload = msg
-
-        self.x.publish(payload, :key => "#{@type}.order.load")
-
-        puts " [@x] Sent #{type}.order.load"
+        self.x.publish(payload, :key => "#{order_params[:type]}.order.load")
       rescue Exception => e
         puts e.message
       end

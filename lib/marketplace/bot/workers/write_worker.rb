@@ -18,14 +18,18 @@ module Marketplace
       
       begin
         q.subscribe(:block => true) do |delivery_info, properties, body|
+          parsed_str = JSON.parse(body)
           writer = Writer.new
-          writer.to_db(body)
+          writer.to_db(parsed_str)
         end
       rescue Interrupt => _
         ch.close
         conn.close
       end
 
+    end
+
+    def compare_okpd
     end
   end
 end

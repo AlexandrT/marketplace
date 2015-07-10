@@ -48,10 +48,11 @@ module Marketplace
     # @return [HTTParty::Response]
     # @example
     #   list(0, 200000000)
-    def load_list(start_price, end_price)
+    def load_list(start_price, end_price, type)
       
       @start_price = start_price
       @end_price = end_price
+      @type = type
 
       case type
       # TODO
@@ -79,12 +80,15 @@ module Marketplace
     def analyze_list_response(response)
       code = response.code
 
+      params = { :start_price => @start_price, :end_price => @end_price, :type => @type }
+
       case code.to_i
       when 500...599
         sleep TIMEOUT
-        @producer.load_list(@start_price, @end_price)
+        @producer.load_list(params)
       when 200
-        @producer.parse_list(response.body, @start_price, @end_price)
+        params[:page] = response.body
+        @producer.parse_list(params)
       else
         puts "Strange response code during list load - #{code}"
       end
@@ -96,6 +100,8 @@ module Marketplace
     # @example
     #   load_order("10004234")
     def load_order(id)
+      @id = id
+
       case @type
       when "fz_44"
         options = { query: { regNumber: id } }
@@ -123,12 +129,15 @@ module Marketplace
     def analyze_order_response(response)
       code = response.code
 
+      params = { :order_id => @id, :type => @type }
+
       case code.to_i
       when 500...599
         sleep TIMEOUT
-        @producer.load_order
+        @producer.load_order(params)
       when 200
-        @producer.parse_order(response.body)
+        params[:page] = response.body
+        @producer.parse_order(params)
       else
         puts "Strange response code during order load - #{code}"
       end
