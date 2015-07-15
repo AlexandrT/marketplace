@@ -9,10 +9,6 @@ describe Marketplace::Bot::Parsers::ListParser do
   let(:start_price) { 0 }
   let(:end_price) { 1000 }
 
-  before(:each) do
-    producer.fill_attr("fz_94")
-  end
-
   context "get_count" do
     let(:page_without_arrow) { Nokogiri::HTML(File.open(Rails.root + '../../spec/support/order_list_without_arrow.html'), nil, 'utf-8') }
 

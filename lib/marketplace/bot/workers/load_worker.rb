@@ -15,13 +15,15 @@ module Marketplace
       x = ch.topic("common")
       q = ch.queue("load", :exclusive => true)
 
-      q.bind(x, :routing_key => "#.load")
+      q.bind(x, :routing_key => "*.load")
       
       begin
         q.subscribe(:block => true) do |delivery_info, properties, body|
-          type, obj = delivery_info.routing_key.split(".")
+          obj = delivery_info.routing_key.split(".")[1]
 
           parsed_str = JSON.parse(body)
+
+          type = parsed_str[:type]
 
           if obj == "list"
             page_loader = PageLoader.new

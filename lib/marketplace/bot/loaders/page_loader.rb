@@ -85,10 +85,10 @@ module Marketplace
       case code.to_i
       when 500...599
         sleep TIMEOUT
-        @producer.load_list(params)
+        @producer.send_job(params) { |x| "list.load" }
       when 200
         params[:page] = response.body
-        @producer.parse_list(params)
+        @producer.send_job(params) { |x| "list.parse" }
       else
         puts "Strange response code during list load - #{code}"
       end
@@ -134,10 +134,10 @@ module Marketplace
       case code.to_i
       when 500...599
         sleep TIMEOUT
-        @producer.load_order(params)
+        @producer.send_job(params) { |x| "order.load" }
       when 200
         params[:page] = response.body
-        @producer.parse_order(params)
+        @producer.send_job(params) { |x| "order.parse" }
       else
         puts "Strange response code during order load - #{code}"
       end

@@ -14,17 +14,19 @@ module Marketplace
       x = ch.topic("common")
       q = ch.queue("parse", :exclusive => true)
 
-      q.bind(x, :routing_key => "#.parse")
+      q.bind(x, :routing_key => "*.parse")
       
       begin
         q.subscribe(:block => true) do |delivery_info, properties, body|
-          type, obj = delivery_info.routing_key.split(".")
+          obj = delivery_info.routing_key.split(".")[1]
 
           parsed_str = JSON.parse(body)
 
+          type = parsed_str[:type]
+
           if obj == "list"
             list_parser = ListParser.new
-            list_parser.get_ids(parsed_str[:page], parsed_str[:start_price], parsed_str[:end_price])
+            list_parser.get_ids(type, parsed_str[:page], parsed_str[:start_price], parsed_str[:end_price])
           elsif obj == "order"
             case type
             when "fz_44"
