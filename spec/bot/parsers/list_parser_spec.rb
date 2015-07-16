@@ -20,9 +20,9 @@ describe Marketplace::Bot::Parsers::ListParser do
   context "get_ids from page with more than 1000" do
     let(:page_more_1000) { File.open(Rails.root + '../../spec/support/order_list_more_1000.html') }
 
-    before do
-      producer.should_receive(:load_list).exactly(2).and_return(:producer)
-    end
+    #before do
+    #  producer.should_receive(:load_list).exactly(2).and_return(:producer)
+    #end
 
     it "check size and elements of array" do
       expect(list_parser.get_ids(page_more_1000, start_price, end_price)).to eq(:producer)
@@ -32,9 +32,9 @@ describe Marketplace::Bot::Parsers::ListParser do
   context "get_ids from page without arrow" do 
     let(:page_without_arrow) { File.open(Rails.root + '../../spec/support/order_list_without_arrow.html') }
 
-    before do
-      producer.should_receive(:load_order).exactly(10).and_return(:producer)
-    end
+    #before do
+    #  producer.should_receive(:load_order).exactly(10).and_return(:producer)
+    #end
 
     it "check call method" do 
       expect(list_parser.get_ids(page_without_arrow, start_price, end_price)).to include(

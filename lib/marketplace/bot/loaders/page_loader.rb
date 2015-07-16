@@ -48,26 +48,26 @@ module Marketplace
     # @return [HTTParty::Response]
     # @example
     #   list(0, 200000000)
-    def load_list(start_price, end_price, type)
-      
-      @start_price = start_price
-      @end_price = end_price
-      @type = type
+    def load_list(list_params)
+      list_params[:start_date] = list_params[:end_date] = DateTime.now.strftime('%d.%m.%Y') if list_params[:start_date].nil? || list_params[:end_date].nil?
 
-      case type
+      list_params[:page_number] = 1 if list_params[:page_number].nil?
+
+      case list_params[:type]
       # TODO
       # dry!
-      when "fz44"
-        url = "/epz/order/quicksearch/update.html?placeOfSearch=FZ_44&_placeOfSearch=on&_placeOfSearch=on&_placeOfSearch=on&priceFrom=" + format_price(@start_price) + "&priceTo=" + format_price(@end_price) + "&publishDateFrom=" + @producer.start_date + "&publishDateTo=" + @producer.end_date + "&updateDateFrom=" + @producer.start_date + "&updateDateTo=" + @producer.end_date + "&orderStages=AF&_orderStages=on&orderStages=CA&_orderStages=on&orderStages=PC&_orderStages=on&orderStages=PA&_orderStages=on&sortDirection=false&sortBy=UPDATE_DATE&recordsPerPage=_50&pageNo=" + @producer.page_number + "&searchString=&strictEqual=false&morphology=false&showLotsInfo=false&isPaging=true&isHeaderClick=&checkIds="
-      when "fz94"
-        url = "/epz/order/quicksearch/update.html?_placeOfSearch=on&_placeOfSearch=on&placeOfSearch=FZ_94&_placeOfSearch=on&priceFrom=" + format_price(@start_price) + "&priceTo=" + format_price(@end_price) + "&publishDateFrom=" + @producer.start_date + "&publishDateTo=" + @producer.end_date + "&updateDateFrom=" + @producer.start_date + "&updateDateTo=" + @producer.end_date + "&orderStages=AF&_orderStages=on&orderStages=CA&_orderStages=on&orderStages=PC&_orderStages=on&orderStages=PA&_orderStages=on&sortDirection=false&sortBy=UPDATE_DATE&recordsPerPage=_50&pageNo=" + @producer.page_number + "&searchString=&strictEqual=false&morphology=false&showLotsInfo=false&isPaging=true&isHeaderClick=&checkIds="
-      when "fz223"
-        url = "/epz/order/quicksearch/update.html?_placeOfSearch=on&placeOfSearch=FZ_223&_placeOfSearch=on&_placeOfSearch=on&priceFrom=" + format_price(@start_price) + "&priceTo=" + format_price(@end_price) + "&publishDateFrom=" + @producer.start_date + "&publishDateTo=" + @producer.end_date + "&updateDateFrom=" + @producer.start_date + "&updateDateTo=" + @producer.end_date + "&orderStages=AF&_orderStages=on&orderStages=CA&_orderStages=on&orderStages=PC&_orderStages=on&orderStages=PA&_orderStages=on&sortDirection=false&sortBy=UPDATE_DATE&recordsPerPage=_50&pageNo=" + @producer.page_number + "&searchString=&strictEqual=false&morphology=false&showLotsInfo=false&isPaging=true&isHeaderClick=&checkIds="
+      when "fz_44"
+        url = "/epz/order/quicksearch/update.html?placeOfSearch=FZ_44&_placeOfSearch=on&_placeOfSearch=on&_placeOfSearch=on&priceFrom=" + format_price(list_params[:start_price]) + "&priceTo=" + format_price(list_params[:end_price]) + "&publishDateFrom=" + list_params[:start_date] + "&publishDateTo=" + list_params[:end_date] + "&updateDateFrom=" + list_params[:start_date] + "&updateDateTo=" + list_params[:end_date] + "&orderStages=AF&_orderStages=on&orderStages=CA&_orderStages=on&orderStages=PC&_orderStages=on&orderStages=PA&_orderStages=on&sortDirection=false&sortBy=UPDATE_DATE&recordsPerPage=_50&pageNo=" + list_params[:page_number].to_s + "&searchString=&strictEqual=false&morphology=false&showLotsInfo=false&isPaging=true&isHeaderClick=&checkIds="
+      when "fz_94"
+        url = "/epz/order/quicksearch/update.html?_placeOfSearch=on&_placeOfSearch=on&placeOfSearch=FZ_94&_placeOfSearch=on&priceFrom=" + format_price(list_params[:start_price]) + "&priceTo=" + format_price(list_params[:end_price]) + "&publishDateFrom=" + list_params[:start_date] + "&publishDateTo=" + list_params[:end_date] + "&updateDateFrom=" + list_params[:start_date] + "&updateDateTo=" + list_params[:end_date] + "&orderStages=AF&_orderStages=on&orderStages=CA&_orderStages=on&orderStages=PC&_orderStages=on&orderStages=PA&_orderStages=on&sortDirection=false&sortBy=UPDATE_DATE&recordsPerPage=_50&pageNo=" + list_params[:page_number].to_s + "&searchString=&strictEqual=false&morphology=false&showLotsInfo=false&isPaging=true&isHeaderClick=&checkIds="
+      when "fz_223"
+        url = "/epz/order/quicksearch/update.html?_placeOfSearch=on&placeOfSearch=FZ_223&_placeOfSearch=on&_placeOfSearch=on&priceFrom=" + format_price(list_params[:start_price]) + "&priceTo=" + format_price(list_params[:end_price]) + "&publishDateFrom=" + list_params[:start_date] + "&publishDateTo=" + list_params[:end_date] + "&updateDateFrom=" + list_params[:start_date] + "&updateDateTo=" + list_params[:end_date] + "&orderStages=AF&_orderStages=on&orderStages=CA&_orderStages=on&orderStages=PC&_orderStages=on&orderStages=PA&_orderStages=on&sortDirection=false&sortBy=UPDATE_DATE&recordsPerPage=_50&pageNo=" + list_params[:page_number].to_s + "&searchString=&strictEqual=false&morphology=false&showLotsInfo=false&isPaging=true&isHeaderClick=&checkIds="
       else
         puts "Unknown order type in PageLoader"
+        return false
       end
       response = self.class.get(url)
-      analyze_list_response(response)
+      analyze_list_response(response, list_params)
     end
 
     # Анализирует ответ сервера по коду ответа и принимает решение для дальнейших действий.
@@ -77,18 +77,16 @@ module Marketplace
     # @param response [HTTParty::Response] Ответ сервера на get-запрос
     # @example
     #   analyze_list_response(response)
-    def analyze_list_response(response)
+    def analyze_list_response(response, list_params)
       code = response.code
-
-      params = { :start_price => @start_price, :end_price => @end_price, :type => @type }
 
       case code.to_i
       when 500...599
         sleep TIMEOUT
-        @producer.send_job(params) { |x| "list.load" }
+        @producer.send_job(list_params) { |x| "list.load" }
       when 200
-        params[:page] = response.body
-        @producer.send_job(params) { |x| "list.parse" }
+        list_params[:page] = response.body
+        @producer.send_job(list_params) { |x| "list.parse" }
       else
         puts "Strange response code during list load - #{code}"
       end
@@ -99,24 +97,22 @@ module Marketplace
     # @return [HTTParty::Response]
     # @example
     #   load_order("10004234")
-    def load_order(id)
-      @id = id
-
-      case @type
+    def load_order(order_params)
+      case order_params[:type]
       when "fz_44"
-        options = { query: { regNumber: id } }
+        options = { query: { regNumber: order_params[:id] } }
         response = self.class.get(FZ_44, options)
       when "fz_94"
-        options = { query: { type: "NOTIFICATION", id: id } }
+        options = { query: { type: "NOTIFICATION", id: order_params[:id] } }
         response = self.class.get(FZ_94, options)
       when "fz_223"
-        options = { query: { noticeId: id } }
+        options = { query: { noticeId: order_params[:id] } }
         response = self.class.get(FZ_223, options)
       else
         puts "unknown order type"
       end
 
-      analyze_order_response(response)
+      analyze_order_response(response, order_params)
     end
 
     # Анализирует ответ сервера по коду ответа и принимает решение для дальнейших действий.
@@ -126,18 +122,16 @@ module Marketplace
     # @param response [HTTParty::Response] Ответ сервера на get-запрос
     # @example
     #   analyze_order_response(response)
-    def analyze_order_response(response)
+    def analyze_order_response(response, order_params)
       code = response.code
-
-      params = { :order_id => @id, :type => @type }
 
       case code.to_i
       when 500...599
         sleep TIMEOUT
-        @producer.send_job(params) { |x| "order.load" }
+        @producer.send_job(order_params) { |x| "order.load" }
       when 200
-        params[:page] = response.body
-        @producer.send_job(params) { |x| "order.parse" }
+        order_params[:page] = response.body
+        @producer.send_job(order_params) { |x| "order.parse" }
       else
         puts "Strange response code during order load - #{code}"
       end

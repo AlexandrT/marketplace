@@ -15,32 +15,32 @@ module Marketplace
     # @param end_price [Integer] Максимальная стоимость закупки
     # @example
     #   get_ids("<html</html", 0, 200000000)
-    def get_ids(type, page, start_price, end_price, page_num)
+    def get_ids(params)
       orders_url = []
       
-      page = Nokogiri::HTML(page, nil, 'utf-8')
+      page = Nokogiri::HTML(params[:page], nil, 'utf-8')
       
       order_count = get_count(page)
-      params = { type: type }
+      #params = { type: type }
 
       if order_count > 1000
-        params[start_price:] = start_price
-        params[end_price:] = end_price/2
+        #params[:start_price] = start_price
+        params[:end_price] = params[:end_price]/2
         @producer.send_job(params) { |x| "load.list" }
 
-        params[start_price:] = end_price/2 + 1
-        params[end_price:] = end_price
+        params[:start_price] = params[:end_price] + 1
+        params[:end_price] = params[:end_price] * 2
         @producer.send_job(params) { |x| "load.list" }
       else
         page.xpath("//a[child::span[@class='printBtn']]").each{ |link| orders_url << link["href"] }
         if page.at_css(".rightArrow")
-          params = { start_price: start_price, end_price: end_price, page_num: page_num + 1 }
-          @producer.load_list(params)
+          params = { page_num: page_num + 1 }
+          @producer.send_job(params) { |x| "load.list" }
         end
 
         orders_url.each do |order_url|
-          params[id:] = order_url
-          @producer.send_job(order_url)
+          params[:id] = order_url
+          @producer.send_job(params)
         end
       end
     end
